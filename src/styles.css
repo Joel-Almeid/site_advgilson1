@@ -1,6 +1,27 @@
 @import "tailwindcss" source(none);
 @source "../src";
 @import "tw-animate-css";
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
+
+:root {
+  --gold: #c9a55a;
+  --gold-light: #e0c084;
+  --gold-dark: #9a7d3f;
+  --charcoal: #2b2b2b;
+  --charcoal-deep: #1d1d1d;
+  --charcoal-soft: #3a3a3a;
+}
+
+html { scroll-behavior: smooth; }
+body { font-family: 'Inter', sans-serif; background: #333333; color: #e8e6e1; }
+.font-serif-luxe { font-family: 'Cormorant Garamond', serif; }
+.text-gold { color: var(--gold); }
+.bg-gold { background-color: var(--gold); }
+.border-gold { border-color: var(--gold); }
+.gold-gradient { background: linear-gradient(135deg, #e0c084 0%, #c9a55a 50%, #9a7d3f 100%); }
+.text-gold-gradient { background: linear-gradient(135deg, #e0c084 0%, #c9a55a 50%, #9a7d3f 100%); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.gold-frame { box-shadow: 0 0 0 1px var(--gold), 0 0 0 8px transparent, 0 0 0 9px var(--gold-dark); }
+.section-divider { background: linear-gradient(90deg, transparent, var(--gold), transparent); height: 1px; }
 
 @custom-variant dark (&:is(.dark *));
 
