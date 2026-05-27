@@ -83,7 +83,7 @@ function Index() {
               <span className="text-xs tracking-[0.3em] uppercase text-gold">Advocacia de Excelência</span>
             </div>
             <h1 className="font-serif-luxe text-4xl md:text-6xl lg:text-7xl leading-[1.05] text-stone-50 max-w-5xl">
-              Transformando <em className="text-gold-gradient not-italic">desafios jurídicos</em> complexos em soluções eficazes e personalizadas.
+              <em className="text-gold-gradient not-italic">Ciência jurídica</em> avançada e advocacia sob medida para proteger o seu patrimônio e seus direitos.
             </h1>
             <div className="mt-10 space-y-2">
               <p className="font-serif-luxe text-2xl md:text-3xl text-stone-100">
