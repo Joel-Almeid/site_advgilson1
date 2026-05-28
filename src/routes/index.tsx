@@ -1,10 +1,10 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import {
+import {
   Users, FileText, Home, Shield, MapPin, Mail, Phone,
-  MessageCircle, Check, ChevronRight, Menu, X
+  Check, ChevronRight, Menu, X
 } from "lucide-react";
-import logo from "@/assets/logo_gilson.png";
 import imgGilson from "@/assets/img-gilson.png";
 import imgEscritorio from "@/assets/img-escritorio.jpg";
 import bgBooks from "@/assets/bg-books.jpg";
