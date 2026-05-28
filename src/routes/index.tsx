@@ -91,14 +91,17 @@ function Index() {
               <div className="w-12 h-px bg-gold" />
               <span className="text-xs tracking-[0.3em] uppercase text-gold">Advocacia de Excelência</span>
             </div>
-            <h1 className="font-serif-luxe text-4xl md:text-6xl lg:text-7xl leading-[1.05] text-stone-50 max-w-5xl">
-              <em className="text-gold-gradient not-italic">Ciência jurídica</em> avançada e advocacia sob medida para proteger o seu patrimônio e seus direitos.
+            <h1 className="font-serif-luxe text-[2rem] xs:text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-[1.1] tracking-tight text-stone-50 max-w-5xl break-words">
+              <em className="text-gold-gradient not-italic">Ciência jurídica avançada</em> e advocacia sob medida para proteger o seu patrimônio e seus direitos.
             </h1>
-            <div className="mt-10 space-y-2">
-              <p className="font-serif-luxe text-2xl md:text-3xl text-stone-100">
-                Dr. Gilson Carvalho <span className="text-gold">|</span> OAB/TO 2.591 · OAB/RJ 256.131
+            <div className="mt-8 md:mt-10 space-y-3 border-l-2 border-gold/60 pl-5">
+              <p className="font-serif-luxe text-xl md:text-2xl lg:text-3xl text-stone-100 leading-snug">
+                Dr. Gilson Carvalho
               </p>
-              <p className="text-xs md:text-sm tracking-[0.25em] uppercase text-stone-400">
+              <p className="text-[11px] md:text-xs tracking-[0.25em] uppercase text-gold">
+                OAB/TO 2.591 <span className="text-stone-500">·</span> OAB/RJ 256.131
+              </p>
+              <p className="text-[10px] md:text-xs tracking-[0.25em] uppercase text-stone-400">
                 Professor Universitário · Mestre & Especialista
               </p>
             </div>
