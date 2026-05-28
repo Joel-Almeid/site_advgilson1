@@ -72,11 +72,11 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Gilson Carvalho — Advocacia | Excelência Jurídica" },
-      { name: "description", content: "Escritório Gilson Carvalho - Advocacia. Atuação em Direito de Família, Civil, Imobiliário e Penal. Atendimento presencial e digital em todo o Brasil." },
+      { title: "Gilson Carvalho — Advocacia | Ciência Jurídica Avançada e Sob Medida" },
+      { name: "description", content: "Ciência jurídica avançada e advocacia sob medida para proteger o seu patrimônio e seus direitos. Dr. Gilson Carvalho — OAB/TO 2.591 · OAB/RJ 256.131." },
       { name: "author", content: "Gilson Carvalho Advocacia" },
-      { property: "og:title", content: "Gilson Carvalho — Advocacia" },
-      { property: "og:description", content: "Tradição, ética e resultado. Mais de 20 anos transformando desafios jurídicos em soluções." },
+      { property: "og:title", content: "Gilson Carvalho — Advocacia | Ciência Jurídica Avançada" },
+      { property: "og:description", content: "Ciência jurídica avançada e advocacia sob medida para proteger o seu patrimônio e seus direitos." },
       { property: "og:type", content: "website" },
     ],
     links: [

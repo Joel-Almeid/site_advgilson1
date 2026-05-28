@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import {
   Users, FileText, Home, Shield, MapPin, Mail, Phone,
-  MessageCircle, Check, ChevronRight, Menu, X
+  Check, ChevronRight, Menu, X
 } from "lucide-react";
 import logo from "@/assets/logo_gilson.png";
 import imgGilson from "@/assets/img-gilson.png";
@@ -22,11 +22,20 @@ function Index() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [form, setForm] = useState({ nome: "", telefone: "", email: "", area: "" });
 
+  const maskPhone = (v: string) => {
+    const d = v.replace(/\D/g, "").slice(0, 11);
+    if (d.length <= 2) return d.length ? `(${d}` : "";
+    if (d.length <= 7) return `(${d.slice(0, 2)}) ${d.slice(2)}`;
+    return `(${d.slice(0, 2)}) ${d.slice(2, 7)}-${d.slice(7)}`;
+  };
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const msg = `Olá, sou ${form.nome}.%0ATelefone: ${form.telefone}%0AE-mail: ${form.email}%0AÁrea de interesse: ${form.area}`;
     window.open(`https://wa.me/${WHATSAPP}?text=${msg}`, "_blank");
   };
+
+  const closeMenu = () => setMenuOpen(false);
 
   const navLinks = [
     { label: "Início", href: "#inicio" },
@@ -60,7 +69,7 @@ function Index() {
         {menuOpen && (
           <div className="lg:hidden border-t border-white/10 px-6 py-6 space-y-4" style={{ backgroundColor: "#1d1d1d" }}>
             {navLinks.map(l => (
-              <a key={l.href} href={l.href} onClick={() => setMenuOpen(false)} className="block text-sm tracking-wider uppercase text-stone-200 hover:text-gold">
+              <a key={l.href} href={l.href} onClick={closeMenu} className="block text-sm tracking-wider uppercase text-stone-200 hover:text-gold">
                 {l.label}
               </a>
             ))}
@@ -82,14 +91,17 @@ function Index() {
               <div className="w-12 h-px bg-gold" />
               <span className="text-xs tracking-[0.3em] uppercase text-gold">Advocacia de Excelência</span>
             </div>
-            <h1 className="font-serif-luxe text-4xl md:text-6xl lg:text-7xl leading-[1.05] text-stone-50 max-w-5xl">
-              <em className="text-gold-gradient not-italic">Ciência jurídica</em> avançada e advocacia sob medida para proteger o seu patrimônio e seus direitos.
+            <h1 className="font-serif-luxe text-[2rem] xs:text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-[1.1] tracking-tight text-stone-50 max-w-5xl break-words">
+              <em className="text-gold-gradient not-italic">Ciência jurídica avançada</em> e advocacia sob medida para proteger o seu patrimônio e seus direitos.
             </h1>
-            <div className="mt-10 space-y-2">
-              <p className="font-serif-luxe text-2xl md:text-3xl text-stone-100">
-                Dr. Gilson Carvalho <span className="text-gold">|</span> OAB/TO 2.591 · OAB/RJ 256.131
+            <div className="mt-8 md:mt-10 space-y-3 border-l-2 border-gold/60 pl-5">
+              <p className="font-serif-luxe text-xl md:text-2xl lg:text-3xl text-stone-100 leading-snug">
+                Dr. Gilson Carvalho
               </p>
-              <p className="text-xs md:text-sm tracking-[0.25em] uppercase text-stone-400">
+              <p className="text-[11px] md:text-xs tracking-[0.25em] uppercase text-gold">
+                OAB/TO 2.591 <span className="text-stone-500">·</span> OAB/RJ 256.131
+              </p>
+              <p className="text-[10px] md:text-xs tracking-[0.25em] uppercase text-stone-400">
                 Professor Universitário · Mestre & Especialista
               </p>
             </div>
@@ -219,7 +231,7 @@ function Index() {
               { Icon: Home, title: "Direito Imobiliário", desc: "Segurança jurídica em transações, contratos de compra e venda, posses e regularização de imóveis." },
               { Icon: Shield, title: "Direito Penal / Criminal", desc: "Defesa técnica especializada e acompanhamento detalhado em demandas de complexidade criminal." },
             ].map(({ Icon, title, desc }) => (
-              <div key={title} className="group relative p-8 border border-gold/20 hover:border-gold/60 transition-all duration-500" style={{ backgroundColor: "rgba(30,30,30,0.6)" }}>
+              <div key={title} className="card-luxe group relative p-8 border border-gold/20" style={{ backgroundColor: "rgba(30,30,30,0.6)" }}>
                 <div className="absolute top-0 left-0 w-8 h-px bg-gold" />
                 <div className="absolute top-0 left-0 w-px h-8 bg-gold" />
                 <Icon size={36} className="text-gold mb-6" strokeWidth={1.2} />
@@ -274,10 +286,15 @@ function Index() {
                     id={f.id}
                     type={f.type}
                     required
-                    maxLength={150}
+                    maxLength={f.id === "telefone" ? 15 : 150}
+                    placeholder={f.id === "telefone" ? "(63) 99999-9999" : undefined}
+                    inputMode={f.id === "telefone" ? "tel" : undefined}
                     value={form[f.id as keyof typeof form]}
-                    onChange={e => setForm({ ...form, [f.id]: e.target.value })}
-                    className="w-full bg-transparent border-b border-white/20 focus:border-gold py-3 text-stone-100 outline-none transition-colors"
+                    onChange={e => {
+                      const v = f.id === "telefone" ? maskPhone(e.target.value) : e.target.value;
+                      setForm({ ...form, [f.id]: v });
+                    }}
+                    className="w-full bg-transparent border-b border-white/20 focus:border-gold py-3 text-stone-100 placeholder:text-stone-600 outline-none transition-colors"
                   />
                 </div>
               ))}
@@ -331,6 +348,7 @@ function Index() {
                 <li>Av. Guanabara, 1669 — Gurupi/TO</li>
                 <li>advogado@gilsoncarvalho.com</li>
                 <li>+55 (63) 98447-4070</li>
+                <li className="text-stone-400">Seg. a Sex. · 09:00 às 18:00</li>
                 <li className="pt-3 border-t border-white/5 mt-4 text-gold">OAB/TO 2.591 · OAB/RJ 256.131</li>
               </ul>
             </div>
@@ -348,10 +366,12 @@ function Index() {
         target="_blank"
         rel="noopener"
         aria-label="Falar no WhatsApp"
-        className="fixed bottom-6 right-6 z-50 flex items-center justify-center w-14 h-14 rounded-full shadow-2xl shadow-green-900/40 hover:scale-110 transition-transform"
+        className="wa-ping fixed bottom-6 right-6 z-50 flex items-center justify-center w-16 h-16 rounded-full shadow-2xl shadow-green-900/50 hover:scale-110 transition-transform"
         style={{ backgroundColor: "#25D366" }}
       >
-        <MessageCircle size={26} className="text-white" />
+        <svg viewBox="0 0 32 32" className="w-8 h-8" fill="#ffffff" aria-hidden="true">
+          <path d="M19.11 17.27c-.27-.13-1.59-.78-1.84-.87-.25-.09-.43-.13-.61.14-.18.27-.69.87-.85 1.05-.16.18-.31.2-.58.07-.27-.13-1.13-.42-2.16-1.33-.8-.71-1.34-1.59-1.49-1.86-.16-.27-.02-.41.12-.55.12-.12.27-.31.41-.47.13-.16.18-.27.27-.45.09-.18.04-.34-.02-.47-.07-.13-.61-1.47-.84-2.01-.22-.53-.45-.46-.61-.47l-.52-.01c-.18 0-.47.07-.72.34-.25.27-.94.92-.94 2.25 0 1.33.96 2.61 1.09 2.79.13.18 1.89 2.89 4.58 4.05.64.28 1.14.44 1.53.57.64.2 1.22.17 1.68.1.51-.08 1.59-.65 1.82-1.28.22-.63.22-1.17.16-1.28-.07-.11-.25-.18-.52-.31zM16.02 5.33c-5.89 0-10.67 4.78-10.67 10.67 0 1.88.49 3.71 1.43 5.33L5.33 26.67l5.5-1.43c1.56.85 3.32 1.3 5.12 1.3h.01c5.88 0 10.67-4.78 10.67-10.67 0-2.85-1.11-5.53-3.12-7.55a10.62 10.62 0 0 0-7.54-3.12zm0 19.55h-.01c-1.6 0-3.17-.43-4.55-1.25l-.33-.19-3.39.89.9-3.3-.21-.34a8.85 8.85 0 0 1-1.36-4.72c0-4.89 3.98-8.87 8.87-8.87 2.37 0 4.6.92 6.27 2.6a8.83 8.83 0 0 1 2.6 6.28c0 4.89-3.98 8.87-8.79 8.87z"/>
+        </svg>
       </a>
     </div>
   );
