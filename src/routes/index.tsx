@@ -19,7 +19,6 @@ const waLink = (msg = "Olá, gostaria de agendar uma consulta jurídica.") =>
   `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(msg)}`;
 
 function Index() {
-function Index() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [form, setForm] = useState({ nome: "", telefone: "", email: "", area: "" });
 
