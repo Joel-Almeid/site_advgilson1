@@ -69,7 +69,7 @@ function Index() {
         {menuOpen && (
           <div className="lg:hidden border-t border-white/10 px-6 py-6 space-y-4" style={{ backgroundColor: "#1d1d1d" }}>
             {navLinks.map(l => (
-              <a key={l.href} href={l.href} onClick={() => setMenuOpen(false)} className="block text-sm tracking-wider uppercase text-stone-200 hover:text-gold">
+              <a key={l.href} href={l.href} onClick={closeMenu} className="block text-sm tracking-wider uppercase text-stone-200 hover:text-gold">
                 {l.label}
               </a>
             ))}
