@@ -286,10 +286,15 @@ function Index() {
                     id={f.id}
                     type={f.type}
                     required
-                    maxLength={150}
+                    maxLength={f.id === "telefone" ? 15 : 150}
+                    placeholder={f.id === "telefone" ? "(63) 99999-9999" : undefined}
+                    inputMode={f.id === "telefone" ? "tel" : undefined}
                     value={form[f.id as keyof typeof form]}
-                    onChange={e => setForm({ ...form, [f.id]: e.target.value })}
-                    className="w-full bg-transparent border-b border-white/20 focus:border-gold py-3 text-stone-100 outline-none transition-colors"
+                    onChange={e => {
+                      const v = f.id === "telefone" ? maskPhone(e.target.value) : e.target.value;
+                      setForm({ ...form, [f.id]: v });
+                    }}
+                    className="w-full bg-transparent border-b border-white/20 focus:border-gold py-3 text-stone-100 placeholder:text-stone-600 outline-none transition-colors"
                   />
                 </div>
               ))}
