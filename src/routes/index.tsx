@@ -231,7 +231,7 @@ function Index() {
               { Icon: Home, title: "Direito Imobiliário", desc: "Segurança jurídica em transações, contratos de compra e venda, posses e regularização de imóveis." },
               { Icon: Shield, title: "Direito Penal / Criminal", desc: "Defesa técnica especializada e acompanhamento detalhado em demandas de complexidade criminal." },
             ].map(({ Icon, title, desc }) => (
-              <div key={title} className="group relative p-8 border border-gold/20 hover:border-gold/60 transition-all duration-500" style={{ backgroundColor: "rgba(30,30,30,0.6)" }}>
+              <div key={title} className="card-luxe group relative p-8 border border-gold/20" style={{ backgroundColor: "rgba(30,30,30,0.6)" }}>
                 <div className="absolute top-0 left-0 w-8 h-px bg-gold" />
                 <div className="absolute top-0 left-0 w-px h-8 bg-gold" />
                 <Icon size={36} className="text-gold mb-6" strokeWidth={1.2} />
