@@ -348,6 +348,7 @@ function Index() {
                 <li>Av. Guanabara, 1669 — Gurupi/TO</li>
                 <li>advogado@gilsoncarvalho.com</li>
                 <li>+55 (63) 98447-4070</li>
+                <li className="text-stone-400">Seg. a Sex. · 09:00 às 18:00</li>
                 <li className="pt-3 border-t border-white/5 mt-4 text-gold">OAB/TO 2.591 · OAB/RJ 256.131</li>
               </ul>
             </div>
