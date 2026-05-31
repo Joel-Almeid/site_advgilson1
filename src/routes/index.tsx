@@ -5,9 +5,10 @@ import {
   Check, ChevronRight, Menu, X
 } from "lucide-react";
 import { FaWhatsapp } from "react-icons/fa";
+import { motion } from "framer-motion";
 
 import logo from "@/assets/logo_gilson.png";
-import imgGilson from "@/assets/img-gilson.png";
+import imgGilson2 from "@/assets/foto2gilson.png";
 import imgEscritorio from "@/assets/img-escritorio.jpg";
 import bgBooks from "@/assets/bg-books.jpg";
 import bgMarble from "@/assets/bg-marble.jpg";
@@ -141,14 +142,26 @@ function Index() {
             <h2 className="font-serif-luxe text-5xl md:text-6xl text-stone-50">Tradição, Ética e Resultado</h2>
           </div>
 
-          <div className="grid lg:grid-cols-12 gap-16 items-center">
-            <div className="lg:col-span-5">
-              <div className="relative">
-                <div className="absolute -inset-3 border border-gold/60" />
-                <div className="absolute -inset-1 border border-gold" />
-                <img src={imgGilson} alt="Dr. Gilson Carvalho" className="relative w-full h-auto grayscale-[15%]" />
+          <div className="grid lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+            <motion.div
+              className="lg:col-span-5"
+              initial={{ opacity: 0, x: -40 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
+            >
+              <div className="relative mx-auto lg:mx-0 max-w-[450px]">
+                <div className="absolute -inset-2 border border-gold/40" />
+                <div className="p-[1px]" style={{ borderColor: "#C8A84B", border: "1px solid #C8A84B" }}>
+                  <img
+                    src={imgGilson2}
+                    alt="Dr. Gilson Carvalho — Advogado"
+                    className="w-full max-w-[450px] h-auto object-cover rounded-lg mx-auto lg:mx-0 shadow-2xl shadow-black/60"
+                    style={{ aspectRatio: "4/5" }}
+                  />
+                </div>
               </div>
-            </div>
+            </motion.div>
             <div className="lg:col-span-7">
               <span className="inline-block text-[10px] tracking-[0.35em] uppercase text-gold border border-gold/40 px-4 py-2 mb-6">O Advogado</span>
               <h3 className="font-serif-luxe text-4xl md:text-5xl text-stone-50 leading-tight mb-8">
