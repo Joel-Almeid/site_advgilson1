@@ -72,17 +72,12 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Gilson Carvalho — Advocacia | Ciência Jurídica Avançada e Sob Medida" },
-      { name: "description", content: "Landing page premium para escritório de advocacia, focada em alta conversão e design luxuoso." },
+      { title: "Gilson Carvalho — Advocacia | Excelência Jurídica" },
+      { name: "description", content: "Escritório Gilson Carvalho - Advocacia. Atuação em Direito de Família, Civil, Imobiliário e Penal. Atendimento presencial e digital em todo o Brasil." },
       { name: "author", content: "Gilson Carvalho Advocacia" },
-      { property: "og:title", content: "Gilson Carvalho — Advocacia | Ciência Jurídica Avançada e Sob Medida" },
-      { property: "og:description", content: "Landing page premium para escritório de advocacia, focada em alta conversão e design luxuoso." },
+      { property: "og:title", content: "Gilson Carvalho — Advocacia" },
+      { property: "og:description", content: "Tradição, ética e resultado. Mais de 20 anos transformando desafios jurídicos em soluções." },
       { property: "og:type", content: "website" },
-      { name: "twitter:title", content: "Gilson Carvalho — Advocacia | Ciência Jurídica Avançada e Sob Medida" },
-      { name: "twitter:description", content: "Advocacia especializada em proteger o seu patrimônio e seus direitos." },
-      { property: "og:image", content: "/favicon.png" },
-      { name: "twitter:image", content: "/favicon.png" },
-      { name: "twitter:card", content: "summary_large_image" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
@@ -98,7 +93,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 
 function RootShell({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="pt-BR">
+    <html lang="en">
       <head>
         <HeadContent />
       </head>
