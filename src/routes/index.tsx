@@ -4,6 +4,8 @@ import {
   Users, FileText, Home, Shield, MapPin, Mail, Phone,
   Check, ChevronRight, Menu, X
 } from "lucide-react";
+import { FaWhatsapp } from "react-icons/fa";
+
 import logo from "@/assets/logo_gilson.png";
 import imgGilson from "@/assets/img-gilson.png";
 import imgEscritorio from "@/assets/img-escritorio.jpg";
@@ -382,9 +384,7 @@ function Index() {
         className="wa-ping fixed bottom-6 right-6 z-50 flex items-center justify-center w-16 h-16 rounded-full shadow-2xl shadow-green-900/50 hover:scale-110 transition-transform"
         style={{ backgroundColor: "#25D366" }}
       >
-        <svg viewBox="0 0 32 32" className="w-9 h-9" fill="#ffffff" aria-hidden="true">
-          <path d="M19.11 17.205c-.372 0-1.088 1.39-1.518 1.39a.63.63 0 0 1-.315-.1c-.802-.402-1.504-.817-2.163-1.447-.545-.516-1.146-1.29-1.46-1.963a.426.426 0 0 1-.073-.215c0-.33.99-.945.99-1.49 0-.143-.73-2.09-.832-2.335-.143-.372-.214-.487-.6-.487-.187 0-.36-.043-.53-.043-.302 0-.53.115-.746.315-.688.645-1.032 1.318-1.06 2.264v.114c-.015.99.472 1.977 1.017 2.78 1.23 1.82 2.506 3.41 4.554 4.34.616.287 2.035.888 2.722.888.817 0 2.15-.515 2.55-1.276.114-.243.214-.5.214-.773 0-.5-.07-.5-.443-.71-.422-.243-2.808-1.302-3.307-1.346zm-3.144 9.51c-1.978 0-3.913-.587-5.55-1.677l-3.88 1.244 1.262-3.752a9.928 9.928 0 0 1-1.92-5.86c0-5.523 4.522-10.026 10.073-10.026a9.99 9.99 0 0 1 7.11 2.94c1.9 1.892 3.062 4.413 3.062 7.105 0 5.522-4.62 10.026-10.17 10.026zm0-22.066c-6.674 0-12.107 5.412-12.107 12.066 0 2.118.516 4.236 1.59 6.07L2 31.998l8.46-2.205a12.117 12.117 0 0 0 5.795 1.477h.014c6.673 0 12.207-5.412 12.207-12.067 0-3.222-1.346-6.244-3.62-8.518a12.099 12.099 0 0 0-8.572-3.55z" />
-        </svg>
+        <FaWhatsapp className="w-9 h-9 text-white" />
       </a>
     </div>
   );
