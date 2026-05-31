@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import {
   Users, FileText, Home, Shield, MapPin, Mail, Phone,
-  MessageCircle, Check, ChevronRight, Menu, X
+  Check, ChevronRight, Menu, X
 } from "lucide-react";
 import logo from "@/assets/logo_gilson.png";
 import imgGilson from "@/assets/img-gilson.png";
@@ -22,10 +22,25 @@ function Index() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [form, setForm] = useState({ nome: "", telefone: "", email: "", area: "" });
 
+  const maskPhone = (v: string) => {
+    const d = v.replace(/\D/g, "").slice(0, 11);
+    if (d.length <= 2) return d.length ? `(${d}` : "";
+    if (d.length <= 6) return `(${d.slice(0, 2)}) ${d.slice(2)}`;
+    if (d.length <= 10) return `(${d.slice(0, 2)}) ${d.slice(2, 6)}-${d.slice(6)}`;
+    return `(${d.slice(0, 2)}) ${d.slice(2, 7)}-${d.slice(7)}`;
+  };
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const msg = `Olá, sou ${form.nome}.%0ATelefone: ${form.telefone}%0AE-mail: ${form.email}%0AÁrea de interesse: ${form.area}`;
     window.open(`https://wa.me/${WHATSAPP}?text=${msg}`, "_blank");
+  };
+
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    e.preventDefault();
+    setMenuOpen(false);
+    const el = document.querySelector(href);
+    if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
   };
 
   const navLinks = [
@@ -45,7 +60,7 @@ function Index() {
           </a>
           <nav className="hidden lg:flex items-center gap-10">
             {navLinks.map(l => (
-              <a key={l.href} href={l.href} className="text-sm tracking-wider uppercase text-stone-200 hover:text-gold transition-colors">
+              <a key={l.href} href={l.href} onClick={(e) => handleNavClick(e, l.href)} className="text-sm tracking-wider uppercase text-stone-200 hover:text-gold transition-colors">
                 {l.label}
               </a>
             ))}
@@ -53,18 +68,18 @@ function Index() {
           <a href={waLink()} target="_blank" rel="noopener" className="hidden lg:inline-flex items-center gap-2 border border-gold text-gold px-5 py-2.5 text-xs tracking-[0.2em] uppercase hover:bg-gold hover:text-charcoal-deep transition-all" style={{ borderColor: "var(--gold)" }}>
             Falar com Advogado
           </a>
-          <button onClick={() => setMenuOpen(!menuOpen)} className="lg:hidden text-gold">
+          <button onClick={() => setMenuOpen(!menuOpen)} className="lg:hidden text-gold" aria-label="Abrir menu">
             {menuOpen ? <X size={26} /> : <Menu size={26} />}
           </button>
         </div>
         {menuOpen && (
           <div className="lg:hidden border-t border-white/10 px-6 py-6 space-y-4" style={{ backgroundColor: "#1d1d1d" }}>
             {navLinks.map(l => (
-              <a key={l.href} href={l.href} onClick={() => setMenuOpen(false)} className="block text-sm tracking-wider uppercase text-stone-200 hover:text-gold">
+              <a key={l.href} href={l.href} onClick={(e) => handleNavClick(e, l.href)} className="block text-sm tracking-wider uppercase text-stone-200 hover:text-gold">
                 {l.label}
               </a>
             ))}
-            <a href={waLink()} target="_blank" rel="noopener" className="inline-flex items-center gap-2 border border-gold text-gold px-5 py-2.5 text-xs tracking-[0.2em] uppercase">
+            <a href={waLink()} target="_blank" rel="noopener" onClick={() => setMenuOpen(false)} className="inline-flex items-center gap-2 border border-gold text-gold px-5 py-2.5 text-xs tracking-[0.2em] uppercase">
               Falar com Advogado
             </a>
           </div>
@@ -82,14 +97,18 @@ function Index() {
               <div className="w-12 h-px bg-gold" />
               <span className="text-xs tracking-[0.3em] uppercase text-gold">Advocacia de Excelência</span>
             </div>
-            <h1 className="font-serif-luxe text-4xl md:text-6xl lg:text-7xl leading-[1.05] text-stone-50 max-w-5xl">
-              <em className="text-gold-gradient not-italic">Ciência jurídica</em> avançada e advocacia sob medida para proteger o seu patrimônio e seus direitos.
+            <h1 className="font-serif-luxe text-[2rem] sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl leading-[1.1] tracking-tight text-stone-50 max-w-5xl text-balance break-words">
+              <em className="text-gold-gradient not-italic">Ciência jurídica avançada</em> e advocacia sob medida para proteger o seu patrimônio e seus direitos.
             </h1>
-            <div className="mt-10 space-y-2">
-              <p className="font-serif-luxe text-2xl md:text-3xl text-stone-100">
-                Dr. Gilson Carvalho <span className="text-gold">|</span> OAB/TO 2.591 · OAB/RJ 256.131
+            <div className="mt-8 md:mt-10 space-y-3">
+              <p className="font-serif-luxe text-xl sm:text-2xl md:text-3xl text-stone-100 leading-snug">
+                Dr. Gilson Carvalho
               </p>
-              <p className="text-xs md:text-sm tracking-[0.25em] uppercase text-stone-400">
+              <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-[11px] sm:text-xs tracking-[0.25em] uppercase">
+                <span className="text-gold border border-gold/40 px-3 py-1">OAB/TO 2.591</span>
+                <span className="text-gold border border-gold/40 px-3 py-1">OAB/RJ 256.131</span>
+              </div>
+              <p className="text-xs md:text-sm tracking-[0.25em] uppercase text-stone-400 pt-1">
                 Professor Universitário · Mestre & Especialista
               </p>
             </div>
@@ -219,7 +238,7 @@ function Index() {
               { Icon: Home, title: "Direito Imobiliário", desc: "Segurança jurídica em transações, contratos de compra e venda, posses e regularização de imóveis." },
               { Icon: Shield, title: "Direito Penal / Criminal", desc: "Defesa técnica especializada e acompanhamento detalhado em demandas de complexidade criminal." },
             ].map(({ Icon, title, desc }) => (
-              <div key={title} className="group relative p-8 border border-gold/20 hover:border-gold/60 transition-all duration-500" style={{ backgroundColor: "rgba(30,30,30,0.6)" }}>
+              <div key={title} className="card-hover-gold group relative p-8 border border-gold/20" style={{ backgroundColor: "rgba(30,30,30,0.6)" }}>
                 <div className="absolute top-0 left-0 w-8 h-px bg-gold" />
                 <div className="absolute top-0 left-0 w-px h-8 bg-gold" />
                 <Icon size={36} className="text-gold mb-6" strokeWidth={1.2} />
@@ -264,9 +283,9 @@ function Index() {
           <div className="p-8 md:p-10 border border-gold/20" style={{ backgroundColor: "#1f1f1f" }}>
             <form onSubmit={handleSubmit} className="space-y-6">
               {[
-                { id: "nome", label: "Nome Completo", type: "text" },
-                { id: "telefone", label: "Telefone / WhatsApp", type: "tel" },
-                { id: "email", label: "E-mail", type: "email" },
+                { id: "nome", label: "Nome Completo", type: "text", placeholder: "Seu nome completo" },
+                { id: "telefone", label: "Telefone / WhatsApp", type: "tel", placeholder: "(63) 99999-9999" },
+                { id: "email", label: "E-mail", type: "email", placeholder: "seu@email.com" },
               ].map(f => (
                 <div key={f.id}>
                   <label htmlFor={f.id} className="block text-[10px] tracking-[0.3em] uppercase text-gold mb-3">{f.label}</label>
@@ -274,10 +293,15 @@ function Index() {
                     id={f.id}
                     type={f.type}
                     required
-                    maxLength={150}
+                    maxLength={f.id === "telefone" ? 15 : 150}
+                    placeholder={f.placeholder}
+                    inputMode={f.id === "telefone" ? "numeric" : undefined}
                     value={form[f.id as keyof typeof form]}
-                    onChange={e => setForm({ ...form, [f.id]: e.target.value })}
-                    className="w-full bg-transparent border-b border-white/20 focus:border-gold py-3 text-stone-100 outline-none transition-colors"
+                    onChange={e => {
+                      const v = f.id === "telefone" ? maskPhone(e.target.value) : e.target.value;
+                      setForm({ ...form, [f.id]: v });
+                    }}
+                    className="w-full bg-transparent border-b border-white/20 focus:border-gold py-3 text-stone-100 placeholder:text-stone-600 outline-none transition-colors"
                   />
                 </div>
               ))}
@@ -321,7 +345,7 @@ function Index() {
               <h5 className="text-[10px] tracking-[0.3em] uppercase text-gold mb-6">Navegação</h5>
               <ul className="space-y-3">
                 {navLinks.map(l => (
-                  <li key={l.href}><a href={l.href} className="text-stone-300 hover:text-gold text-sm transition-colors">{l.label}</a></li>
+                  <li key={l.href}><a href={l.href} onClick={(e) => handleNavClick(e, l.href)} className="text-stone-300 hover:text-gold text-sm transition-colors">{l.label}</a></li>
                 ))}
               </ul>
             </div>
@@ -331,7 +355,14 @@ function Index() {
                 <li>Av. Guanabara, 1669 — Gurupi/TO</li>
                 <li>advogado@gilsoncarvalho.com</li>
                 <li>+55 (63) 98447-4070</li>
-                <li className="pt-3 border-t border-white/5 mt-4 text-gold">OAB/TO 2.591 · OAB/RJ 256.131</li>
+                <li className="pt-3 text-stone-400">
+                  <span className="block text-[10px] tracking-[0.3em] uppercase text-gold mb-1">Horário de Atendimento</span>
+                  Segunda a Sexta · 09:00 às 18:00
+                </li>
+                <li className="pt-3 border-t border-white/5 mt-4 flex flex-wrap gap-2">
+                  <span className="text-[10px] tracking-[0.25em] uppercase text-gold border border-gold/40 px-2 py-1">OAB/TO 2.591</span>
+                  <span className="text-[10px] tracking-[0.25em] uppercase text-gold border border-gold/40 px-2 py-1">OAB/RJ 256.131</span>
+                </li>
               </ul>
             </div>
           </div>
@@ -348,10 +379,12 @@ function Index() {
         target="_blank"
         rel="noopener"
         aria-label="Falar no WhatsApp"
-        className="fixed bottom-6 right-6 z-50 flex items-center justify-center w-14 h-14 rounded-full shadow-2xl shadow-green-900/40 hover:scale-110 transition-transform"
+        className="wa-ping fixed bottom-6 right-6 z-50 flex items-center justify-center w-16 h-16 rounded-full shadow-2xl shadow-green-900/50 hover:scale-110 transition-transform"
         style={{ backgroundColor: "#25D366" }}
       >
-        <MessageCircle size={26} className="text-white" />
+        <svg viewBox="0 0 32 32" className="w-9 h-9" fill="#ffffff" aria-hidden="true">
+          <path d="M19.11 17.205c-.372 0-1.088 1.39-1.518 1.39a.63.63 0 0 1-.315-.1c-.802-.402-1.504-.817-2.163-1.447-.545-.516-1.146-1.29-1.46-1.963a.426.426 0 0 1-.073-.215c0-.33.99-.945.99-1.49 0-.143-.73-2.09-.832-2.335-.143-.372-.214-.487-.6-.487-.187 0-.36-.043-.53-.043-.302 0-.53.115-.746.315-.688.645-1.032 1.318-1.06 2.264v.114c-.015.99.472 1.977 1.017 2.78 1.23 1.82 2.506 3.41 4.554 4.34.616.287 2.035.888 2.722.888.817 0 2.15-.515 2.55-1.276.114-.243.214-.5.214-.773 0-.5-.07-.5-.443-.71-.422-.243-2.808-1.302-3.307-1.346zm-3.144 9.51c-1.978 0-3.913-.587-5.55-1.677l-3.88 1.244 1.262-3.752a9.928 9.928 0 0 1-1.92-5.86c0-5.523 4.522-10.026 10.073-10.026a9.99 9.99 0 0 1 7.11 2.94c1.9 1.892 3.062 4.413 3.062 7.105 0 5.522-4.62 10.026-10.17 10.026zm0-22.066c-6.674 0-12.107 5.412-12.107 12.066 0 2.118.516 4.236 1.59 6.07L2 31.998l8.46-2.205a12.117 12.117 0 0 0 5.795 1.477h.014c6.673 0 12.207-5.412 12.207-12.067 0-3.222-1.346-6.244-3.62-8.518a12.099 12.099 0 0 0-8.572-3.55z" />
+        </svg>
       </a>
     </div>
   );
