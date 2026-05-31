@@ -345,7 +345,7 @@ function Index() {
               <h5 className="text-[10px] tracking-[0.3em] uppercase text-gold mb-6">Navegação</h5>
               <ul className="space-y-3">
                 {navLinks.map(l => (
-                  <li key={l.href}><a href={l.href} className="text-stone-300 hover:text-gold text-sm transition-colors">{l.label}</a></li>
+                  <li key={l.href}><a href={l.href} onClick={(e) => handleNavClick(e, l.href)} className="text-stone-300 hover:text-gold text-sm transition-colors">{l.label}</a></li>
                 ))}
               </ul>
             </div>
