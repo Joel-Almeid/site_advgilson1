@@ -283,9 +283,9 @@ function Index() {
           <div className="p-8 md:p-10 border border-gold/20" style={{ backgroundColor: "#1f1f1f" }}>
             <form onSubmit={handleSubmit} className="space-y-6">
               {[
-                { id: "nome", label: "Nome Completo", type: "text" },
-                { id: "telefone", label: "Telefone / WhatsApp", type: "tel" },
-                { id: "email", label: "E-mail", type: "email" },
+                { id: "nome", label: "Nome Completo", type: "text", placeholder: "Seu nome completo" },
+                { id: "telefone", label: "Telefone / WhatsApp", type: "tel", placeholder: "(63) 99999-9999" },
+                { id: "email", label: "E-mail", type: "email", placeholder: "seu@email.com" },
               ].map(f => (
                 <div key={f.id}>
                   <label htmlFor={f.id} className="block text-[10px] tracking-[0.3em] uppercase text-gold mb-3">{f.label}</label>
@@ -293,10 +293,15 @@ function Index() {
                     id={f.id}
                     type={f.type}
                     required
-                    maxLength={150}
+                    maxLength={f.id === "telefone" ? 15 : 150}
+                    placeholder={f.placeholder}
+                    inputMode={f.id === "telefone" ? "numeric" : undefined}
                     value={form[f.id as keyof typeof form]}
-                    onChange={e => setForm({ ...form, [f.id]: e.target.value })}
-                    className="w-full bg-transparent border-b border-white/20 focus:border-gold py-3 text-stone-100 outline-none transition-colors"
+                    onChange={e => {
+                      const v = f.id === "telefone" ? maskPhone(e.target.value) : e.target.value;
+                      setForm({ ...form, [f.id]: v });
+                    }}
+                    className="w-full bg-transparent border-b border-white/20 focus:border-gold py-3 text-stone-100 placeholder:text-stone-600 outline-none transition-colors"
                   />
                 </div>
               ))}
