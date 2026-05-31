@@ -79,9 +79,9 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { property: "og:description", content: "Landing page premium para escritório de advocacia, focada em alta conversão e design luxuoso." },
       { property: "og:type", content: "website" },
       { name: "twitter:title", content: "Gilson Carvalho — Advocacia | Ciência Jurídica Avançada e Sob Medida" },
-      { name: "twitter:description", content: "Landing page premium para escritório de advocacia, focada em alta conversão e design luxuoso." },
-      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/5e04c549-e714-4334-94dd-eea44925578c/id-preview-bea437f2--16305905-d4df-4097-8474-d2b17948b87c.lovable.app-1780012014997.png" },
-      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/5e04c549-e714-4334-94dd-eea44925578c/id-preview-bea437f2--16305905-d4df-4097-8474-d2b17948b87c.lovable.app-1780012014997.png" },
+      { name: "twitter:description", content: "Advocacia especializada em proteger o seu patrimônio e seus direitos." },
+      { property: "og:image", content: "/favicon.png" },
+      { name: "twitter:image", content: "/favicon.png" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
     links: [
@@ -98,7 +98,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 
 function RootShell({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="pt-BR">
       <head>
         <HeadContent />
       </head>
