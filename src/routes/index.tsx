@@ -60,7 +60,7 @@ function Index() {
           </a>
           <nav className="hidden lg:flex items-center gap-10">
             {navLinks.map(l => (
-              <a key={l.href} href={l.href} className="text-sm tracking-wider uppercase text-stone-200 hover:text-gold transition-colors">
+              <a key={l.href} href={l.href} onClick={(e) => handleNavClick(e, l.href)} className="text-sm tracking-wider uppercase text-stone-200 hover:text-gold transition-colors">
                 {l.label}
               </a>
             ))}
@@ -68,18 +68,18 @@ function Index() {
           <a href={waLink()} target="_blank" rel="noopener" className="hidden lg:inline-flex items-center gap-2 border border-gold text-gold px-5 py-2.5 text-xs tracking-[0.2em] uppercase hover:bg-gold hover:text-charcoal-deep transition-all" style={{ borderColor: "var(--gold)" }}>
             Falar com Advogado
           </a>
-          <button onClick={() => setMenuOpen(!menuOpen)} className="lg:hidden text-gold">
+          <button onClick={() => setMenuOpen(!menuOpen)} className="lg:hidden text-gold" aria-label="Abrir menu">
             {menuOpen ? <X size={26} /> : <Menu size={26} />}
           </button>
         </div>
         {menuOpen && (
           <div className="lg:hidden border-t border-white/10 px-6 py-6 space-y-4" style={{ backgroundColor: "#1d1d1d" }}>
             {navLinks.map(l => (
-              <a key={l.href} href={l.href} onClick={() => setMenuOpen(false)} className="block text-sm tracking-wider uppercase text-stone-200 hover:text-gold">
+              <a key={l.href} href={l.href} onClick={(e) => handleNavClick(e, l.href)} className="block text-sm tracking-wider uppercase text-stone-200 hover:text-gold">
                 {l.label}
               </a>
             ))}
-            <a href={waLink()} target="_blank" rel="noopener" className="inline-flex items-center gap-2 border border-gold text-gold px-5 py-2.5 text-xs tracking-[0.2em] uppercase">
+            <a href={waLink()} target="_blank" rel="noopener" onClick={() => setMenuOpen(false)} className="inline-flex items-center gap-2 border border-gold text-gold px-5 py-2.5 text-xs tracking-[0.2em] uppercase">
               Falar com Advogado
             </a>
           </div>
