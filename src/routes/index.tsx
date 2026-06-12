@@ -2,12 +2,16 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import {
   Users, FileText, Home, Shield, MapPin, Mail, Phone,
-  Check, ChevronRight, Menu, X
+  Check, ChevronRight, Menu, X, Star
 } from "lucide-react";
 import { FaWhatsapp } from "react-icons/fa";
 import { motion } from "framer-motion";
+import {
+  Accordion, AccordionItem, AccordionTrigger, AccordionContent,
+} from "@/components/ui/accordion";
 
 import logo from "@/assets/logo_gilson.png";
+import imgGilson from "@/assets/img-gilson.png";
 import imgGilson2 from "@/assets/foto2gilson.png";
 import imgEscritorio from "@/assets/img-escritorio.jpg";
 import bgBooks from "@/assets/bg-books.jpg";
@@ -94,13 +98,14 @@ function Index() {
         <div className="absolute inset-0 bg-fixed bg-center bg-cover" style={{ backgroundImage: `url(${bgBooks})` }} />
         <div className="absolute inset-0" style={{ backgroundColor: "rgba(20,20,20,0.85)" }} />
         <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-transparent to-black/40" />
-        <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-10 py-24 grid lg:grid-cols-12 gap-10">
-          <div className="lg:col-span-9">
+        <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-10 py-24 grid lg:grid-cols-12 gap-10 lg:gap-12 items-center w-full">
+          {/* LEFT COLUMN — TEXT + CTAs */}
+          <div className="lg:col-span-7 order-2 lg:order-1">
             <div className="inline-flex items-center gap-3 mb-8">
               <div className="w-12 h-px bg-gold" />
               <span className="text-xs tracking-[0.3em] uppercase text-gold">Advocacia de Excelência</span>
             </div>
-            <h1 className="font-serif-luxe text-[2rem] sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl leading-[1.1] tracking-tight text-stone-50 max-w-5xl text-balance break-words">
+            <h1 className="font-serif-luxe text-[2rem] sm:text-4xl md:text-5xl lg:text-5xl xl:text-6xl leading-[1.1] tracking-tight text-stone-50 text-balance break-words">
               <em className="text-gold-gradient not-italic">Ciência jurídica avançada</em> e advocacia sob medida para proteger o seu patrimônio e seus direitos.
             </h1>
             <div className="mt-8 md:mt-10 space-y-3">
@@ -115,19 +120,68 @@ function Index() {
                 Professor Universitário · Mestre & Especialista
               </p>
             </div>
-            <div className="mt-12 flex flex-col sm:flex-row items-start sm:items-center gap-6">
-              <a href={waLink()} target="_blank" rel="noopener" className="group inline-flex items-center gap-3 gold-gradient text-charcoal-deep font-medium px-8 py-4 text-sm tracking-[0.25em] uppercase hover:shadow-2xl hover:shadow-amber-900/40 transition-all">
-                Agendar Consulta
-                <ChevronRight size={16} className="group-hover:translate-x-1 transition-transform" />
+            {/* DUAL CTA */}
+            <div className="mt-10 flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
+              <a
+                href={waLink()}
+                target="_blank"
+                rel="noopener"
+                className="inline-flex items-center justify-center gap-3 text-charcoal-deep font-semibold px-7 py-4 text-xs tracking-[0.25em] uppercase hover:shadow-2xl hover:shadow-amber-900/40 transition-all"
+                style={{ backgroundColor: "#bfa15f" }}
+              >
+                Entrar em Contato
+                <ChevronRight size={16} />
               </a>
-              <div className="flex items-center gap-3">
-                <span className="w-1.5 h-1.5 rounded-full bg-gold animate-pulse" />
-                <span className="text-[11px] tracking-[0.2em] uppercase text-stone-300">Atendimento Presencial e Digital · Todo o Brasil</span>
-              </div>
+              <a
+                href="#areas"
+                onClick={(e) => handleNavClick(e, "#areas")}
+                className="inline-flex items-center justify-center gap-3 border border-gold text-gold font-medium px-7 py-4 text-xs tracking-[0.25em] uppercase hover:bg-gold hover:text-charcoal-deep transition-all"
+                style={{ borderColor: "#bfa15f" }}
+              >
+                Nossas Soluções
+              </a>
             </div>
+            <div className="mt-6 flex items-center gap-3">
+              <span className="w-1.5 h-1.5 rounded-full bg-gold animate-pulse" />
+              <span className="text-[11px] tracking-[0.2em] uppercase text-stone-300">Atendimento Presencial e Digital · Todo o Brasil</span>
+            </div>
+          </div>
+
+          {/* RIGHT COLUMN — PORTRAIT */}
+          <div className="lg:col-span-5 order-1 lg:order-2 relative flex justify-center lg:justify-end">
+            <motion.img
+              src={imgGilson}
+              alt="Dr. Gilson Carvalho"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
+              className="portrait-fade w-full max-w-sm md:max-w-md lg:max-w-full h-auto object-contain select-none pointer-events-none"
+              draggable={false}
+            />
           </div>
         </div>
       </section>
+
+      {/* MARQUEE */}
+      <div className="relative overflow-hidden border-y border-gold/20" style={{ backgroundColor: "#000000" }}>
+        <div className="marquee-track py-4">
+          {Array.from({ length: 2 }).map((_, i) => (
+            <div key={i} className="flex items-center shrink-0 pr-8">
+              {[
+                "Planejamento Sucessório", "Divórcio e Partilha", "Guarda e Pensão",
+                "Defesa de Direitos", "Advocacia de Excelência", "Pareceres Jurídicos",
+                "Atendimento Nacional", "Tradição e Resultados",
+              ].map((t) => (
+                <span key={t + i} className="flex items-center gap-8 pr-8">
+                  <span className="text-xs md:text-sm tracking-[0.3em] uppercase text-stone-100">{t}</span>
+                  <span className="text-gold">•</span>
+                </span>
+              ))}
+            </div>
+          ))}
+        </div>
+      </div>
+
 
       {/* TRADIÇÃO ÉTICA RESULTADO */}
       <section id="sobre" className="relative py-28 lg:py-36" style={{ backgroundColor: "#2b2b2b" }}>
@@ -265,7 +319,80 @@ function Index() {
         </div>
       </section>
 
+      {/* DEPOIMENTOS */}
+      <section className="relative py-28 lg:py-36" style={{ backgroundColor: "#262626" }}>
+        <div className="absolute inset-0 opacity-[0.04] bg-cover bg-center" style={{ backgroundImage: `url(${bgMarble})` }} />
+        <div className="relative max-w-7xl mx-auto px-6 lg:px-10">
+          <div className="text-center mb-16 max-w-3xl mx-auto">
+            <div className="flex items-center justify-center gap-4 mb-6">
+              <div className="w-16 h-px bg-gold" />
+              <span className="text-xs tracking-[0.3em] uppercase text-gold">Prova Social</span>
+              <div className="w-16 h-px bg-gold" />
+            </div>
+            <h2 className="font-serif-luxe text-4xl md:text-5xl text-stone-50 mb-4">O que dizem nossos clientes</h2>
+            <p className="text-stone-300 text-base leading-relaxed">A confiança de quem busca soluções jurídicas sérias e personalizadas.</p>
+          </div>
+          <div className="grid md:grid-cols-3 gap-6">
+            {[
+              { name: "Mariana A.", role: "Cliente — Família", text: "Conduziu meu processo de divórcio com sensibilidade e total domínio técnico. Resultado acima das expectativas." },
+              { name: "Rafael S.", role: "Cliente — Sucessões", text: "Planejamento sucessório impecável. Dr. Gilson explicou cada etapa com clareza e segurança jurídica." },
+              { name: "Juliana M.", role: "Cliente — Civil", text: "Atendimento humano e estratégico. Recomendo a qualquer pessoa que busque excelência na advocacia." },
+            ].map((d) => (
+              <div key={d.name} className="card-hover-gold relative p-8 border border-gold/20" style={{ backgroundColor: "rgba(30,30,30,0.6)" }}>
+                <div className="flex items-center gap-1 mb-5">
+                  {Array.from({ length: 5 }).map((_, i) => (
+                    <Star key={i} size={16} className="text-gold fill-gold" strokeWidth={1} />
+                  ))}
+                </div>
+                <p className="text-stone-200 leading-relaxed italic mb-8">"{d.text}"</p>
+                <div className="border-t border-gold/20 pt-5">
+                  <div className="font-serif-luxe text-xl text-stone-50">{d.name}</div>
+                  <div className="text-[10px] tracking-[0.25em] uppercase text-gold mt-1">{d.role}</div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ */}
+      <section className="relative py-28 lg:py-36" style={{ backgroundColor: "#2b2b2b" }}>
+        <div className="max-w-4xl mx-auto px-6 lg:px-10">
+          <div className="text-center mb-14">
+            <div className="flex items-center justify-center gap-4 mb-6">
+              <div className="w-16 h-px bg-gold" />
+              <span className="text-xs tracking-[0.3em] uppercase text-gold">Perguntas Frequentes</span>
+              <div className="w-16 h-px bg-gold" />
+            </div>
+            <h2 className="font-serif-luxe text-4xl md:text-5xl text-stone-50">Tire suas principais dúvidas</h2>
+          </div>
+          <Accordion type="single" collapsible className="space-y-3">
+            {[
+              { q: "Como é feita a primeira consulta?", a: "A consulta inicial é realizada de forma presencial em nosso escritório ou por videoconferência. Analisamos o seu caso com profundidade, esclarecemos dúvidas e apresentamos as melhores estratégias jurídicas aplicáveis." },
+              { q: "O escritório atende clientes em todo o Brasil?", a: "Sim. Com inscrições na OAB/TO e OAB/RJ, atuamos em demandas de todo o território nacional, com atendimento digital seguro e suporte presencial sempre que necessário." },
+              { q: "Quais são as formas de pagamento dos honorários?", a: "Trabalhamos com honorários transparentes, definidos em contrato. Aceitamos pagamento via Pix, transferência bancária e cartão de crédito, podendo ser parcelados conforme a complexidade do caso." },
+              { q: "Quanto tempo leva um processo judicial?", a: "O prazo varia conforme a natureza da demanda e da Justiça competente. Em cada etapa, mantemos o cliente integralmente informado e buscamos sempre as soluções mais ágeis e estratégicas." },
+            ].map((f, i) => (
+              <AccordionItem
+                key={i}
+                value={`item-${i}`}
+                className="border border-gold/20 px-6 rounded-none"
+                style={{ backgroundColor: "rgba(30,30,30,0.6)" }}
+              >
+                <AccordionTrigger className="text-stone-50 font-serif-luxe text-lg md:text-xl hover:no-underline py-5">
+                  {f.q}
+                </AccordionTrigger>
+                <AccordionContent className="text-stone-300 leading-relaxed text-[15px] pb-5">
+                  {f.a}
+                </AccordionContent>
+              </AccordionItem>
+            ))}
+          </Accordion>
+        </div>
+      </section>
+
       {/* CONTATO */}
+
       <section id="contato" className="relative py-28 lg:py-36" style={{ backgroundColor: "#2b2b2b" }}>
         <div className="max-w-7xl mx-auto px-6 lg:px-10 grid lg:grid-cols-2 gap-16">
           <div>
