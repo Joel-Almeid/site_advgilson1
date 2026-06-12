@@ -38,6 +38,21 @@ body { font-family: 'Inter', sans-serif; background: #333333; color: #e8e6e1; }
   z-index: -1;
 }
 
+/* Infinite marquee */
+@keyframes marquee-scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.marquee-track { animation: marquee-scroll 40s linear infinite; }
+.marquee-track:hover { animation-play-state: paused; }
+
+/* Hero portrait fade into background */
+.hero-portrait-fade {
+  -webkit-mask-image: linear-gradient(to bottom, black 70%, transparent 100%), linear-gradient(to left, black 75%, transparent 100%);
+  -webkit-mask-composite: source-in;
+          mask-image: linear-gradient(to bottom, black 70%, transparent 100%);
+}
+
 @custom-variant dark (&:is(.dark *));
 
 /*

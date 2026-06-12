@@ -2,12 +2,16 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import {
   Users, FileText, Home, Shield, MapPin, Mail, Phone,
-  Check, ChevronRight, Menu, X
+  Check, ChevronRight, Menu, X, Star, Quote
 } from "lucide-react";
 import { FaWhatsapp } from "react-icons/fa";
 import { motion } from "framer-motion";
+import {
+  Accordion, AccordionItem, AccordionTrigger, AccordionContent,
+} from "@/components/ui/accordion";
 
 import logo from "@/assets/logo_gilson.png";
+import imgGilson1 from "@/assets/img-gilson.png";
 import imgGilson2 from "@/assets/foto2gilson.png";
 import imgEscritorio from "@/assets/img-escritorio.jpg";
 import bgBooks from "@/assets/bg-books.jpg";
