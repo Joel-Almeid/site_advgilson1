@@ -38,6 +38,24 @@ body { font-family: 'Inter', sans-serif; background: #333333; color: #e8e6e1; }
   z-index: -1;
 }
 
+/* Hero portrait fade-out into background */
+.portrait-fade {
+  -webkit-mask-image: linear-gradient(to bottom, #000 60%, transparent 100%);
+          mask-image: linear-gradient(to bottom, #000 60%, transparent 100%);
+}
+
+/* Infinite marquee */
+@keyframes marquee-left {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.marquee-track {
+  display: inline-flex;
+  white-space: nowrap;
+  animation: marquee-left 12s linear infinite;
+  will-change: transform;
+}
+
 @custom-variant dark (&:is(.dark *));
 
 /*
