@@ -168,6 +168,10 @@ function Index() {
           ))}
         </div>
       </div>
+
+      {/* TRADIÇÃO ÉTICA RESULTADO */}
+      <section id="sobre" className="relative py-28 lg:py-36" style={{ backgroundColor: "#2b2b2b" }}>
+        <div className="absolute inset-0 opacity-[0.04] bg-cover bg-center" style={{ backgroundImage: `url(${bgMarble})` }} />
         <div className="relative max-w-7xl mx-auto px-6 lg:px-10">
           <div className="text-center mb-20">
             <div className="flex items-center justify-center gap-4 mb-6">
