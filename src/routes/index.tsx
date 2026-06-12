@@ -305,6 +305,106 @@ function Index() {
         </div>
       </section>
 
+      {/* DEPOIMENTOS */}
+      <section className="relative py-28 lg:py-32" style={{ backgroundColor: "#262626" }}>
+        <div className="absolute inset-0 opacity-[0.04] bg-cover bg-center" style={{ backgroundImage: `url(${bgMarble})` }} />
+        <div className="relative max-w-7xl mx-auto px-6 lg:px-10">
+          <div className="text-center mb-16 max-w-3xl mx-auto">
+            <div className="flex items-center justify-center gap-4 mb-6">
+              <div className="w-16 h-px bg-gold" />
+              <span className="text-xs tracking-[0.3em] uppercase text-gold">Prova Social</span>
+              <div className="w-16 h-px bg-gold" />
+            </div>
+            <h2 className="font-serif-luxe text-4xl md:text-5xl text-stone-50 mb-4">O que dizem nossos clientes</h2>
+            <p className="text-stone-400">Resultados construídos com confiança, técnica e ética.</p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-6">
+            {[
+              {
+                name: "Mariana R.", role: "Empresária — Palmas/TO",
+                text: "Atendimento impecável e extremamente técnico. O Dr. Gilson conduziu meu inventário com sensibilidade e total transparência em cada etapa.",
+              },
+              {
+                name: "Carlos E.", role: "Cliente — Rio de Janeiro/RJ",
+                text: "Profissional sério, ético e preparado. Resolvi questões familiares delicadas com a segurança jurídica que eu precisava. Recomendo sem hesitar.",
+              },
+              {
+                name: "Juliana M.", role: "Cliente — Gurupi/TO",
+                text: "Excelência do início ao fim. Comunicação clara, prazos rigorosamente cumpridos e um resultado que superou minhas expectativas.",
+              },
+            ].map((t) => (
+              <div key={t.name} className="card-hover-gold relative p-8 border border-gold/20" style={{ backgroundColor: "rgba(30,30,30,0.7)" }}>
+                <Quote className="text-gold mb-4" size={28} strokeWidth={1.2} />
+                <p className="text-stone-200 leading-relaxed text-[15px] mb-6 italic font-serif-luxe text-lg">
+                  “{t.text}”
+                </p>
+                <div className="flex items-center gap-1 mb-4">
+                  {Array.from({ length: 5 }).map((_, i) => (
+                    <Star key={i} size={14} className="text-gold fill-gold" />
+                  ))}
+                </div>
+                <div className="border-t border-gold/20 pt-4">
+                  <div className="text-stone-100 font-medium">{t.name}</div>
+                  <div className="text-[10px] tracking-[0.25em] uppercase text-stone-400 mt-1">{t.role}</div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ */}
+      <section className="relative py-28 lg:py-32" style={{ backgroundColor: "#2b2b2b" }}>
+        <div className="relative max-w-4xl mx-auto px-6 lg:px-10">
+          <div className="text-center mb-14">
+            <div className="flex items-center justify-center gap-4 mb-6">
+              <div className="w-16 h-px bg-gold" />
+              <span className="text-xs tracking-[0.3em] uppercase text-gold">Perguntas Frequentes</span>
+              <div className="w-16 h-px bg-gold" />
+            </div>
+            <h2 className="font-serif-luxe text-4xl md:text-5xl text-stone-50">Dúvidas sobre o atendimento</h2>
+          </div>
+
+          <Accordion type="single" collapsible className="space-y-4">
+            {[
+              {
+                q: "Como funciona a primeira consulta?",
+                a: "A consulta inicial é realizada de forma presencial em nosso escritório em Gurupi/TO ou por videoconferência. Analisamos o seu caso com atenção, esclarecemos dúvidas e apresentamos as estratégias jurídicas possíveis com total transparência sobre prazos e honorários.",
+              },
+              {
+                q: "Vocês atendem clientes de outros estados?",
+                a: "Sim. Com inscrições na OAB/TO e OAB/RJ e estrutura para atendimento digital, atendemos clientes em todo o território nacional, garantindo a mesma excelência técnica e proximidade no acompanhamento do caso.",
+              },
+              {
+                q: "Quais são as áreas de atuação do escritório?",
+                a: "Atuamos com destaque em Direito de Família e Sucessões, Direito Civil e Contratos, Direito Imobiliário e Direito Penal/Criminal, sempre com abordagem estratégica e personalizada para cada cliente.",
+              },
+              {
+                q: "Como são definidos os honorários?",
+                a: "Os honorários são definidos após a análise do caso, considerando complexidade, tempo de dedicação e responsabilidade envolvida. Seguimos integralmente a tabela da OAB e oferecemos contrato claro, com previsibilidade de custos.",
+              },
+            ].map((f, i) => (
+              <AccordionItem
+                key={i}
+                value={`item-${i}`}
+                className="border border-gold/20 px-6 rounded-sm"
+                style={{ backgroundColor: "rgba(30,30,30,0.7)" }}
+              >
+                <AccordionTrigger className="font-serif-luxe text-lg md:text-xl text-stone-100 hover:no-underline hover:text-gold py-6">
+                  {f.q}
+                </AccordionTrigger>
+                <AccordionContent className="text-stone-300 leading-relaxed text-[15px] pb-6">
+                  {f.a}
+                </AccordionContent>
+              </AccordionItem>
+            ))}
+          </Accordion>
+        </div>
+      </section>
+
+
+
       {/* CONTATO */}
       <section id="contato" className="relative py-28 lg:py-36" style={{ backgroundColor: "#2b2b2b" }}>
         <div className="max-w-7xl mx-auto px-6 lg:px-10 grid lg:grid-cols-2 gap-16">
