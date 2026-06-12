@@ -98,13 +98,14 @@ function Index() {
         <div className="absolute inset-0 bg-fixed bg-center bg-cover" style={{ backgroundImage: `url(${bgBooks})` }} />
         <div className="absolute inset-0" style={{ backgroundColor: "rgba(20,20,20,0.85)" }} />
         <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-transparent to-black/40" />
-        <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-10 py-24 grid lg:grid-cols-12 gap-10">
-          <div className="lg:col-span-9">
+        <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-10 py-24 grid lg:grid-cols-12 gap-10 lg:gap-12 items-center w-full">
+          {/* LEFT COLUMN — TEXT + CTAs */}
+          <div className="lg:col-span-7 order-2 lg:order-1">
             <div className="inline-flex items-center gap-3 mb-8">
               <div className="w-12 h-px bg-gold" />
               <span className="text-xs tracking-[0.3em] uppercase text-gold">Advocacia de Excelência</span>
             </div>
-            <h1 className="font-serif-luxe text-[2rem] sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl leading-[1.1] tracking-tight text-stone-50 max-w-5xl text-balance break-words">
+            <h1 className="font-serif-luxe text-[2rem] sm:text-4xl md:text-5xl lg:text-5xl xl:text-6xl leading-[1.1] tracking-tight text-stone-50 text-balance break-words">
               <em className="text-gold-gradient not-italic">Ciência jurídica avançada</em> e advocacia sob medida para proteger o seu patrimônio e seus direitos.
             </h1>
             <div className="mt-8 md:mt-10 space-y-3">
@@ -119,19 +120,68 @@ function Index() {
                 Professor Universitário · Mestre & Especialista
               </p>
             </div>
-            <div className="mt-12 flex flex-col sm:flex-row items-start sm:items-center gap-6">
-              <a href={waLink()} target="_blank" rel="noopener" className="group inline-flex items-center gap-3 gold-gradient text-charcoal-deep font-medium px-8 py-4 text-sm tracking-[0.25em] uppercase hover:shadow-2xl hover:shadow-amber-900/40 transition-all">
-                Agendar Consulta
-                <ChevronRight size={16} className="group-hover:translate-x-1 transition-transform" />
+            {/* DUAL CTA */}
+            <div className="mt-10 flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
+              <a
+                href={waLink()}
+                target="_blank"
+                rel="noopener"
+                className="inline-flex items-center justify-center gap-3 text-charcoal-deep font-semibold px-7 py-4 text-xs tracking-[0.25em] uppercase hover:shadow-2xl hover:shadow-amber-900/40 transition-all"
+                style={{ backgroundColor: "#bfa15f" }}
+              >
+                Entrar em Contato
+                <ChevronRight size={16} />
               </a>
-              <div className="flex items-center gap-3">
-                <span className="w-1.5 h-1.5 rounded-full bg-gold animate-pulse" />
-                <span className="text-[11px] tracking-[0.2em] uppercase text-stone-300">Atendimento Presencial e Digital · Todo o Brasil</span>
-              </div>
+              <a
+                href="#areas"
+                onClick={(e) => handleNavClick(e, "#areas")}
+                className="inline-flex items-center justify-center gap-3 border border-gold text-gold font-medium px-7 py-4 text-xs tracking-[0.25em] uppercase hover:bg-gold hover:text-charcoal-deep transition-all"
+                style={{ borderColor: "#bfa15f" }}
+              >
+                Nossas Soluções
+              </a>
             </div>
+            <div className="mt-6 flex items-center gap-3">
+              <span className="w-1.5 h-1.5 rounded-full bg-gold animate-pulse" />
+              <span className="text-[11px] tracking-[0.2em] uppercase text-stone-300">Atendimento Presencial e Digital · Todo o Brasil</span>
+            </div>
+          </div>
+
+          {/* RIGHT COLUMN — PORTRAIT */}
+          <div className="lg:col-span-5 order-1 lg:order-2 relative flex justify-center lg:justify-end">
+            <motion.img
+              src={imgGilson}
+              alt="Dr. Gilson Carvalho"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
+              className="portrait-fade w-full max-w-sm md:max-w-md lg:max-w-full h-auto object-contain select-none pointer-events-none"
+              draggable={false}
+            />
           </div>
         </div>
       </section>
+
+      {/* MARQUEE */}
+      <div className="relative overflow-hidden border-y border-gold/20" style={{ backgroundColor: "#000000" }}>
+        <div className="marquee-track py-4">
+          {Array.from({ length: 2 }).map((_, i) => (
+            <div key={i} className="flex items-center shrink-0 pr-8">
+              {[
+                "Planejamento Sucessório", "Divórcio e Partilha", "Guarda e Pensão",
+                "Defesa de Direitos", "Advocacia de Excelência", "Pareceres Jurídicos",
+                "Atendimento Nacional", "Tradição e Resultados",
+              ].map((t) => (
+                <span key={t + i} className="flex items-center gap-8 pr-8">
+                  <span className="text-xs md:text-sm tracking-[0.3em] uppercase text-stone-100">{t}</span>
+                  <span className="text-gold">•</span>
+                </span>
+              ))}
+            </div>
+          ))}
+        </div>
+      </div>
+
 
       {/* TRADIÇÃO ÉTICA RESULTADO */}
       <section id="sobre" className="relative py-28 lg:py-36" style={{ backgroundColor: "#2b2b2b" }}>
