@@ -98,8 +98,8 @@ function Index() {
         <div className="absolute inset-0 bg-fixed bg-center bg-cover" style={{ backgroundImage: `url(${bgBooks})` }} />
         <div className="absolute inset-0" style={{ backgroundColor: "rgba(20,20,20,0.85)" }} />
         <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-transparent to-black/40" />
-        <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-10 py-24 grid lg:grid-cols-12 gap-10">
-          <div className="lg:col-span-9">
+        <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-10 py-24 grid lg:grid-cols-12 gap-10 items-center">
+          <div className="lg:col-span-7 xl:col-span-8">
             <div className="inline-flex items-center gap-3 mb-8">
               <div className="w-12 h-px bg-gold" />
               <span className="text-xs tracking-[0.3em] uppercase text-gold">Advocacia de Excelência</span>
@@ -119,23 +119,55 @@ function Index() {
                 Professor Universitário · Mestre & Especialista
               </p>
             </div>
-            <div className="mt-12 flex flex-col sm:flex-row items-start sm:items-center gap-6">
-              <a href={waLink()} target="_blank" rel="noopener" className="group inline-flex items-center gap-3 gold-gradient text-charcoal-deep font-medium px-8 py-4 text-sm tracking-[0.25em] uppercase hover:shadow-2xl hover:shadow-amber-900/40 transition-all">
-                Agendar Consulta
+            <div className="mt-12 flex flex-col sm:flex-row items-stretch sm:items-center gap-4 sm:gap-5">
+              <a href={waLink()} target="_blank" rel="noopener" className="group inline-flex items-center justify-center gap-3 gold-gradient text-charcoal-deep font-medium px-8 py-4 text-sm tracking-[0.25em] uppercase hover:shadow-2xl hover:shadow-amber-900/40 transition-all">
+                Entrar em Contato
                 <ChevronRight size={16} className="group-hover:translate-x-1 transition-transform" />
               </a>
-              <div className="flex items-center gap-3">
-                <span className="w-1.5 h-1.5 rounded-full bg-gold animate-pulse" />
-                <span className="text-[11px] tracking-[0.2em] uppercase text-stone-300">Atendimento Presencial e Digital · Todo o Brasil</span>
-              </div>
+              <a href="#areas" onClick={(e) => handleNavClick(e, "#areas")} className="inline-flex items-center justify-center gap-3 border border-gold text-gold px-8 py-4 text-sm tracking-[0.25em] uppercase hover:bg-gold hover:text-charcoal-deep transition-all">
+                Nossas Soluções
+              </a>
             </div>
+            <div className="mt-8 flex items-center gap-3">
+              <span className="w-1.5 h-1.5 rounded-full bg-gold animate-pulse" />
+              <span className="text-[11px] tracking-[0.2em] uppercase text-stone-300">Atendimento Presencial e Digital · Todo o Brasil</span>
+            </div>
+          </div>
+
+          {/* HERO PORTRAIT — fade into background */}
+          <div className="hidden lg:block lg:col-span-5 xl:col-span-4 relative">
+            <motion.img
+              src={imgGilson1}
+              alt="Dr. Gilson Carvalho"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1, ease: "easeOut" }}
+              className="hero-portrait-fade w-full h-auto object-contain drop-shadow-[0_20px_45px_rgba(0,0,0,0.6)] select-none pointer-events-none"
+              style={{ maxHeight: "82vh" }}
+            />
           </div>
         </div>
       </section>
 
-      {/* TRADIÇÃO ÉTICA RESULTADO */}
-      <section id="sobre" className="relative py-28 lg:py-36" style={{ backgroundColor: "#2b2b2b" }}>
-        <div className="absolute inset-0 opacity-[0.04] bg-cover bg-center" style={{ backgroundImage: `url(${bgMarble})` }} />
+      {/* MARQUEE INFINITO */}
+      <div className="relative bg-black border-y border-gold/20 overflow-hidden py-5">
+        <div className="marquee-track flex whitespace-nowrap will-change-transform">
+          {[0, 1].map((dup) => (
+            <div key={dup} className="flex shrink-0 items-center" aria-hidden={dup === 1}>
+              {[
+                "Planejamento Sucessório", "Divórcio e Partilha", "Guarda e Pensão",
+                "Defesa de Direitos", "Advocacia de Excelência", "Pareceres Jurídicos",
+                "Atendimento Nacional", "Tradição e Resultados",
+              ].map((item, i) => (
+                <span key={`${dup}-${i}`} className="flex items-center px-8 font-serif-luxe text-xl md:text-2xl text-stone-100 tracking-wide">
+                  {item}
+                  <span className="ml-8 text-gold text-2xl">•</span>
+                </span>
+              ))}
+            </div>
+          ))}
+        </div>
+      </div>
         <div className="relative max-w-7xl mx-auto px-6 lg:px-10">
           <div className="text-center mb-20">
             <div className="flex items-center justify-center gap-4 mb-6">
