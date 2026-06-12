@@ -319,7 +319,80 @@ function Index() {
         </div>
       </section>
 
+      {/* DEPOIMENTOS */}
+      <section className="relative py-28 lg:py-36" style={{ backgroundColor: "#262626" }}>
+        <div className="absolute inset-0 opacity-[0.04] bg-cover bg-center" style={{ backgroundImage: `url(${bgMarble})` }} />
+        <div className="relative max-w-7xl mx-auto px-6 lg:px-10">
+          <div className="text-center mb-16 max-w-3xl mx-auto">
+            <div className="flex items-center justify-center gap-4 mb-6">
+              <div className="w-16 h-px bg-gold" />
+              <span className="text-xs tracking-[0.3em] uppercase text-gold">Prova Social</span>
+              <div className="w-16 h-px bg-gold" />
+            </div>
+            <h2 className="font-serif-luxe text-4xl md:text-5xl text-stone-50 mb-4">O que dizem nossos clientes</h2>
+            <p className="text-stone-300 text-base leading-relaxed">A confiança de quem busca soluções jurídicas sérias e personalizadas.</p>
+          </div>
+          <div className="grid md:grid-cols-3 gap-6">
+            {[
+              { name: "Mariana A.", role: "Cliente — Família", text: "Conduziu meu processo de divórcio com sensibilidade e total domínio técnico. Resultado acima das expectativas." },
+              { name: "Rafael S.", role: "Cliente — Sucessões", text: "Planejamento sucessório impecável. Dr. Gilson explicou cada etapa com clareza e segurança jurídica." },
+              { name: "Juliana M.", role: "Cliente — Civil", text: "Atendimento humano e estratégico. Recomendo a qualquer pessoa que busque excelência na advocacia." },
+            ].map((d) => (
+              <div key={d.name} className="card-hover-gold relative p-8 border border-gold/20" style={{ backgroundColor: "rgba(30,30,30,0.6)" }}>
+                <div className="flex items-center gap-1 mb-5">
+                  {Array.from({ length: 5 }).map((_, i) => (
+                    <Star key={i} size={16} className="text-gold fill-gold" strokeWidth={1} />
+                  ))}
+                </div>
+                <p className="text-stone-200 leading-relaxed italic mb-8">"{d.text}"</p>
+                <div className="border-t border-gold/20 pt-5">
+                  <div className="font-serif-luxe text-xl text-stone-50">{d.name}</div>
+                  <div className="text-[10px] tracking-[0.25em] uppercase text-gold mt-1">{d.role}</div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ */}
+      <section className="relative py-28 lg:py-36" style={{ backgroundColor: "#2b2b2b" }}>
+        <div className="max-w-4xl mx-auto px-6 lg:px-10">
+          <div className="text-center mb-14">
+            <div className="flex items-center justify-center gap-4 mb-6">
+              <div className="w-16 h-px bg-gold" />
+              <span className="text-xs tracking-[0.3em] uppercase text-gold">Perguntas Frequentes</span>
+              <div className="w-16 h-px bg-gold" />
+            </div>
+            <h2 className="font-serif-luxe text-4xl md:text-5xl text-stone-50">Tire suas principais dúvidas</h2>
+          </div>
+          <Accordion type="single" collapsible className="space-y-3">
+            {[
+              { q: "Como é feita a primeira consulta?", a: "A consulta inicial é realizada de forma presencial em nosso escritório ou por videoconferência. Analisamos o seu caso com profundidade, esclarecemos dúvidas e apresentamos as melhores estratégias jurídicas aplicáveis." },
+              { q: "O escritório atende clientes em todo o Brasil?", a: "Sim. Com inscrições na OAB/TO e OAB/RJ, atuamos em demandas de todo o território nacional, com atendimento digital seguro e suporte presencial sempre que necessário." },
+              { q: "Quais são as formas de pagamento dos honorários?", a: "Trabalhamos com honorários transparentes, definidos em contrato. Aceitamos pagamento via Pix, transferência bancária e cartão de crédito, podendo ser parcelados conforme a complexidade do caso." },
+              { q: "Quanto tempo leva um processo judicial?", a: "O prazo varia conforme a natureza da demanda e da Justiça competente. Em cada etapa, mantemos o cliente integralmente informado e buscamos sempre as soluções mais ágeis e estratégicas." },
+            ].map((f, i) => (
+              <AccordionItem
+                key={i}
+                value={`item-${i}`}
+                className="border border-gold/20 px-6 rounded-none"
+                style={{ backgroundColor: "rgba(30,30,30,0.6)" }}
+              >
+                <AccordionTrigger className="text-stone-50 font-serif-luxe text-lg md:text-xl hover:no-underline py-5">
+                  {f.q}
+                </AccordionTrigger>
+                <AccordionContent className="text-stone-300 leading-relaxed text-[15px] pb-5">
+                  {f.a}
+                </AccordionContent>
+              </AccordionItem>
+            ))}
+          </Accordion>
+        </div>
+      </section>
+
       {/* CONTATO */}
+
       <section id="contato" className="relative py-28 lg:py-36" style={{ backgroundColor: "#2b2b2b" }}>
         <div className="max-w-7xl mx-auto px-6 lg:px-10 grid lg:grid-cols-2 gap-16">
           <div>
