@@ -117,9 +117,20 @@ function Index() {
         <div className="absolute inset-0 bg-fixed bg-center bg-cover" style={{ backgroundImage: `url(${bgBooks})` }} />
         <div className="absolute inset-0" style={{ backgroundColor: "rgba(20,20,20,0.85)" }} />
         <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-transparent to-black/40" />
+        {/* FULLSCREEN PORTRAIT — lg+ only, breaks out behind nav, fuses with marquee */}
+        <motion.img
+          src={imgGilson}
+          alt="Dr. Gilson Carvalho"
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.9, ease: "easeOut" }}
+          aria-hidden="true"
+          draggable={false}
+          className="hidden lg:block absolute right-0 lg:right-[-2rem] xl:right-0 top-0 bottom-0 h-full w-auto max-w-[60%] object-contain object-bottom select-none pointer-events-none z-[5] portrait-fade-deep drop-shadow-[0_30px_50px_rgba(0,0,0,0.7)]"
+        />
         <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-10 py-24 grid lg:grid-cols-12 gap-10 lg:gap-12 items-center w-full">
           {/* LEFT COLUMN — TEXT + CTAs */}
-          <div className="lg:col-span-7 order-2 lg:order-1">
+          <div className="lg:col-span-7 order-2 lg:order-1 relative z-20">
             <div className="inline-flex items-center gap-3 mb-8">
               <div className="w-12 h-px bg-gold" />
               <span className="text-xs tracking-[0.3em] uppercase text-gold">Advocacia de Excelência</span>
@@ -165,16 +176,15 @@ function Index() {
               <span className="text-[11px] tracking-[0.2em] uppercase text-stone-300">Atendimento Presencial e Digital · Todo o Brasil</span>
             </div>
           </div>
-
-          {/* RIGHT COLUMN — PORTRAIT */}
-          <div className="lg:col-span-5 order-1 lg:order-2 relative flex justify-center lg:justify-end items-end self-stretch lg:-mb-24">
+          {/* RIGHT COLUMN — PORTRAIT (mobile inline only) */}
+          <div className="lg:hidden order-1 relative flex justify-center items-end">
             <motion.img
               src={imgGilson}
               alt="Dr. Gilson Carvalho"
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, ease: "easeOut" }}
-              className="portrait-fade-deep w-full max-w-sm md:max-w-md lg:max-w-full h-auto object-contain object-bottom select-none pointer-events-none drop-shadow-[0_30px_40px_rgba(0,0,0,0.6)]"
+              className="portrait-fade-deep w-full max-w-sm md:max-w-md h-auto object-contain object-bottom select-none pointer-events-none drop-shadow-[0_30px_40px_rgba(0,0,0,0.6)]"
               draggable={false}
             />
           </div>
