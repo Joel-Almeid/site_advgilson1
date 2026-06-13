@@ -319,22 +319,63 @@ function Index() {
             </p>
           </div>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <motion.div {...reveal} className="grid sm:grid-cols-2 gap-6">
             {[
-              { Icon: Users, title: "Direito de Família e Sucessões", desc: "Demandas familiares, divórcios, inventários e partilhas de bens de forma humanizada e estratégica." },
-              { Icon: FileText, title: "Direito Civil & Contratos", desc: "Regulação de relações jurídicas gerais, elaboração, análise e revisão de contratos complexos e obrigações." },
-              { Icon: Home, title: "Direito Imobiliário", desc: "Segurança jurídica em transações, contratos de compra e venda, posses e regularização de imóveis." },
-              { Icon: Shield, title: "Direito Penal / Criminal", desc: "Defesa técnica especializada e acompanhamento detalhado em demandas de complexidade criminal." },
-            ].map(({ Icon, title, desc }) => (
-              <div key={title} className="card-hover-gold group relative p-8 border border-gold/20" style={{ backgroundColor: "rgba(30,30,30,0.6)" }}>
-                <div className="absolute top-0 left-0 w-8 h-px bg-gold" />
-                <div className="absolute top-0 left-0 w-px h-8 bg-gold" />
-                <Icon size={36} className="text-gold mb-6" strokeWidth={1.2} />
-                <h4 className="font-serif-luxe text-2xl text-stone-50 mb-4 leading-tight">{title}</h4>
-                <p className="text-sm text-stone-400 leading-relaxed">{desc}</p>
-              </div>
+              {
+                Icon: Users,
+                title: "Direito de Família e Sucessões",
+                desc: "Demandas familiares, divórcios, inventários e partilhas de bens de forma humanizada e estratégica.",
+                items: ["Divórcio consensual e litigioso", "Guarda, pensão e regulamentação de visitas", "Inventário, partilha e testamento", "Planejamento sucessório e holding familiar"],
+              },
+              {
+                Icon: FileText,
+                title: "Direito Civil & Contratos",
+                desc: "Regulação de relações jurídicas gerais, elaboração, análise e revisão de contratos complexos e obrigações.",
+                items: ["Elaboração e revisão contratual", "Responsabilidade civil e indenizações", "Cobranças e execuções", "Pareceres jurídicos especializados"],
+              },
+              {
+                Icon: Home,
+                title: "Direito Imobiliário",
+                desc: "Segurança jurídica em transações, contratos de compra e venda, posses e regularização de imóveis.",
+                items: ["Compra, venda e permuta de imóveis", "Usucapião e regularização fundiária", "Locações residenciais e comerciais", "Due diligence imobiliária"],
+              },
+              {
+                Icon: Shield,
+                title: "Direito Penal / Criminal",
+                desc: "Defesa técnica especializada e acompanhamento detalhado em demandas de complexidade criminal.",
+                items: ["Defesa em inquéritos e ações penais", "Acompanhamento em audiências", "Habeas corpus e medidas urgentes", "Recursos e tribunais superiores"],
+              },
+            ].map(({ Icon, title, desc, items }, idx) => (
+              <Accordion key={title} type="single" collapsible>
+                <AccordionItem
+                  value={`area-${idx}`}
+                  className="glass-card relative p-2 rounded-none border-0"
+                >
+                  <div className="absolute top-0 left-0 w-8 h-px bg-gold" />
+                  <div className="absolute top-0 left-0 w-px h-8 bg-gold" />
+                  <AccordionTrigger className="hover:no-underline px-6 py-6 [&[data-state=open]>svg]:text-gold">
+                    <div className="flex items-start gap-5 text-left">
+                      <Icon size={32} className="text-gold shrink-0 mt-1" strokeWidth={1.2} />
+                      <div>
+                        <h4 className="font-serif-luxe text-2xl text-stone-50 leading-tight mb-2">{title}</h4>
+                        <p className="text-sm text-stone-400 leading-relaxed">{desc}</p>
+                      </div>
+                    </div>
+                  </AccordionTrigger>
+                  <AccordionContent className="px-6 pb-6">
+                    <ul className="space-y-3 border-t border-gold/20 pt-5">
+                      {items.map((it) => (
+                        <li key={it} className="flex items-start gap-3 text-stone-200 text-[15px]">
+                          <Check size={16} className="text-gold mt-1 shrink-0" />
+                          <span>{it}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </AccordionContent>
+                </AccordionItem>
+              </Accordion>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 
