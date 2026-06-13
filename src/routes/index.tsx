@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Users, FileText, Home, Shield, MapPin, Mail, Phone,
   Check, ChevronRight, Menu, X, Star
@@ -11,9 +11,9 @@ import {
 } from "@/components/ui/accordion";
 
 import logo from "@/assets/logo_gilson.png";
-import imgGilson from "@/assets/img-gilson.png";
+import imgGilson from "@/assets/gilsonfoto1.png";
 import imgGilson2 from "@/assets/foto2gilson.png";
-import imgEscritorio from "@/assets/img-escritorio.jpg";
+import imgEscritorio from "@/assets/escritorio.png";
 import bgBooks from "@/assets/bg-books.jpg";
 import bgMarble from "@/assets/bg-marble.jpg";
 
@@ -25,9 +25,28 @@ const WHATSAPP = "5563984474070";
 const waLink = (msg = "Olá, gostaria de agendar uma consulta jurídica.") =>
   `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(msg)}`;
 
+const reveal = {
+  initial: { opacity: 0, y: 32 },
+  whileInView: { opacity: 1, y: 0 },
+  viewport: { once: true, amount: 0.2 },
+  transition: { duration: 0.7, ease: "easeOut" as const },
+};
+
 function Index() {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [form, setForm] = useState({ nome: "", telefone: "", email: "", area: "" });
+  const [form, setForm] = useState({ nome: "", telefone: "", email: "", area: "", mensagem: "" });
+  const [waTipVisible, setWaTipVisible] = useState(false);
+  const [waTipKey, setWaTipKey] = useState(0);
+
+  useEffect(() => {
+    const id = setInterval(() => {
+      setWaTipKey((k) => k + 1);
+      setWaTipVisible(true);
+      const t = setTimeout(() => setWaTipVisible(false), 3000);
+      return () => clearTimeout(t);
+    }, 8000);
+    return () => clearInterval(id);
+  }, []);
 
   const maskPhone = (v: string) => {
     const d = v.replace(/\D/g, "").slice(0, 11);
