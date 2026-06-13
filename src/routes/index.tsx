@@ -525,9 +525,25 @@ function Index() {
                   <option>Outro</option>
                 </select>
               </div>
+              <div>
+                <label htmlFor="mensagem" className="block text-[10px] tracking-[0.3em] uppercase text-gold mb-3">Relate brevemente a sua necessidade</label>
+                <textarea
+                  id="mensagem"
+                  required
+                  rows={4}
+                  maxLength={1000}
+                  placeholder="Ex: Gostaria de entender sobre planejamento sucessório / holding familiar..."
+                  value={form.mensagem}
+                  onChange={(e) => setForm({ ...form, mensagem: e.target.value })}
+                  className="w-full bg-transparent border border-white/15 focus:border-gold p-3 text-stone-100 placeholder:text-stone-600 outline-none transition-colors resize-none"
+                />
+              </div>
               <button type="submit" className="w-full gold-gradient text-charcoal-deep font-medium py-4 text-sm tracking-[0.25em] uppercase hover:shadow-2xl hover:shadow-amber-900/40 transition-all mt-4">
                 Enviar Mensagem
               </button>
+              <p className="text-[11px] text-stone-400 text-center leading-relaxed pt-1">
+                🔒 Seus dados estão protegidos sob absoluto sigilo profissional e em estrita conformidade com a LGPD.
+              </p>
             </form>
           </div>
         </div>
