@@ -126,8 +126,10 @@ function Index() {
           transition={{ duration: 0.9, ease: "easeOut" }}
           aria-hidden="true"
           draggable={false}
-          className="hidden lg:block absolute right-0 lg:right-[-2rem] xl:right-0 top-0 bottom-0 h-full w-auto max-w-[60%] object-contain object-bottom select-none pointer-events-none z-[5] portrait-fade-deep drop-shadow-[0_30px_50px_rgba(0,0,0,0.7)]"
+          className="hidden lg:block hero-portrait-premium drop-shadow-[0_30px_50px_rgba(0,0,0,0.7)]"
         />
+
+        
         <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-10 py-24 grid lg:grid-cols-12 gap-10 lg:gap-12 items-center w-full">
           {/* LEFT COLUMN — TEXT + CTAs */}
           <div className="lg:col-span-7 order-2 lg:order-1 relative z-20">
