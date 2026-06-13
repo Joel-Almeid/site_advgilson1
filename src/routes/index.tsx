@@ -167,14 +167,14 @@ function Index() {
           </div>
 
           {/* RIGHT COLUMN — PORTRAIT */}
-          <div className="lg:col-span-5 order-1 lg:order-2 relative flex justify-center lg:justify-end">
+          <div className="lg:col-span-5 order-1 lg:order-2 relative flex justify-center lg:justify-end items-end self-stretch lg:-mb-24">
             <motion.img
               src={imgGilson}
               alt="Dr. Gilson Carvalho"
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, ease: "easeOut" }}
-              className="portrait-fade w-full max-w-sm md:max-w-md lg:max-w-full h-auto object-contain select-none pointer-events-none"
+              className="portrait-fade-deep w-full max-w-sm md:max-w-md lg:max-w-full h-auto object-contain object-bottom select-none pointer-events-none drop-shadow-[0_30px_40px_rgba(0,0,0,0.6)]"
               draggable={false}
             />
           </div>
