@@ -135,7 +135,47 @@ function Index() {
               <div className="w-12 h-px bg-gold" />
               <span className="text-xs tracking-[0.3em] uppercase text-gold">Advocacia de Excelência</span>
             </div>
-...
+            <h1 className="font-serif-luxe text-[2rem] sm:text-4xl md:text-5xl lg:text-5xl xl:text-6xl leading-[1.1] tracking-tight text-stone-50 text-balance break-words">
+              <em className="text-gold-gradient not-italic">Ciência jurídica avançada</em> e advocacia sob medida para proteger o seu patrimônio e seus direitos.
+            </h1>
+            <div className="mt-8 md:mt-10 space-y-3">
+              <p className="font-serif-luxe text-xl sm:text-2xl md:text-3xl text-stone-100 leading-snug">
+                Dr. Gilson Carvalho
+              </p>
+              <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-[11px] sm:text-xs tracking-[0.25em] uppercase">
+                <span className="text-gold border border-gold/40 px-3 py-1">OAB/TO 2.591</span>
+                <span className="text-gold border border-gold/40 px-3 py-1">OAB/RJ 256.131</span>
+              </div>
+              <p className="text-xs md:text-sm tracking-[0.25em] uppercase text-stone-400 pt-1">
+                Professor Universitário · Mestre & Especialista
+              </p>
+            </div>
+            {/* DUAL CTA */}
+            <div className="mt-10 flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
+              <a
+                href={waLink()}
+                target="_blank"
+                rel="noopener"
+                className="inline-flex items-center justify-center gap-3 text-charcoal-deep font-semibold px-7 py-4 text-xs tracking-[0.25em] uppercase hover:shadow-2xl hover:shadow-amber-900/40 transition-all"
+                style={{ backgroundColor: "#bfa15f" }}
+              >
+                Entrar em Contato
+                <ChevronRight size={16} />
+              </a>
+              <a
+                href="#areas"
+                onClick={(e) => handleNavClick(e, "#areas")}
+                className="inline-flex items-center justify-center gap-3 border border-gold text-gold font-medium px-7 py-4 text-xs tracking-[0.25em] uppercase hover:bg-gold hover:text-charcoal-deep transition-all"
+                style={{ borderColor: "#bfa15f" }}
+              >
+                Nossas Soluções
+              </a>
+            </div>
+            <div className="mt-6 flex items-center gap-3">
+              <span className="w-1.5 h-1.5 rounded-full bg-gold animate-pulse" />
+              <span className="text-[11px] tracking-[0.2em] uppercase text-stone-300">Atendimento Presencial e Digital · Todo o Brasil</span>
+            </div>
+          </div>
           {/* RIGHT COLUMN — PORTRAIT (mobile inline only) */}
           <div className="lg:hidden order-1 relative flex justify-center items-end">
             <motion.img
