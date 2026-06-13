@@ -44,7 +44,7 @@ body { font-family: 'Inter', sans-serif; background: #333333; color: #e8e6e1; }
           mask-image: linear-gradient(to bottom, #000 60%, transparent 100%);
 }
 
-/* Infinite marquee */
+/* Infinite marquee — slower, elegant */
 @keyframes marquee-left {
   0% { transform: translateX(0); }
   100% { transform: translateX(-50%); }
@@ -52,8 +52,38 @@ body { font-family: 'Inter', sans-serif; background: #333333; color: #e8e6e1; }
 .marquee-track {
   display: inline-flex;
   white-space: nowrap;
-  animation: marquee-left 12s linear infinite;
+  animation: marquee-left 60s linear infinite;
   will-change: transform;
+}
+
+/* Hero portrait deeper fade into background */
+.portrait-fade-deep {
+  -webkit-mask-image: linear-gradient(to bottom, #000 45%, rgba(0,0,0,0.6) 70%, transparent 100%);
+          mask-image: linear-gradient(to bottom, #000 45%, rgba(0,0,0,0.6) 70%, transparent 100%);
+}
+
+/* Glassmorphism service card */
+.glass-card {
+  background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.015));
+  backdrop-filter: blur(14px) saturate(140%);
+  border: 1px solid rgba(201,165,90,0.18);
+  transition: transform .4s ease, border-color .4s ease, box-shadow .4s ease;
+}
+.glass-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(224,192,132,0.7);
+  box-shadow: 0 0 0 1px rgba(224,192,132,0.35), 0 12px 40px -10px rgba(201,165,90,0.35);
+}
+
+/* WhatsApp tooltip */
+@keyframes wa-tip-in {
+  0% { opacity: 0; transform: translateY(6px) translateX(0); }
+  15% { opacity: 1; transform: translateY(0); }
+  85% { opacity: 1; transform: translateY(0); }
+  100% { opacity: 0; transform: translateY(-4px); }
+}
+.wa-tooltip {
+  animation: wa-tip-in 3s ease forwards;
 }
 
 @custom-variant dark (&:is(.dark *));

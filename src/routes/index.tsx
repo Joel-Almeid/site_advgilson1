@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Users, FileText, Home, Shield, MapPin, Mail, Phone,
   Check, ChevronRight, Menu, X, Star
@@ -11,9 +11,9 @@ import {
 } from "@/components/ui/accordion";
 
 import logo from "@/assets/logo_gilson.png";
-import imgGilson from "@/assets/img-gilson.png";
+import imgGilson from "@/assets/gilsonfoto1.png";
 import imgGilson2 from "@/assets/foto2gilson.png";
-import imgEscritorio from "@/assets/img-escritorio.jpg";
+import imgEscritorio from "@/assets/escritorio.png";
 import bgBooks from "@/assets/bg-books.jpg";
 import bgMarble from "@/assets/bg-marble.jpg";
 
@@ -25,9 +25,28 @@ const WHATSAPP = "5563984474070";
 const waLink = (msg = "Olá, gostaria de agendar uma consulta jurídica.") =>
   `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(msg)}`;
 
+const reveal = {
+  initial: { opacity: 0, y: 32 },
+  whileInView: { opacity: 1, y: 0 },
+  viewport: { once: true, amount: 0.2 },
+  transition: { duration: 0.7, ease: "easeOut" as const },
+};
+
 function Index() {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [form, setForm] = useState({ nome: "", telefone: "", email: "", area: "" });
+  const [form, setForm] = useState({ nome: "", telefone: "", email: "", area: "", mensagem: "" });
+  const [waTipVisible, setWaTipVisible] = useState(false);
+  const [waTipKey, setWaTipKey] = useState(0);
+
+  useEffect(() => {
+    const id = setInterval(() => {
+      setWaTipKey((k) => k + 1);
+      setWaTipVisible(true);
+      const t = setTimeout(() => setWaTipVisible(false), 3000);
+      return () => clearTimeout(t);
+    }, 8000);
+    return () => clearInterval(id);
+  }, []);
 
   const maskPhone = (v: string) => {
     const d = v.replace(/\D/g, "").slice(0, 11);
@@ -39,7 +58,7 @@ function Index() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    const msg = `Olá, sou ${form.nome}.%0ATelefone: ${form.telefone}%0AE-mail: ${form.email}%0AÁrea de interesse: ${form.area}`;
+    const msg = `Olá, sou ${form.nome}.%0ATelefone: ${form.telefone}%0AE-mail: ${form.email}%0AÁrea de interesse: ${form.area}%0ANecessidade: ${form.mensagem}`;
     window.open(`https://wa.me/${WHATSAPP}?text=${msg}`, "_blank");
   };
 
@@ -148,14 +167,14 @@ function Index() {
           </div>
 
           {/* RIGHT COLUMN — PORTRAIT */}
-          <div className="lg:col-span-5 order-1 lg:order-2 relative flex justify-center lg:justify-end">
+          <div className="lg:col-span-5 order-1 lg:order-2 relative flex justify-center lg:justify-end items-end self-stretch lg:-mb-24">
             <motion.img
               src={imgGilson}
               alt="Dr. Gilson Carvalho"
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, ease: "easeOut" }}
-              className="portrait-fade w-full max-w-sm md:max-w-md lg:max-w-full h-auto object-contain select-none pointer-events-none"
+              className="portrait-fade-deep w-full max-w-sm md:max-w-md lg:max-w-full h-auto object-contain object-bottom select-none pointer-events-none drop-shadow-[0_30px_40px_rgba(0,0,0,0.6)]"
               draggable={false}
             />
           </div>
@@ -300,22 +319,63 @@ function Index() {
             </p>
           </div>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <motion.div {...reveal} className="grid sm:grid-cols-2 gap-6">
             {[
-              { Icon: Users, title: "Direito de Família e Sucessões", desc: "Demandas familiares, divórcios, inventários e partilhas de bens de forma humanizada e estratégica." },
-              { Icon: FileText, title: "Direito Civil & Contratos", desc: "Regulação de relações jurídicas gerais, elaboração, análise e revisão de contratos complexos e obrigações." },
-              { Icon: Home, title: "Direito Imobiliário", desc: "Segurança jurídica em transações, contratos de compra e venda, posses e regularização de imóveis." },
-              { Icon: Shield, title: "Direito Penal / Criminal", desc: "Defesa técnica especializada e acompanhamento detalhado em demandas de complexidade criminal." },
-            ].map(({ Icon, title, desc }) => (
-              <div key={title} className="card-hover-gold group relative p-8 border border-gold/20" style={{ backgroundColor: "rgba(30,30,30,0.6)" }}>
-                <div className="absolute top-0 left-0 w-8 h-px bg-gold" />
-                <div className="absolute top-0 left-0 w-px h-8 bg-gold" />
-                <Icon size={36} className="text-gold mb-6" strokeWidth={1.2} />
-                <h4 className="font-serif-luxe text-2xl text-stone-50 mb-4 leading-tight">{title}</h4>
-                <p className="text-sm text-stone-400 leading-relaxed">{desc}</p>
-              </div>
+              {
+                Icon: Users,
+                title: "Direito de Família e Sucessões",
+                desc: "Demandas familiares, divórcios, inventários e partilhas de bens de forma humanizada e estratégica.",
+                items: ["Divórcio consensual e litigioso", "Guarda, pensão e regulamentação de visitas", "Inventário, partilha e testamento", "Planejamento sucessório e holding familiar"],
+              },
+              {
+                Icon: FileText,
+                title: "Direito Civil & Contratos",
+                desc: "Regulação de relações jurídicas gerais, elaboração, análise e revisão de contratos complexos e obrigações.",
+                items: ["Elaboração e revisão contratual", "Responsabilidade civil e indenizações", "Cobranças e execuções", "Pareceres jurídicos especializados"],
+              },
+              {
+                Icon: Home,
+                title: "Direito Imobiliário",
+                desc: "Segurança jurídica em transações, contratos de compra e venda, posses e regularização de imóveis.",
+                items: ["Compra, venda e permuta de imóveis", "Usucapião e regularização fundiária", "Locações residenciais e comerciais", "Due diligence imobiliária"],
+              },
+              {
+                Icon: Shield,
+                title: "Direito Penal / Criminal",
+                desc: "Defesa técnica especializada e acompanhamento detalhado em demandas de complexidade criminal.",
+                items: ["Defesa em inquéritos e ações penais", "Acompanhamento em audiências", "Habeas corpus e medidas urgentes", "Recursos e tribunais superiores"],
+              },
+            ].map(({ Icon, title, desc, items }, idx) => (
+              <Accordion key={title} type="single" collapsible>
+                <AccordionItem
+                  value={`area-${idx}`}
+                  className="glass-card relative p-2 rounded-none border-0"
+                >
+                  <div className="absolute top-0 left-0 w-8 h-px bg-gold" />
+                  <div className="absolute top-0 left-0 w-px h-8 bg-gold" />
+                  <AccordionTrigger className="hover:no-underline px-6 py-6 [&[data-state=open]>svg]:text-gold">
+                    <div className="flex items-start gap-5 text-left">
+                      <Icon size={32} className="text-gold shrink-0 mt-1" strokeWidth={1.2} />
+                      <div>
+                        <h4 className="font-serif-luxe text-2xl text-stone-50 leading-tight mb-2">{title}</h4>
+                        <p className="text-sm text-stone-400 leading-relaxed">{desc}</p>
+                      </div>
+                    </div>
+                  </AccordionTrigger>
+                  <AccordionContent className="px-6 pb-6">
+                    <ul className="space-y-3 border-t border-gold/20 pt-5">
+                      {items.map((it) => (
+                        <li key={it} className="flex items-start gap-3 text-stone-200 text-[15px]">
+                          <Check size={16} className="text-gold mt-1 shrink-0" />
+                          <span>{it}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </AccordionContent>
+                </AccordionItem>
+              </Accordion>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 
@@ -332,7 +392,7 @@ function Index() {
             <h2 className="font-serif-luxe text-4xl md:text-5xl text-stone-50 mb-4">O que dizem nossos clientes</h2>
             <p className="text-stone-300 text-base leading-relaxed">A confiança de quem busca soluções jurídicas sérias e personalizadas.</p>
           </div>
-          <div className="grid md:grid-cols-3 gap-6">
+          <motion.div {...reveal} className="grid md:grid-cols-3 gap-6">
             {[
               { name: "Mariana A.", role: "Cliente — Família", text: "Conduziu meu processo de divórcio com sensibilidade e total domínio técnico. Resultado acima das expectativas." },
               { name: "Rafael S.", role: "Cliente — Sucessões", text: "Planejamento sucessório impecável. Dr. Gilson explicou cada etapa com clareza e segurança jurídica." },
@@ -351,7 +411,7 @@ function Index() {
                 </div>
               </div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 
@@ -366,6 +426,7 @@ function Index() {
             </div>
             <h2 className="font-serif-luxe text-4xl md:text-5xl text-stone-50">Tire suas principais dúvidas</h2>
           </div>
+          <motion.div {...reveal}>
           <Accordion type="single" collapsible className="space-y-3">
             {[
               { q: "Como é feita a primeira consulta?", a: "A consulta inicial é realizada de forma presencial em nosso escritório ou por videoconferência. Analisamos o seu caso com profundidade, esclarecemos dúvidas e apresentamos as melhores estratégias jurídicas aplicáveis." },
@@ -388,6 +449,7 @@ function Index() {
               </AccordionItem>
             ))}
           </Accordion>
+          </motion.div>
         </div>
       </section>
 
@@ -465,9 +527,25 @@ function Index() {
                   <option>Outro</option>
                 </select>
               </div>
+              <div>
+                <label htmlFor="mensagem" className="block text-[10px] tracking-[0.3em] uppercase text-gold mb-3">Relate brevemente a sua necessidade</label>
+                <textarea
+                  id="mensagem"
+                  required
+                  rows={4}
+                  maxLength={1000}
+                  placeholder="Ex: Gostaria de entender sobre planejamento sucessório / holding familiar..."
+                  value={form.mensagem}
+                  onChange={(e) => setForm({ ...form, mensagem: e.target.value })}
+                  className="w-full bg-transparent border border-white/15 focus:border-gold p-3 text-stone-100 placeholder:text-stone-600 outline-none transition-colors resize-none"
+                />
+              </div>
               <button type="submit" className="w-full gold-gradient text-charcoal-deep font-medium py-4 text-sm tracking-[0.25em] uppercase hover:shadow-2xl hover:shadow-amber-900/40 transition-all mt-4">
                 Enviar Mensagem
               </button>
+              <p className="text-[11px] text-stone-400 text-center leading-relaxed pt-1">
+                🔒 Seus dados estão protegidos sob absoluto sigilo profissional e em estrita conformidade com a LGPD.
+              </p>
             </form>
           </div>
         </div>
@@ -516,16 +594,28 @@ function Index() {
       </footer>
 
       {/* WHATSAPP FLOAT */}
-      <a
-        href={waLink()}
-        target="_blank"
-        rel="noopener"
-        aria-label="Falar no WhatsApp"
-        className="wa-ping fixed bottom-6 right-6 z-50 flex items-center justify-center w-16 h-16 rounded-full shadow-2xl shadow-green-900/50 hover:scale-110 transition-transform"
-        style={{ backgroundColor: "#25D366" }}
-      >
-        <FaWhatsapp className="w-9 h-9 text-white" />
-      </a>
+      <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-2">
+        {waTipVisible && (
+          <div
+            key={waTipKey}
+            className="wa-tooltip relative mr-1 px-4 py-2 border border-gold/40 text-[11px] tracking-[0.2em] uppercase text-stone-100 shadow-2xl"
+            style={{ backgroundColor: "#1a1a1a" }}
+          >
+            <span className="text-gold">Agendar Consulta Privada</span> · Linha Direta
+            <span className="absolute -bottom-1 right-6 w-2 h-2 rotate-45 border-r border-b border-gold/40" style={{ backgroundColor: "#1a1a1a" }} />
+          </div>
+        )}
+        <a
+          href={waLink()}
+          target="_blank"
+          rel="noopener"
+          aria-label="Falar no WhatsApp"
+          className="wa-ping relative flex items-center justify-center w-16 h-16 rounded-full shadow-2xl shadow-green-900/50 hover:scale-110 transition-transform"
+          style={{ backgroundColor: "#25D366" }}
+        >
+          <FaWhatsapp className="w-9 h-9 text-white" />
+        </a>
+      </div>
     </div>
   );
 }
