@@ -58,7 +58,7 @@ function Index() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    const msg = `Olá, sou ${form.nome}.%0ATelefone: ${form.telefone}%0AE-mail: ${form.email}%0AÁrea de interesse: ${form.area}`;
+    const msg = `Olá, sou ${form.nome}.%0ATelefone: ${form.telefone}%0AE-mail: ${form.email}%0AÁrea de interesse: ${form.area}%0ANecessidade: ${form.mensagem}`;
     window.open(`https://wa.me/${WHATSAPP}?text=${msg}`, "_blank");
   };
 
