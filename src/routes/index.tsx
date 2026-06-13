@@ -592,16 +592,28 @@ function Index() {
       </footer>
 
       {/* WHATSAPP FLOAT */}
-      <a
-        href={waLink()}
-        target="_blank"
-        rel="noopener"
-        aria-label="Falar no WhatsApp"
-        className="wa-ping fixed bottom-6 right-6 z-50 flex items-center justify-center w-16 h-16 rounded-full shadow-2xl shadow-green-900/50 hover:scale-110 transition-transform"
-        style={{ backgroundColor: "#25D366" }}
-      >
-        <FaWhatsapp className="w-9 h-9 text-white" />
-      </a>
+      <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-2">
+        {waTipVisible && (
+          <div
+            key={waTipKey}
+            className="wa-tooltip relative mr-1 px-4 py-2 border border-gold/40 text-[11px] tracking-[0.2em] uppercase text-stone-100 shadow-2xl"
+            style={{ backgroundColor: "#1a1a1a" }}
+          >
+            <span className="text-gold">Agendar Consulta Privada</span> · Linha Direta
+            <span className="absolute -bottom-1 right-6 w-2 h-2 rotate-45 border-r border-b border-gold/40" style={{ backgroundColor: "#1a1a1a" }} />
+          </div>
+        )}
+        <a
+          href={waLink()}
+          target="_blank"
+          rel="noopener"
+          aria-label="Falar no WhatsApp"
+          className="wa-ping relative flex items-center justify-center w-16 h-16 rounded-full shadow-2xl shadow-green-900/50 hover:scale-110 transition-transform"
+          style={{ backgroundColor: "#25D366" }}
+        >
+          <FaWhatsapp className="w-9 h-9 text-white" />
+        </a>
+      </div>
     </div>
   );
 }
