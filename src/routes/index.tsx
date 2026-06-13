@@ -426,6 +426,7 @@ function Index() {
             </div>
             <h2 className="font-serif-luxe text-4xl md:text-5xl text-stone-50">Tire suas principais dúvidas</h2>
           </div>
+          <motion.div {...reveal}>
           <Accordion type="single" collapsible className="space-y-3">
             {[
               { q: "Como é feita a primeira consulta?", a: "A consulta inicial é realizada de forma presencial em nosso escritório ou por videoconferência. Analisamos o seu caso com profundidade, esclarecemos dúvidas e apresentamos as melhores estratégias jurídicas aplicáveis." },
@@ -448,6 +449,7 @@ function Index() {
               </AccordionItem>
             ))}
           </Accordion>
+          </motion.div>
         </div>
       </section>
 
