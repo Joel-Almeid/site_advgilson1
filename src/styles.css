@@ -227,31 +227,40 @@ body { font-family: 'Inter', sans-serif; background: #333333; color: #e8e6e1; }
   }
 }
 
-/* --- Ajuste Cirúrgico da Imagem da Hero (Máximo Impacto) --- */
+/* --- Ajuste Cirúrgico da Imagem da Hero (Desktop apenas) --- */
 @layer utilities {
+  /* Em mobile a foto NÃO deve ser absoluta — fluxo inline */
   .hero-portrait-premium {
-    position: absolute;
-    right: 0;
-    bottom: 0;
-    /* Faz a foto ocupar toda a altura da seção no desktop */
-    height: 100%; 
-    max-height: 90vh; /* Controla o limite para não esmagar */
-    width: auto;
+    position: static;
+    width: 100%;
+    max-width: 360px;
+    height: auto;
+    margin: 0 auto;
     object-fit: contain;
-    object-position: bottom right;
-    /* Deixa a cabeça passar por trás do menu, mas na frente do fundo */
-    z-index: 10; 
-    
-    /* Aplica o efeito de fusão profunda na base que você já tem configurado */
-    composes: portrait-fade-deep; 
-    
-    /* Dá uma leve ampliada para estourar o limite e trazer imponência */
-    transform: scale(1.08);
-    transform-origin: bottom right;
-    transition: transform 0.5s ease;
+    -webkit-mask-image: linear-gradient(to bottom, #000 55%, rgba(0,0,0,0.5) 80%, transparent 100%);
+            mask-image: linear-gradient(to bottom, #000 55%, rgba(0,0,0,0.5) 80%, transparent 100%);
   }
 
-  /* Garante que o menu de navegação e o logo fiquem sempre na frente da cabeça dele */
+  @media (min-width: 1024px) {
+    .hero-portrait-premium {
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      height: 100%;
+      max-height: 90vh;
+      width: auto;
+      max-width: none;
+      margin: 0;
+      object-position: bottom right;
+      z-index: 10;
+      transform: scale(1.08);
+      transform-origin: bottom right;
+      transition: transform 0.5s ease;
+      -webkit-mask-image: linear-gradient(to bottom, #000 45%, rgba(0,0,0,0.6) 70%, transparent 100%);
+              mask-image: linear-gradient(to bottom, #000 45%, rgba(0,0,0,0.6) 70%, transparent 100%);
+    }
+  }
+
   .header-premium-layer {
     position: relative;
     z-index: 50;
