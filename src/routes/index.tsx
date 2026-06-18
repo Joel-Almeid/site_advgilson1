@@ -25,12 +25,55 @@ const WHATSAPP = "5563984474070";
 const waLink = (msg = "Olá, gostaria de agendar uma consulta jurídica.") =>
   `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(msg)}`;
 
+const INSTAGRAM_URL = "https://www.instagram.com/gilsoncarvalho.adv/";
+
 const reveal = {
-  initial: { opacity: 0, y: 32 },
+  initial: { opacity: 0, y: 20 },
   whileInView: { opacity: 1, y: 0 },
   viewport: { once: true, amount: 0.2 },
   transition: { duration: 0.7, ease: "easeOut" as const },
 };
+
+// Magnetic hover anchor — moves slightly toward cursor
+function MagneticLink({
+  href, children, className, style, target, rel, onClick,
+}: {
+  href: string;
+  children: React.ReactNode;
+  className?: string;
+  style?: React.CSSProperties;
+  target?: string;
+  rel?: string;
+  onClick?: (e: React.MouseEvent<HTMLAnchorElement>) => void;
+}) {
+  const ref = useRef<HTMLAnchorElement>(null);
+  const handleMove = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    const el = ref.current;
+    if (!el) return;
+    const r = el.getBoundingClientRect();
+    const x = e.clientX - (r.left + r.width / 2);
+    const y = e.clientY - (r.top + r.height / 2);
+    el.style.transform = `translate(${x * 0.15}px, ${y * 0.2}px)`;
+  };
+  const handleLeave = () => {
+    if (ref.current) ref.current.style.transform = "";
+  };
+  return (
+    <a
+      ref={ref}
+      href={href}
+      target={target}
+      rel={rel}
+      onClick={onClick}
+      onMouseMove={handleMove}
+      onMouseLeave={handleLeave}
+      className={`magnetic ${className ?? ""}`}
+      style={style}
+    >
+      {children}
+    </a>
+  );
+}
 
 function Index() {
   const [menuOpen, setMenuOpen] = useState(false);
