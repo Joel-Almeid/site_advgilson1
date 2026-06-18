@@ -1,8 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   Users, FileText, Home, Shield, MapPin, Mail, Phone,
-  Check, ChevronRight, Menu, X, Star
+  Check, ChevronRight, Menu, X, Star, Instagram
 } from "lucide-react";
 import { FaWhatsapp } from "react-icons/fa";
 import { motion } from "framer-motion";
