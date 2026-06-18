@@ -646,10 +646,11 @@ function Index() {
           <motion.div {...reveal} className="relative border border-gold/30 p-2 shadow-2xl shadow-black/60">
             <iframe
               title="Localização do escritório Gilson Carvalho Advocacia"
-              src="https://maps.google.com/maps?q=Avenida%20Guanabara,%201669,%20Centro,%20Gurupi,%20Tocantins&t=&z=15&ie=UTF8&iwloc=&output=embed"
+              src="https://www.google.com/maps/embed?pb=!3m2!1spt-BR!2sbr!4v1781761337176!5m2!1spt-BR!2sbr!6m8!1m7!1sRrftdzF3qo2CTOm8-mylxQ!2m2!1d-11.72514097147767!2d-49.07741492409406!3f132.25511955615298!4f11.793795739450672!5f0.7820865974627469"
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
-              className="w-full h-[350px] md:h-[420px] rounded-sm grayscale invert contrast-[90%] hue-rotate-180"
+              allowFullScreen
+              className="w-full h-[350px] md:h-[450px] rounded-sm"
               style={{ border: 0 }}
             />
           </motion.div>
