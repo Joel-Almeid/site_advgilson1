@@ -185,7 +185,21 @@ function Index() {
         <div className="absolute inset-0 bg-fixed bg-center bg-cover" style={{ backgroundImage: `url(${bgBooks})` }} />
         <div className="absolute inset-0" style={{ backgroundColor: "rgba(20,20,20,0.85)" }} />
         <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-transparent to-black/40" />
-        {/* FULLSCREEN PORTRAIT — lg+ only, breaks out behind nav, fuses with marquee */}
+        {/* MOBILE PORTRAIT — absolute background behind text */}
+        <motion.img
+          src={imgGilson}
+          alt=""
+          aria-hidden="true"
+          draggable={false}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 0.4 }}
+          transition={{ duration: 1.2, ease: "easeOut" }}
+          className="lg:hidden absolute inset-0 w-full h-full object-cover object-top scale-125 z-0 pointer-events-none select-none"
+        />
+        {/* Dark gradient veil to keep text readable on mobile */}
+        <div className="lg:hidden absolute inset-0 z-0 pointer-events-none bg-gradient-to-b from-black/70 via-black/55 to-black/85" />
+
+        {/* DESKTOP FULLSCREEN PORTRAIT */}
         <motion.img
           src={imgGilson}
           alt="Dr. Gilson Carvalho"
@@ -196,6 +210,7 @@ function Index() {
           draggable={false}
           className="hidden lg:block hero-portrait-premium drop-shadow-[0_30px_50px_rgba(0,0,0,0.7)]"
         />
+
 
         
         <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-10 py-24 grid lg:grid-cols-12 gap-10 lg:gap-12 items-center w-full">
