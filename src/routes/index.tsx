@@ -160,7 +160,7 @@ function Index() {
               );
             })}
           </nav>
-          <MagneticLink href={waLink()} target="_blank" rel="noopener" className="hidden lg:inline-flex items-center gap-2 border text-gold px-5 py-2.5 text-xs tracking-[0.2em] uppercase hover:bg-gold hover:text-charcoal-deep" style={{ borderColor: "var(--gold)" }}>
+          <MagneticLink href={waLink()} target="_blank" rel="noopener noreferrer" className="hidden lg:inline-flex items-center gap-2 border text-gold px-5 py-2.5 text-xs tracking-[0.2em] uppercase hover:bg-gold hover:text-charcoal-deep" style={{ borderColor: "var(--gold)" }}>
             Falar com Advogado
           </MagneticLink>
           <button onClick={() => setMenuOpen(!menuOpen)} className="lg:hidden text-gold" aria-label="Abrir menu">
@@ -174,7 +174,7 @@ function Index() {
                 {l.label}
               </a>
             ))}
-            <a href={waLink()} target="_blank" rel="noopener" onClick={() => setMenuOpen(false)} className="inline-flex items-center gap-2 border border-gold text-gold px-5 py-2.5 text-xs tracking-[0.2em] uppercase">
+            <a href={waLink()} target="_blank" rel="noopener noreferrer" onClick={() => setMenuOpen(false)} className="inline-flex items-center gap-2 border border-gold text-gold px-5 py-2.5 text-xs tracking-[0.2em] uppercase">
               Falar com Advogado
             </a>
           </div>
@@ -186,30 +186,15 @@ function Index() {
         <div className="absolute inset-0 bg-fixed bg-center bg-cover" style={{ backgroundImage: `url(${bgBooks})` }} />
         <div className="absolute inset-0" style={{ backgroundColor: "rgba(20,20,20,0.85)" }} />
         <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-transparent to-black/40" />
-        {/* MOBILE PORTRAIT — absolute background behind text */}
-        <motion.img
-          src={imgGilson}
-          alt=""
-          aria-hidden="true"
-          draggable={false}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 0.4 }}
-          transition={{ duration: 1.2, ease: "easeOut" }}
-          className="lg:hidden absolute inset-0 w-full h-full object-cover object-top scale-125 z-0 pointer-events-none select-none"
-        />
-        {/* Dark gradient veil to keep text readable on mobile */}
-        <div className="lg:hidden absolute inset-0 z-0 pointer-events-none bg-gradient-to-b from-black/70 via-black/55 to-black/85" />
-
-        {/* DESKTOP FULLSCREEN PORTRAIT */}
+        {/* HERO PORTRAIT — inline (opacity-40) on mobile, fullscreen on desktop */}
         <motion.img
           src={imgGilson}
           alt="Dr. Gilson Carvalho"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9, ease: "easeOut" }}
-          aria-hidden="true"
           draggable={false}
-          className="hidden lg:block hero-portrait-premium drop-shadow-[0_30px_50px_rgba(0,0,0,0.7)]"
+          className="hero-portrait-premium opacity-40 lg:opacity-100 drop-shadow-[0_30px_50px_rgba(0,0,0,0.7)]"
         />
 
 
@@ -240,7 +225,7 @@ function Index() {
               <MagneticLink
                 href={waLink()}
                 target="_blank"
-                rel="noopener"
+                rel="noopener noreferrer"
                 className="inline-flex items-center justify-center gap-3 text-charcoal-deep font-semibold px-7 py-4 text-xs tracking-[0.25em] uppercase hover:shadow-2xl hover:shadow-amber-900/40"
                 style={{ backgroundColor: "#bfa15f" }}
               >
@@ -623,13 +608,13 @@ function Index() {
                 </select>
               </div>
               <div>
-                <label htmlFor="mensagem" className="block text-[10px] tracking-[0.3em] uppercase text-gold mb-3">Relate brevemente a sua necessidade</label>
+                <label htmlFor="mensagem" className="block text-[10px] tracking-[0.3em] uppercase text-gold mb-3">DESCREVA O SEU CASO PARA ANÁLISE</label>
                 <textarea
                   id="mensagem"
                   required
                   rows={4}
                   maxLength={1000}
-                  placeholder="Ex: Gostaria de entender sobre planejamento sucessório / holding familiar..."
+                  placeholder="Ex: Necessito iniciar um processo de inventário / organizar a proteção patrimonial ou contratual da minha empresa."
                   value={form.mensagem}
                   onChange={(e) => setForm({ ...form, mensagem: e.target.value })}
                   className="w-full bg-transparent border border-white/15 focus:border-gold p-3 text-stone-100 placeholder:text-stone-600 outline-none transition-colors resize-none"
@@ -661,10 +646,11 @@ function Index() {
           <motion.div {...reveal} className="relative border border-gold/30 p-2 shadow-2xl shadow-black/60">
             <iframe
               title="Localização do escritório Gilson Carvalho Advocacia"
-              src="https://maps.google.com/maps?q=Avenida%20Guanabara,%201669,%20Centro,%20Gurupi,%20Tocantins&t=&z=15&ie=UTF8&iwloc=&output=embed"
+              src="https://www.google.com/maps/embed?pb=!3m2!1spt-BR!2sbr!4v1781761337176!5m2!1spt-BR!2sbr!6m8!1m7!1sRrftdzF3qo2CTOm8-mylxQ!2m2!1d-11.72514097147767!2d-49.07741492409406!3f132.25511955615298!4f11.793795739450672!5f0.7820865974627469"
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
-              className="w-full h-[350px] md:h-[420px] rounded-sm grayscale invert contrast-[90%] hue-rotate-180"
+              allowFullScreen
+              className="w-full h-[350px] md:h-[450px] rounded-sm"
               style={{ border: 0 }}
             />
           </motion.div>
@@ -740,7 +726,7 @@ function Index() {
         <a
           href={waLink()}
           target="_blank"
-          rel="noopener"
+          rel="noopener noreferrer"
           aria-label="Falar no WhatsApp"
           className="wa-ping relative flex items-center justify-center w-16 h-16 rounded-full shadow-2xl shadow-green-900/50 hover:scale-110 transition-transform"
           style={{ backgroundColor: "#25D366" }}
