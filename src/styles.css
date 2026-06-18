@@ -86,6 +86,38 @@ body { font-family: 'Inter', sans-serif; background: #333333; color: #e8e6e1; }
   animation: wa-tip-in 3s ease forwards;
 }
 
+/* Cinematic noise overlay */
+.noise-overlay {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 60;
+  opacity: 0.035;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)' opacity='0.85'/></svg>");
+}
+
+/* Magnetic hover transition */
+.magnetic {
+  transition: transform 0.25s cubic-bezier(.2,.8,.2,1), box-shadow .3s ease, background-color .3s ease;
+  will-change: transform;
+}
+
+/* Active nav indicator */
+.nav-link { position: relative; }
+.nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0; right: 0; bottom: -6px;
+  height: 1px;
+  background: var(--gold);
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform .35s ease;
+}
+.nav-link.active::after,
+.nav-link:hover::after { transform: scaleX(1); }
+
 @custom-variant dark (&:is(.dark *));
 
 /*
