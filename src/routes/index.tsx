@@ -160,7 +160,7 @@ function Index() {
               );
             })}
           </nav>
-          <MagneticLink href={waLink()} target="_blank" rel="noopener" className="hidden lg:inline-flex items-center gap-2 border text-gold px-5 py-2.5 text-xs tracking-[0.2em] uppercase hover:bg-gold hover:text-charcoal-deep" style={{ borderColor: "var(--gold)" }}>
+          <MagneticLink href={waLink()} target="_blank" rel="noopener noreferrer" className="hidden lg:inline-flex items-center gap-2 border text-gold px-5 py-2.5 text-xs tracking-[0.2em] uppercase hover:bg-gold hover:text-charcoal-deep" style={{ borderColor: "var(--gold)" }}>
             Falar com Advogado
           </MagneticLink>
           <button onClick={() => setMenuOpen(!menuOpen)} className="lg:hidden text-gold" aria-label="Abrir menu">
@@ -174,7 +174,7 @@ function Index() {
                 {l.label}
               </a>
             ))}
-            <a href={waLink()} target="_blank" rel="noopener" onClick={() => setMenuOpen(false)} className="inline-flex items-center gap-2 border border-gold text-gold px-5 py-2.5 text-xs tracking-[0.2em] uppercase">
+            <a href={waLink()} target="_blank" rel="noopener noreferrer" onClick={() => setMenuOpen(false)} className="inline-flex items-center gap-2 border border-gold text-gold px-5 py-2.5 text-xs tracking-[0.2em] uppercase">
               Falar com Advogado
             </a>
           </div>
@@ -225,7 +225,7 @@ function Index() {
               <MagneticLink
                 href={waLink()}
                 target="_blank"
-                rel="noopener"
+                rel="noopener noreferrer"
                 className="inline-flex items-center justify-center gap-3 text-charcoal-deep font-semibold px-7 py-4 text-xs tracking-[0.25em] uppercase hover:shadow-2xl hover:shadow-amber-900/40"
                 style={{ backgroundColor: "#bfa15f" }}
               >
@@ -726,7 +726,7 @@ function Index() {
         <a
           href={waLink()}
           target="_blank"
-          rel="noopener"
+          rel="noopener noreferrer"
           aria-label="Falar no WhatsApp"
           className="wa-ping relative flex items-center justify-center w-16 h-16 rounded-full shadow-2xl shadow-green-900/50 hover:scale-110 transition-transform"
           style={{ backgroundColor: "#25D366" }}
