@@ -564,6 +564,18 @@ function Index() {
                 </div>
               ))}
             </div>
+            <div className="mt-10 flex items-center gap-4">
+              <span className="text-[10px] tracking-[0.3em] uppercase text-stone-400">Siga-nos</span>
+              <a
+                href={INSTAGRAM_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Instagram de Gilson Carvalho Advocacia"
+                className="group flex items-center justify-center w-11 h-11 border border-gold/40 hover:border-gold transition-colors"
+              >
+                <Instagram size={18} className="text-stone-300 group-hover:text-gold transition-colors" />
+              </a>
+            </div>
           </div>
 
           <div className="p-8 md:p-10 border border-gold/20" style={{ backgroundColor: "#1f1f1f" }}>
