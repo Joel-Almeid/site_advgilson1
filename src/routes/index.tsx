@@ -80,6 +80,7 @@ function Index() {
   const [form, setForm] = useState({ nome: "", telefone: "", email: "", area: "", mensagem: "" });
   const [waTipVisible, setWaTipVisible] = useState(false);
   const [waTipKey, setWaTipKey] = useState(0);
+  const [activeSection, setActiveSection] = useState("inicio");
 
   useEffect(() => {
     const id = setInterval(() => {
@@ -89,6 +90,22 @@ function Index() {
       return () => clearTimeout(t);
     }, 8000);
     return () => clearInterval(id);
+  }, []);
+
+  // Scroll spy — highlight current section in nav
+  useEffect(() => {
+    const ids = ["inicio", "sobre", "areas", "contato"];
+    const onScroll = () => {
+      let current = "inicio";
+      for (const id of ids) {
+        const el = document.getElementById(id);
+        if (el && el.getBoundingClientRect().top <= 140) current = id;
+      }
+      setActiveSection(current);
+    };
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   const maskPhone = (v: string) => {
