@@ -235,43 +235,30 @@ function Index() {
                 Professor Universitário · Mestre & Especialista
               </p>
             </div>
-            {/* DUAL CTA */}
             <div className="mt-10 flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
-              <a
+              <MagneticLink
                 href={waLink()}
                 target="_blank"
                 rel="noopener"
-                className="inline-flex items-center justify-center gap-3 text-charcoal-deep font-semibold px-7 py-4 text-xs tracking-[0.25em] uppercase hover:shadow-2xl hover:shadow-amber-900/40 transition-all"
+                className="inline-flex items-center justify-center gap-3 text-charcoal-deep font-semibold px-7 py-4 text-xs tracking-[0.25em] uppercase hover:shadow-2xl hover:shadow-amber-900/40"
                 style={{ backgroundColor: "#bfa15f" }}
               >
                 Entrar em Contato
                 <ChevronRight size={16} />
-              </a>
-              <a
+              </MagneticLink>
+              <MagneticLink
                 href="#areas"
                 onClick={(e) => handleNavClick(e, "#areas")}
-                className="inline-flex items-center justify-center gap-3 border border-gold text-gold font-medium px-7 py-4 text-xs tracking-[0.25em] uppercase hover:bg-gold hover:text-charcoal-deep transition-all"
+                className="inline-flex items-center justify-center gap-3 border text-gold font-medium px-7 py-4 text-xs tracking-[0.25em] uppercase hover:bg-gold hover:text-charcoal-deep"
                 style={{ borderColor: "#bfa15f" }}
               >
                 Nossas Soluções
-              </a>
+              </MagneticLink>
             </div>
             <div className="mt-6 flex items-center gap-3">
               <span className="w-1.5 h-1.5 rounded-full bg-gold animate-pulse" />
               <span className="text-[11px] tracking-[0.2em] uppercase text-stone-300">Atendimento Presencial e Digital · Todo o Brasil</span>
             </div>
-          </div>
-          {/* RIGHT COLUMN — PORTRAIT (mobile inline only) */}
-          <div className="lg:hidden order-1 relative flex justify-center items-end">
-            <motion.img
-              src={imgGilson}
-              alt="Dr. Gilson Carvalho"
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, ease: "easeOut" }}
-              className="portrait-fade-deep w-full max-w-sm md:max-w-md h-auto object-contain object-bottom select-none pointer-events-none drop-shadow-[0_30px_40px_rgba(0,0,0,0.6)]"
-              draggable={false}
-            />
           </div>
         </div>
       </section>
