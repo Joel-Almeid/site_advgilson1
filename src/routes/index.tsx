@@ -645,15 +645,52 @@ function Index() {
         </div>
       </section>
 
+      {/* LOCALIZAÇÃO — MAPA */}
+      <section id="localizacao" className="relative py-24 lg:py-28" style={{ backgroundColor: "#1f1f1f" }}>
+        <div className="max-w-7xl mx-auto px-6 lg:px-10">
+          <div className="text-center mb-12">
+            <div className="flex items-center justify-center gap-4 mb-6">
+              <div className="w-16 h-px bg-gold" />
+              <span className="text-xs tracking-[0.3em] uppercase text-gold">Onde Estamos</span>
+              <div className="w-16 h-px bg-gold" />
+            </div>
+            <h2 className="font-serif-luxe text-4xl md:text-5xl text-stone-50 mb-3">Nosso Escritório</h2>
+            <p className="text-stone-400 text-sm md:text-base">Av. Guanabara, nº 1669, Centro — Gurupi/TO</p>
+          </div>
+          <motion.div {...reveal} className="relative border border-gold/30 p-2 shadow-2xl shadow-black/60">
+            <iframe
+              title="Localização do escritório Gilson Carvalho Advocacia"
+              src="https://maps.google.com/maps?q=Avenida%20Guanabara,%201669,%20Centro,%20Gurupi,%20Tocantins&t=&z=15&ie=UTF8&iwloc=&output=embed"
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              className="w-full h-[350px] md:h-[420px] rounded-sm grayscale invert contrast-[90%] hue-rotate-180"
+              style={{ border: 0 }}
+            />
+          </motion.div>
+        </div>
+      </section>
+
       {/* FOOTER */}
       <footer className="relative pt-20 pb-8 border-t border-gold/20" style={{ backgroundColor: "#1a1a1a" }}>
         <div className="max-w-7xl mx-auto px-6 lg:px-10">
           <div className="grid md:grid-cols-3 gap-12 mb-16">
             <div>
               <img src={logo} alt="Gilson Carvalho" className="h-16 mb-6" />
-              <p className="text-sm text-stone-400 leading-relaxed max-w-xs">
+              <p className="text-sm text-stone-400 leading-relaxed max-w-xs mb-6">
                 Excelência jurídica com ética, transparência e dedicação total ao seu caso.
               </p>
+              <a
+                href={INSTAGRAM_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Instagram de Gilson Carvalho Advocacia"
+                className="inline-flex items-center gap-3 group"
+              >
+                <span className="flex items-center justify-center w-10 h-10 border border-gold/40 group-hover:border-gold transition-colors">
+                  <Instagram size={16} className="text-stone-300 group-hover:text-gold transition-colors" />
+                </span>
+                <span className="text-[11px] tracking-[0.25em] uppercase text-stone-400 group-hover:text-gold transition-colors">@gilsoncarvalho.adv</span>
+              </a>
             </div>
             <div>
               <h5 className="text-[10px] tracking-[0.3em] uppercase text-gold mb-6">Navegação</h5>
