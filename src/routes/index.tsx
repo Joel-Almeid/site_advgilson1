@@ -608,7 +608,7 @@ function Index() {
                 </select>
               </div>
               <div>
-                <label htmlFor="mensagem" className="block text-[10px] tracking-[0.3em] uppercase text-gold mb-3">Relate brevemente a sua necessidade</label>
+                <label htmlFor="mensagem" className="block text-[10px] tracking-[0.3em] uppercase text-gold mb-3">DESCREVA O SEU CASO PARA ANÁLISE</label>
                 <textarea
                   id="mensagem"
                   required
