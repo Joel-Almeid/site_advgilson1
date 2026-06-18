@@ -614,7 +614,7 @@ function Index() {
                   required
                   rows={4}
                   maxLength={1000}
-                  placeholder="Ex: Gostaria de entender sobre planejamento sucessório / holding familiar..."
+                  placeholder="Ex: Necessito iniciar um processo de inventário / organizar a proteção patrimonial ou contratual da minha empresa."
                   value={form.mensagem}
                   onChange={(e) => setForm({ ...form, mensagem: e.target.value })}
                   className="w-full bg-transparent border border-white/15 focus:border-gold p-3 text-stone-100 placeholder:text-stone-600 outline-none transition-colors resize-none"
