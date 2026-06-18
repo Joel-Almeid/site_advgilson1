@@ -1,8 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   Users, FileText, Home, Shield, MapPin, Mail, Phone,
-  Check, ChevronRight, Menu, X, Star
+  Check, ChevronRight, Menu, X, Star, Instagram
 } from "lucide-react";
 import { FaWhatsapp } from "react-icons/fa";
 import { motion } from "framer-motion";
@@ -25,18 +25,62 @@ const WHATSAPP = "5563984474070";
 const waLink = (msg = "Olá, gostaria de agendar uma consulta jurídica.") =>
   `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(msg)}`;
 
+const INSTAGRAM_URL = "https://www.instagram.com/gilsoncarvalho.adv/";
+
 const reveal = {
-  initial: { opacity: 0, y: 32 },
+  initial: { opacity: 0, y: 20 },
   whileInView: { opacity: 1, y: 0 },
   viewport: { once: true, amount: 0.2 },
   transition: { duration: 0.7, ease: "easeOut" as const },
 };
+
+// Magnetic hover anchor — moves slightly toward cursor
+function MagneticLink({
+  href, children, className, style, target, rel, onClick,
+}: {
+  href: string;
+  children: React.ReactNode;
+  className?: string;
+  style?: React.CSSProperties;
+  target?: string;
+  rel?: string;
+  onClick?: (e: React.MouseEvent<HTMLAnchorElement>) => void;
+}) {
+  const ref = useRef<HTMLAnchorElement>(null);
+  const handleMove = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    const el = ref.current;
+    if (!el) return;
+    const r = el.getBoundingClientRect();
+    const x = e.clientX - (r.left + r.width / 2);
+    const y = e.clientY - (r.top + r.height / 2);
+    el.style.transform = `translate(${x * 0.15}px, ${y * 0.2}px)`;
+  };
+  const handleLeave = () => {
+    if (ref.current) ref.current.style.transform = "";
+  };
+  return (
+    <a
+      ref={ref}
+      href={href}
+      target={target}
+      rel={rel}
+      onClick={onClick}
+      onMouseMove={handleMove}
+      onMouseLeave={handleLeave}
+      className={`magnetic ${className ?? ""}`}
+      style={style}
+    >
+      {children}
+    </a>
+  );
+}
 
 function Index() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [form, setForm] = useState({ nome: "", telefone: "", email: "", area: "", mensagem: "" });
   const [waTipVisible, setWaTipVisible] = useState(false);
   const [waTipKey, setWaTipKey] = useState(0);
+  const [activeSection, setActiveSection] = useState("inicio");
 
   useEffect(() => {
     const id = setInterval(() => {
@@ -46,6 +90,22 @@ function Index() {
       return () => clearTimeout(t);
     }, 8000);
     return () => clearInterval(id);
+  }, []);
+
+  // Scroll spy — highlight current section in nav
+  useEffect(() => {
+    const ids = ["inicio", "sobre", "areas", "contato"];
+    const onScroll = () => {
+      let current = "inicio";
+      for (const id of ids) {
+        const el = document.getElementById(id);
+        if (el && el.getBoundingClientRect().top <= 140) current = id;
+      }
+      setActiveSection(current);
+    };
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   const maskPhone = (v: string) => {
@@ -77,7 +137,8 @@ function Index() {
   ];
 
   return (
-    <div className="min-h-screen text-stone-100" style={{ backgroundColor: "#333333" }}>
+    <div className="min-h-screen text-stone-100 relative" style={{ backgroundColor: "#333333" }}>
+      <div className="noise-overlay" aria-hidden="true" />
       {/* HEADER */}
       <header className="fixed top-0 left-0 right-0 z-50 backdrop-blur-md border-b border-white/5" style={{ backgroundColor: "rgba(29,29,29,0.85)" }}>
         <div className="max-w-7xl mx-auto px-6 lg:px-10 h-20 flex items-center justify-between">
@@ -85,15 +146,23 @@ function Index() {
             <img src={logo} alt="Gilson Carvalho Advocacia" className="h-12 w-auto" />
           </a>
           <nav className="hidden lg:flex items-center gap-10">
-            {navLinks.map(l => (
-              <a key={l.href} href={l.href} onClick={(e) => handleNavClick(e, l.href)} className="text-sm tracking-wider uppercase text-stone-200 hover:text-gold transition-colors">
-                {l.label}
-              </a>
-            ))}
+            {navLinks.map(l => {
+              const isActive = activeSection === l.href.slice(1);
+              return (
+                <a
+                  key={l.href}
+                  href={l.href}
+                  onClick={(e) => handleNavClick(e, l.href)}
+                  className={`nav-link text-sm tracking-wider uppercase transition-colors ${isActive ? "active text-gold" : "text-stone-200 hover:text-gold"}`}
+                >
+                  {l.label}
+                </a>
+              );
+            })}
           </nav>
-          <a href={waLink()} target="_blank" rel="noopener" className="hidden lg:inline-flex items-center gap-2 border border-gold text-gold px-5 py-2.5 text-xs tracking-[0.2em] uppercase hover:bg-gold hover:text-charcoal-deep transition-all" style={{ borderColor: "var(--gold)" }}>
+          <MagneticLink href={waLink()} target="_blank" rel="noopener" className="hidden lg:inline-flex items-center gap-2 border text-gold px-5 py-2.5 text-xs tracking-[0.2em] uppercase hover:bg-gold hover:text-charcoal-deep" style={{ borderColor: "var(--gold)" }}>
             Falar com Advogado
-          </a>
+          </MagneticLink>
           <button onClick={() => setMenuOpen(!menuOpen)} className="lg:hidden text-gold" aria-label="Abrir menu">
             {menuOpen ? <X size={26} /> : <Menu size={26} />}
           </button>
@@ -117,7 +186,21 @@ function Index() {
         <div className="absolute inset-0 bg-fixed bg-center bg-cover" style={{ backgroundImage: `url(${bgBooks})` }} />
         <div className="absolute inset-0" style={{ backgroundColor: "rgba(20,20,20,0.85)" }} />
         <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-transparent to-black/40" />
-        {/* FULLSCREEN PORTRAIT — lg+ only, breaks out behind nav, fuses with marquee */}
+        {/* MOBILE PORTRAIT — absolute background behind text */}
+        <motion.img
+          src={imgGilson}
+          alt=""
+          aria-hidden="true"
+          draggable={false}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 0.4 }}
+          transition={{ duration: 1.2, ease: "easeOut" }}
+          className="lg:hidden absolute inset-0 w-full h-full object-cover object-top scale-125 z-0 pointer-events-none select-none"
+        />
+        {/* Dark gradient veil to keep text readable on mobile */}
+        <div className="lg:hidden absolute inset-0 z-0 pointer-events-none bg-gradient-to-b from-black/70 via-black/55 to-black/85" />
+
+        {/* DESKTOP FULLSCREEN PORTRAIT */}
         <motion.img
           src={imgGilson}
           alt="Dr. Gilson Carvalho"
@@ -128,6 +211,7 @@ function Index() {
           draggable={false}
           className="hidden lg:block hero-portrait-premium drop-shadow-[0_30px_50px_rgba(0,0,0,0.7)]"
         />
+
 
         
         <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-10 py-24 grid lg:grid-cols-12 gap-10 lg:gap-12 items-center w-full">
@@ -152,43 +236,30 @@ function Index() {
                 Professor Universitário · Mestre & Especialista
               </p>
             </div>
-            {/* DUAL CTA */}
             <div className="mt-10 flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
-              <a
+              <MagneticLink
                 href={waLink()}
                 target="_blank"
                 rel="noopener"
-                className="inline-flex items-center justify-center gap-3 text-charcoal-deep font-semibold px-7 py-4 text-xs tracking-[0.25em] uppercase hover:shadow-2xl hover:shadow-amber-900/40 transition-all"
+                className="inline-flex items-center justify-center gap-3 text-charcoal-deep font-semibold px-7 py-4 text-xs tracking-[0.25em] uppercase hover:shadow-2xl hover:shadow-amber-900/40"
                 style={{ backgroundColor: "#bfa15f" }}
               >
                 Entrar em Contato
                 <ChevronRight size={16} />
-              </a>
-              <a
+              </MagneticLink>
+              <MagneticLink
                 href="#areas"
                 onClick={(e) => handleNavClick(e, "#areas")}
-                className="inline-flex items-center justify-center gap-3 border border-gold text-gold font-medium px-7 py-4 text-xs tracking-[0.25em] uppercase hover:bg-gold hover:text-charcoal-deep transition-all"
+                className="inline-flex items-center justify-center gap-3 border text-gold font-medium px-7 py-4 text-xs tracking-[0.25em] uppercase hover:bg-gold hover:text-charcoal-deep"
                 style={{ borderColor: "#bfa15f" }}
               >
                 Nossas Soluções
-              </a>
+              </MagneticLink>
             </div>
             <div className="mt-6 flex items-center gap-3">
               <span className="w-1.5 h-1.5 rounded-full bg-gold animate-pulse" />
               <span className="text-[11px] tracking-[0.2em] uppercase text-stone-300">Atendimento Presencial e Digital · Todo o Brasil</span>
             </div>
-          </div>
-          {/* RIGHT COLUMN — PORTRAIT (mobile inline only) */}
-          <div className="lg:hidden order-1 relative flex justify-center items-end">
-            <motion.img
-              src={imgGilson}
-              alt="Dr. Gilson Carvalho"
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, ease: "easeOut" }}
-              className="portrait-fade-deep w-full max-w-sm md:max-w-md h-auto object-contain object-bottom select-none pointer-events-none drop-shadow-[0_30px_40px_rgba(0,0,0,0.6)]"
-              draggable={false}
-            />
           </div>
         </div>
       </section>
@@ -494,6 +565,18 @@ function Index() {
                 </div>
               ))}
             </div>
+            <div className="mt-10 flex items-center gap-4">
+              <span className="text-[10px] tracking-[0.3em] uppercase text-stone-400">Siga-nos</span>
+              <a
+                href={INSTAGRAM_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Instagram de Gilson Carvalho Advocacia"
+                className="group flex items-center justify-center w-11 h-11 border border-gold/40 hover:border-gold transition-colors"
+              >
+                <Instagram size={18} className="text-stone-300 group-hover:text-gold transition-colors" />
+              </a>
+            </div>
           </div>
 
           <div className="p-8 md:p-10 border border-gold/20" style={{ backgroundColor: "#1f1f1f" }}>
@@ -563,15 +646,52 @@ function Index() {
         </div>
       </section>
 
+      {/* LOCALIZAÇÃO — MAPA */}
+      <section id="localizacao" className="relative py-24 lg:py-28" style={{ backgroundColor: "#1f1f1f" }}>
+        <div className="max-w-7xl mx-auto px-6 lg:px-10">
+          <div className="text-center mb-12">
+            <div className="flex items-center justify-center gap-4 mb-6">
+              <div className="w-16 h-px bg-gold" />
+              <span className="text-xs tracking-[0.3em] uppercase text-gold">Onde Estamos</span>
+              <div className="w-16 h-px bg-gold" />
+            </div>
+            <h2 className="font-serif-luxe text-4xl md:text-5xl text-stone-50 mb-3">Nosso Escritório</h2>
+            <p className="text-stone-400 text-sm md:text-base">Av. Guanabara, nº 1669, Centro — Gurupi/TO</p>
+          </div>
+          <motion.div {...reveal} className="relative border border-gold/30 p-2 shadow-2xl shadow-black/60">
+            <iframe
+              title="Localização do escritório Gilson Carvalho Advocacia"
+              src="https://maps.google.com/maps?q=Avenida%20Guanabara,%201669,%20Centro,%20Gurupi,%20Tocantins&t=&z=15&ie=UTF8&iwloc=&output=embed"
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              className="w-full h-[350px] md:h-[420px] rounded-sm grayscale invert contrast-[90%] hue-rotate-180"
+              style={{ border: 0 }}
+            />
+          </motion.div>
+        </div>
+      </section>
+
       {/* FOOTER */}
       <footer className="relative pt-20 pb-8 border-t border-gold/20" style={{ backgroundColor: "#1a1a1a" }}>
         <div className="max-w-7xl mx-auto px-6 lg:px-10">
           <div className="grid md:grid-cols-3 gap-12 mb-16">
             <div>
               <img src={logo} alt="Gilson Carvalho" className="h-16 mb-6" />
-              <p className="text-sm text-stone-400 leading-relaxed max-w-xs">
+              <p className="text-sm text-stone-400 leading-relaxed max-w-xs mb-6">
                 Excelência jurídica com ética, transparência e dedicação total ao seu caso.
               </p>
+              <a
+                href={INSTAGRAM_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Instagram de Gilson Carvalho Advocacia"
+                className="inline-flex items-center gap-3 group"
+              >
+                <span className="flex items-center justify-center w-10 h-10 border border-gold/40 group-hover:border-gold transition-colors">
+                  <Instagram size={16} className="text-stone-300 group-hover:text-gold transition-colors" />
+                </span>
+                <span className="text-[11px] tracking-[0.25em] uppercase text-stone-400 group-hover:text-gold transition-colors">@gilsoncarvalho.adv</span>
+              </a>
             </div>
             <div>
               <h5 className="text-[10px] tracking-[0.3em] uppercase text-gold mb-6">Navegação</h5>
