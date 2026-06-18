@@ -137,7 +137,8 @@ function Index() {
   ];
 
   return (
-    <div className="min-h-screen text-stone-100" style={{ backgroundColor: "#333333" }}>
+    <div className="min-h-screen text-stone-100 relative" style={{ backgroundColor: "#333333" }}>
+      <div className="noise-overlay" aria-hidden="true" />
       {/* HEADER */}
       <header className="fixed top-0 left-0 right-0 z-50 backdrop-blur-md border-b border-white/5" style={{ backgroundColor: "rgba(29,29,29,0.85)" }}>
         <div className="max-w-7xl mx-auto px-6 lg:px-10 h-20 flex items-center justify-between">
