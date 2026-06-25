@@ -1,11 +1,13 @@
 import { Link } from "@tanstack/react-router";
 import { motion } from "framer-motion";
-import { ChevronRight, Check, AlertTriangle, Shield, ArrowLeft, Menu, X } from "lucide-react";
-import { FaWhatsapp } from "react-icons/fa";
-import { useState } from "react";
+import { ChevronRight, Check, AlertTriangle, Shield, ArrowLeft, Menu, X, MapPin, Phone, Mail } from "lucide-react";
+import { FaWhatsapp, FaInstagram } from "react-icons/fa";
+import { useEffect, useState } from "react";
 import logo from "@/assets/logo_gilson.png";
+import imgGilsonAuthority from "@/assets/foto2gilson.png";
 
 const WHATSAPP = "5563984474070";
+const INSTAGRAM_URL = "https://www.instagram.com/gilsoncarvalho.adv/";
 export const waLink = (msg: string) =>
   `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(msg)}`;
 
@@ -21,6 +23,10 @@ export type LandingProps = {
   heroTitle: string;
   heroSubtitle: string;
   heroImage: string;
+  painsImage?: string;
+  solutionsImage?: string;
+  authorityImage?: string;
+  finalImage?: string;
   pains: { title: string; desc: string }[];
   solutions: { title: string; desc: string }[];
   ctaText: string;
@@ -29,6 +35,34 @@ export type LandingProps = {
 
 export default function LegalLanding(p: LandingProps) {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [form, setForm] = useState({ nome: "", telefone: "", email: "", mensagem: "" });
+  const [waTipVisible, setWaTipVisible] = useState(false);
+  const [waTipKey, setWaTipKey] = useState(0);
+
+  useEffect(() => {
+    const id = setInterval(() => {
+      setWaTipKey((k) => k + 1);
+      setWaTipVisible(true);
+      const t = setTimeout(() => setWaTipVisible(false), 3000);
+      return () => clearTimeout(t);
+    }, 8000);
+    return () => clearInterval(id);
+  }, []);
+
+  const maskPhone = (v: string) => {
+    const d = v.replace(/\D/g, "").slice(0, 11);
+    if (d.length <= 2) return d.length ? `(${d}` : "";
+    if (d.length <= 6) return `(${d.slice(0, 2)}) ${d.slice(2)}`;
+    if (d.length <= 10) return `(${d.slice(0, 2)}) ${d.slice(2, 6)}-${d.slice(6)}`;
+    return `(${d.slice(0, 2)}) ${d.slice(2, 7)}-${d.slice(7)}`;
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    const msg = `Olá, sou ${form.nome}.%0ATelefone: ${form.telefone}%0AE-mail: ${form.email}%0AInteresse: ${p.eyebrow}%0ANecessidade: ${form.mensagem}`;
+    window.open(`https://wa.me/${WHATSAPP}?text=${msg}`, "_blank");
+  };
+
   const navLinks = [
     { label: "Início", to: "/" },
     { label: "Divórcio", to: "/divorcio" },
@@ -36,6 +70,10 @@ export default function LegalLanding(p: LandingProps) {
     { label: "Inventário", to: "/inventario" },
     { label: "União Estável", to: "/uniao-estavel" },
   ];
+
+  const painsBg = p.painsImage ?? p.heroImage;
+  const solutionsBg = p.solutionsImage ?? p.heroImage;
+  const finalBg = p.finalImage ?? p.heroImage;
 
   return (
     <div className="min-h-screen text-stone-100 relative" style={{ backgroundColor: "#333333" }}>
@@ -54,7 +92,7 @@ export default function LegalLanding(p: LandingProps) {
               </Link>
             ))}
           </nav>
-          <a href={waLink(p.whatsappMessage)} target="_blank" rel="noopener" className="hidden lg:inline-flex items-center gap-2 border text-gold px-5 py-2.5 text-xs tracking-[0.2em] uppercase hover:bg-gold hover:text-charcoal-deep transition-colors" style={{ borderColor: "var(--gold)" }}>
+          <a href="#triagem" className="hidden lg:inline-flex items-center gap-2 border text-gold px-5 py-2.5 text-xs tracking-[0.2em] uppercase hover:bg-gold hover:text-charcoal-deep transition-colors" style={{ borderColor: "var(--gold)" }}>
             Falar com Advogado
           </a>
           <button onClick={() => setMenuOpen(!menuOpen)} className="lg:hidden text-gold" aria-label="Abrir menu">
@@ -90,7 +128,7 @@ export default function LegalLanding(p: LandingProps) {
             {p.heroSubtitle}
           </motion.p>
           <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
-            <a href={waLink(p.whatsappMessage)} target="_blank" rel="noopener" className="inline-flex items-center justify-center gap-3 text-charcoal-deep font-semibold px-7 py-4 text-xs tracking-[0.25em] uppercase hover:shadow-2xl hover:shadow-amber-900/40 transition-all" style={{ backgroundColor: "#bfa15f" }}>
+            <a href="#triagem" className="inline-flex items-center justify-center gap-3 text-charcoal-deep font-semibold px-7 py-4 text-xs tracking-[0.25em] uppercase hover:shadow-2xl hover:shadow-amber-900/40 transition-all" style={{ backgroundColor: "#bfa15f" }}>
               <FaWhatsapp className="w-4 h-4" /> {p.ctaText}
             </a>
             <Link to="/" className="inline-flex items-center justify-center gap-2 border text-gold font-medium px-7 py-4 text-xs tracking-[0.25em] uppercase hover:bg-gold hover:text-charcoal-deep transition-colors" style={{ borderColor: "#bfa15f" }}>
@@ -101,8 +139,10 @@ export default function LegalLanding(p: LandingProps) {
       </section>
 
       {/* PAINS */}
-      <section className="relative py-24 lg:py-32" style={{ backgroundColor: "#2b2b2b" }}>
-        <div className="max-w-6xl mx-auto px-6 lg:px-10">
+      <section className="relative py-24 lg:py-32 overflow-hidden">
+        <div className="absolute inset-0 bg-cover bg-center bg-fixed" style={{ backgroundImage: `url(${painsBg})` }} />
+        <div className="absolute inset-0" style={{ backgroundColor: "rgba(20,20,20,0.85)" }} />
+        <div className="relative max-w-6xl mx-auto px-6 lg:px-10">
           <div className="text-center mb-16">
             <div className="flex items-center justify-center gap-4 mb-6">
               <div className="w-12 h-px bg-gold" />
@@ -113,7 +153,7 @@ export default function LegalLanding(p: LandingProps) {
           </div>
           <motion.div {...reveal} className="grid md:grid-cols-3 gap-6">
             {p.pains.map((it) => (
-              <div key={it.title} className="relative p-8 border border-gold/20" style={{ backgroundColor: "rgba(30,30,30,0.6)" }}>
+              <div key={it.title} className="relative p-8 border border-gold/20" style={{ backgroundColor: "rgba(30,30,30,0.7)" }}>
                 <AlertTriangle size={26} className="text-gold mb-5" strokeWidth={1.3} />
                 <h4 className="font-serif-luxe text-xl text-stone-50 mb-3">{it.title}</h4>
                 <p className="text-stone-300 text-sm leading-relaxed">{it.desc}</p>
@@ -124,8 +164,10 @@ export default function LegalLanding(p: LandingProps) {
       </section>
 
       {/* SOLUTIONS */}
-      <section className="relative py-24 lg:py-32" style={{ backgroundColor: "#262626" }}>
-        <div className="max-w-6xl mx-auto px-6 lg:px-10">
+      <section className="relative py-24 lg:py-32 overflow-hidden">
+        <div className="absolute inset-0 bg-cover bg-center bg-fixed" style={{ backgroundImage: `url(${solutionsBg})` }} />
+        <div className="absolute inset-0" style={{ backgroundColor: "rgba(20,20,20,0.88)" }} />
+        <div className="relative max-w-6xl mx-auto px-6 lg:px-10">
           <div className="text-center mb-16">
             <div className="flex items-center justify-center gap-4 mb-6">
               <div className="w-12 h-px bg-gold" />
@@ -136,7 +178,7 @@ export default function LegalLanding(p: LandingProps) {
           </div>
           <motion.div {...reveal} className="grid md:grid-cols-2 gap-6">
             {p.solutions.map((it) => (
-              <div key={it.title} className="card-hover-gold relative p-8 border border-gold/20" style={{ backgroundColor: "rgba(30,30,30,0.6)" }}>
+              <div key={it.title} className="card-hover-gold relative p-8 border border-gold/20" style={{ backgroundColor: "rgba(30,30,30,0.7)" }}>
                 <div className="flex items-start gap-4">
                   <span className="flex items-center justify-center w-10 h-10 border border-gold/50 shrink-0">
                     <Shield size={16} className="text-gold" />
@@ -152,25 +194,154 @@ export default function LegalLanding(p: LandingProps) {
         </div>
       </section>
 
-      {/* FINAL CTA */}
-      <section className="relative py-24 lg:py-28" style={{ backgroundColor: "#1f1f1f" }}>
-        <div className="max-w-4xl mx-auto px-6 lg:px-10 text-center">
-          <h3 className="font-serif-luxe text-3xl md:text-4xl text-stone-50 leading-tight mb-6">
-            Pronto para dar o <em className="text-gold-gradient not-italic">próximo passo seguro?</em>
-          </h3>
-          <p className="text-stone-300 leading-relaxed mb-10 max-w-2xl mx-auto">
-            Agende uma consulta privada e receba orientação estratégica feita sob medida para o seu caso, com a discrição e a excelência que ele merece.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a href={waLink(p.whatsappMessage)} target="_blank" rel="noopener" className="inline-flex items-center justify-center gap-3 text-charcoal-deep font-semibold px-8 py-4 text-xs tracking-[0.25em] uppercase hover:shadow-2xl hover:shadow-amber-900/40 transition-all" style={{ backgroundColor: "#bfa15f" }}>
-              <FaWhatsapp className="w-4 h-4" /> Falar agora no WhatsApp
-              <ChevronRight size={16} />
-            </a>
-            <Link to="/" hash="contato" className="inline-flex items-center justify-center gap-2 border text-gold font-medium px-8 py-4 text-xs tracking-[0.25em] uppercase hover:bg-gold hover:text-charcoal-deep transition-colors" style={{ borderColor: "#bfa15f" }}>
-              Formulário de Triagem
-            </Link>
+      {/* AUTHORITY — Quem vai defender os direitos da sua família */}
+      <section className="relative py-24 lg:py-32 overflow-hidden" style={{ backgroundColor: "#242424" }}>
+        <div className="absolute inset-0 opacity-[0.05] bg-cover bg-center" style={{ backgroundImage: `url(${p.authorityImage ?? p.heroImage})` }} />
+        <div className="relative max-w-6xl mx-auto px-6 lg:px-10">
+          <div className="text-center mb-14">
+            <div className="flex items-center justify-center gap-4 mb-6">
+              <div className="w-12 h-px bg-gold" />
+              <span className="text-xs tracking-[0.3em] uppercase text-gold">Autoridade Jurídica</span>
+              <div className="w-12 h-px bg-gold" />
+            </div>
+            <h2 className="font-serif-luxe text-4xl md:text-5xl text-stone-50">
+              Quem vai defender os direitos da <em className="text-gold-gradient not-italic">sua família?</em>
+            </h2>
           </div>
-          <div className="mt-10 flex items-center justify-center gap-3">
+          <motion.div {...reveal} className="grid lg:grid-cols-2 gap-12 items-center">
+            <div className="relative mx-auto max-w-[460px]">
+              <div className="absolute -inset-2 border border-gold/40" />
+              <div style={{ border: "1px solid #C8A84B" }} className="p-[2px]">
+                <img
+                  src={imgGilsonAuthority}
+                  alt="Dr. Gilson Carvalho — Advogado especialista em Direito de Família e Sucessões"
+                  className="w-full h-auto object-cover shadow-2xl shadow-black/60"
+                  style={{ aspectRatio: "4/5" }}
+                />
+              </div>
+            </div>
+            <div>
+              <span className="inline-block text-[10px] tracking-[0.35em] uppercase text-gold border border-gold/40 px-4 py-2 mb-6">Dr. Gilson Carvalho</span>
+              <p className="text-stone-200 text-lg leading-relaxed mb-6">
+                Gilson Carvalho é especialista em <strong className="text-gold">Direito de Família e Sucessões</strong> com mais de <strong className="text-gold">20 anos de atuação estratégica</strong>. Dedica-se a proteger o patrimônio e garantir a paz em momentos de transição familiar, com total discrição e excelência jurídica.
+              </p>
+              <div className="flex flex-wrap items-center gap-3 mb-8">
+                <span className="text-[10px] tracking-[0.25em] uppercase text-gold border border-gold/40 px-3 py-1.5">OAB/TO 2.591</span>
+                <span className="text-[10px] tracking-[0.25em] uppercase text-gold border border-gold/40 px-3 py-1.5">OAB/RJ 256.131</span>
+              </div>
+              <ul className="space-y-3">
+                {["20+ anos de atuação estratégica", "Mestre em Direito · MBA em Gestão", "Atendimento sigiloso em todo o Brasil"].map((it) => (
+                  <li key={it} className="flex items-center gap-3 text-stone-200">
+                    <Check size={16} className="text-gold shrink-0" /> {it}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* FINAL CTA + EMBEDDED FORM */}
+      <section id="triagem" className="relative py-24 lg:py-28 overflow-hidden">
+        <div className="absolute inset-0 bg-cover bg-center bg-fixed" style={{ backgroundImage: `url(${finalBg})` }} />
+        <div className="absolute inset-0" style={{ backgroundColor: "rgba(20,20,20,0.9)" }} />
+        <div className="relative max-w-5xl mx-auto px-6 lg:px-10">
+          <div className="text-center mb-12">
+            <h3 className="font-serif-luxe text-3xl md:text-4xl text-stone-50 leading-tight mb-5">
+              Pronto para dar o <em className="text-gold-gradient not-italic">próximo passo seguro?</em>
+            </h3>
+            <p className="text-stone-300 leading-relaxed max-w-2xl mx-auto">
+              Agende uma consulta privada e receba orientação estratégica feita sob medida para o seu caso.
+            </p>
+            <p className="mt-6 text-[11px] tracking-[0.3em] uppercase text-gold">Escolha a opção desejada abaixo:</p>
+          </div>
+
+          <div className="grid lg:grid-cols-5 gap-8 items-start">
+            {/* Embedded form */}
+            <form onSubmit={handleSubmit} className="lg:col-span-3 p-8 md:p-10 border border-gold/20 space-y-5" style={{ backgroundColor: "rgba(20,20,20,0.85)" }}>
+              <h4 className="font-serif-luxe text-2xl text-stone-50 mb-2">Formulário de Triagem Privada</h4>
+              <p className="text-xs text-stone-400 mb-4">Preencha abaixo — entraremos em contato com a discrição que o seu caso merece.</p>
+              {[
+                { id: "nome", label: "Nome Completo", type: "text", placeholder: "Seu nome completo" },
+                { id: "telefone", label: "Telefone / WhatsApp", type: "tel", placeholder: "(63) 99999-9999" },
+                { id: "email", label: "E-mail", type: "email", placeholder: "seu@email.com" },
+              ].map((f) => (
+                <div key={f.id}>
+                  <label htmlFor={`${f.id}-tri`} className="block text-[10px] tracking-[0.3em] uppercase text-gold mb-2">{f.label}</label>
+                  <input
+                    id={`${f.id}-tri`}
+                    type={f.type}
+                    required
+                    maxLength={f.id === "telefone" ? 15 : 150}
+                    placeholder={f.placeholder}
+                    inputMode={f.id === "telefone" ? "numeric" : undefined}
+                    value={form[f.id as keyof typeof form]}
+                    onChange={(e) => {
+                      const v = f.id === "telefone" ? maskPhone(e.target.value) : e.target.value;
+                      setForm({ ...form, [f.id]: v });
+                    }}
+                    className="w-full bg-transparent border-b border-white/20 focus:border-gold py-2.5 text-stone-100 placeholder:text-stone-600 outline-none transition-colors"
+                  />
+                </div>
+              ))}
+              <div>
+                <label htmlFor="mensagem-tri" className="block text-[10px] tracking-[0.3em] uppercase text-gold mb-2">Relate brevemente o seu caso</label>
+                <textarea
+                  id="mensagem-tri"
+                  required
+                  rows={4}
+                  maxLength={1000}
+                  value={form.mensagem}
+                  onChange={(e) => setForm({ ...form, mensagem: e.target.value })}
+                  className="w-full bg-transparent border border-white/15 focus:border-gold p-3 text-stone-100 placeholder:text-stone-600 outline-none transition-colors resize-none"
+                  placeholder="Conte um pouco sobre a sua necessidade…"
+                />
+              </div>
+              <button type="submit" className="w-full gold-gradient text-charcoal-deep font-medium py-3.5 text-sm tracking-[0.25em] uppercase hover:shadow-2xl hover:shadow-amber-900/40 transition-all">
+                Solicitar Atendimento Privado
+              </button>
+              <p className="text-[11px] text-stone-400 text-center leading-relaxed pt-1">
+                🔒 Dados protegidos sob sigilo profissional · LGPD
+              </p>
+            </form>
+
+            {/* Direct channels */}
+            <aside className="lg:col-span-2 space-y-5">
+              <a
+                href={waLink(p.whatsappMessage)}
+                target="_blank"
+                rel="noopener"
+                className="wa-pulse-cta relative flex items-center justify-center gap-3 text-charcoal-deep font-semibold px-6 py-4 text-xs tracking-[0.25em] uppercase shadow-2xl shadow-green-900/30"
+                style={{ backgroundColor: "#25D366", color: "#0d2418" }}
+              >
+                <FaWhatsapp className="w-5 h-5" />
+                <span className="wa-pulse-label">Falar agora no WhatsApp</span>
+                <ChevronRight size={16} />
+              </a>
+              <div className="p-6 border border-gold/20 space-y-4" style={{ backgroundColor: "rgba(20,20,20,0.85)" }}>
+                {[
+                  { Icon: Phone, label: "WhatsApp", value: "+55 (63) 98447-4070" },
+                  { Icon: Mail, label: "E-mail", value: "advogado@gilsoncarvalho.com" },
+                  { Icon: MapPin, label: "Endereço", value: "Av. Guanabara, 1669 — Gurupi/TO" },
+                ].map(({ Icon, label, value }) => (
+                  <div key={label} className="flex items-start gap-3">
+                    <span className="flex items-center justify-center w-9 h-9 border border-gold/40 shrink-0">
+                      <Icon size={14} className="text-gold" />
+                    </span>
+                    <div>
+                      <div className="text-[10px] tracking-[0.3em] uppercase text-gold mb-0.5">{label}</div>
+                      <div className="text-stone-100 text-sm">{value}</div>
+                    </div>
+                  </div>
+                ))}
+                <a href={INSTAGRAM_URL} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-[11px] tracking-[0.25em] uppercase text-stone-300 hover:text-gold transition-colors pt-2">
+                  <FaInstagram /> @gilsoncarvalho.adv
+                </a>
+              </div>
+            </aside>
+          </div>
+
+          <div className="mt-12 flex items-center justify-center gap-3">
             <Check size={14} className="text-gold" />
             <span className="text-[11px] tracking-[0.25em] uppercase text-stone-400">Atendimento Presencial e Digital · Todo o Brasil</span>
           </div>
@@ -185,17 +356,29 @@ export default function LegalLanding(p: LandingProps) {
         </div>
       </footer>
 
-      {/* WHATSAPP FLOAT */}
-      <a
-        href={waLink(p.whatsappMessage)}
-        target="_blank"
-        rel="noopener"
-        aria-label="Falar no WhatsApp"
-        className="wa-ping fixed bottom-6 right-6 z-50 flex items-center justify-center w-16 h-16 rounded-full shadow-2xl shadow-green-900/50 hover:scale-110 transition-transform"
-        style={{ backgroundColor: "#25D366" }}
-      >
-        <FaWhatsapp className="w-9 h-9 text-white" />
-      </a>
+      {/* WHATSAPP FLOAT WITH PULSING TOOLTIP */}
+      <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-2">
+        {waTipVisible && (
+          <div
+            key={waTipKey}
+            className="wa-tooltip relative mr-1 px-4 py-2 border border-gold/40 text-[11px] tracking-[0.2em] uppercase text-stone-100 shadow-2xl"
+            style={{ backgroundColor: "#1a1a1a" }}
+          >
+            <span className="text-gold">Agendar consulta privada…</span>
+            <span className="absolute -bottom-1 right-6 w-2 h-2 rotate-45 border-r border-b border-gold/40" style={{ backgroundColor: "#1a1a1a" }} />
+          </div>
+        )}
+        <a
+          href={waLink(p.whatsappMessage)}
+          target="_blank"
+          rel="noopener"
+          aria-label="Falar no WhatsApp"
+          className="wa-ping relative flex items-center justify-center w-16 h-16 rounded-full shadow-2xl shadow-green-900/50 hover:scale-110 transition-transform"
+          style={{ backgroundColor: "#25D366" }}
+        >
+          <FaWhatsapp className="w-9 h-9 text-white" />
+        </a>
+      </div>
     </div>
   );
 }

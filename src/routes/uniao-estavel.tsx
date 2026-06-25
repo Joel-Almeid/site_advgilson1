@@ -1,6 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
 import LegalLanding from "@/components/LegalLanding";
 import bgBooks from "@/assets/bg-books.jpg";
+import bgMarble from "@/assets/bg-marble.jpg";
+
+const CANONICAL = "https://gilsoncarvalho.com/uniao-estavel";
 
 export const Route = createFileRoute("/uniao-estavel")({
   head: () => ({
@@ -9,7 +12,9 @@ export const Route = createFileRoute("/uniao-estavel")({
       { name: "description", content: "Reconhecimento, dissolução e consultoria em contratos de união estável. Planejamento patrimonial seguro." },
       { property: "og:title", content: "União Estável — Gilson Carvalho Advocacia" },
       { property: "og:description", content: "Planejamento seguro para os seus próximos passos e para o seu patrimônio." },
+      { property: "og:url", content: CANONICAL },
     ],
+    links: [{ rel: "canonical", href: CANONICAL }],
   }),
   component: UniaoEstavelPage,
 });
@@ -21,6 +26,9 @@ function UniaoEstavelPage() {
       heroTitle="Planejamento seguro para os seus próximos passos e para o seu patrimônio."
       heroSubtitle="Reconhecimento, dissolução e contratos de união estável estruturados com técnica — preservando autonomia, afeto e patrimônio."
       heroImage={bgBooks}
+      painsImage={bgMarble}
+      solutionsImage={bgBooks}
+      finalImage={bgMarble}
       ctaText="Planejar com Segurança"
       whatsappMessage="Olá, gostaria de orientação sobre união estável."
       pains={[
