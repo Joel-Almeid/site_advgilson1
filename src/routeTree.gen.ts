@@ -9,8 +9,38 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as UniaoEstavelRouteImport } from './routes/uniao-estavel'
+import { Route as PensaoEGuardaRouteImport } from './routes/pensao-e-guarda'
+import { Route as LinksRouteImport } from './routes/links'
+import { Route as InventarioRouteImport } from './routes/inventario'
+import { Route as DivorcioRouteImport } from './routes/divorcio'
 import { Route as IndexRouteImport } from './routes/index'
 
+const UniaoEstavelRoute = UniaoEstavelRouteImport.update({
+  id: '/uniao-estavel',
+  path: '/uniao-estavel',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PensaoEGuardaRoute = PensaoEGuardaRouteImport.update({
+  id: '/pensao-e-guarda',
+  path: '/pensao-e-guarda',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LinksRoute = LinksRouteImport.update({
+  id: '/links',
+  path: '/links',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const InventarioRoute = InventarioRouteImport.update({
+  id: '/inventario',
+  path: '/inventario',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DivorcioRoute = DivorcioRouteImport.update({
+  id: '/divorcio',
+  path: '/divorcio',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -19,28 +49,102 @@ const IndexRoute = IndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/divorcio': typeof DivorcioRoute
+  '/inventario': typeof InventarioRoute
+  '/links': typeof LinksRoute
+  '/pensao-e-guarda': typeof PensaoEGuardaRoute
+  '/uniao-estavel': typeof UniaoEstavelRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/divorcio': typeof DivorcioRoute
+  '/inventario': typeof InventarioRoute
+  '/links': typeof LinksRoute
+  '/pensao-e-guarda': typeof PensaoEGuardaRoute
+  '/uniao-estavel': typeof UniaoEstavelRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/divorcio': typeof DivorcioRoute
+  '/inventario': typeof InventarioRoute
+  '/links': typeof LinksRoute
+  '/pensao-e-guarda': typeof PensaoEGuardaRoute
+  '/uniao-estavel': typeof UniaoEstavelRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/divorcio'
+    | '/inventario'
+    | '/links'
+    | '/pensao-e-guarda'
+    | '/uniao-estavel'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/divorcio'
+    | '/inventario'
+    | '/links'
+    | '/pensao-e-guarda'
+    | '/uniao-estavel'
+  id:
+    | '__root__'
+    | '/'
+    | '/divorcio'
+    | '/inventario'
+    | '/links'
+    | '/pensao-e-guarda'
+    | '/uniao-estavel'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  DivorcioRoute: typeof DivorcioRoute
+  InventarioRoute: typeof InventarioRoute
+  LinksRoute: typeof LinksRoute
+  PensaoEGuardaRoute: typeof PensaoEGuardaRoute
+  UniaoEstavelRoute: typeof UniaoEstavelRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/uniao-estavel': {
+      id: '/uniao-estavel'
+      path: '/uniao-estavel'
+      fullPath: '/uniao-estavel'
+      preLoaderRoute: typeof UniaoEstavelRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/pensao-e-guarda': {
+      id: '/pensao-e-guarda'
+      path: '/pensao-e-guarda'
+      fullPath: '/pensao-e-guarda'
+      preLoaderRoute: typeof PensaoEGuardaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/links': {
+      id: '/links'
+      path: '/links'
+      fullPath: '/links'
+      preLoaderRoute: typeof LinksRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/inventario': {
+      id: '/inventario'
+      path: '/inventario'
+      fullPath: '/inventario'
+      preLoaderRoute: typeof InventarioRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/divorcio': {
+      id: '/divorcio'
+      path: '/divorcio'
+      fullPath: '/divorcio'
+      preLoaderRoute: typeof DivorcioRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -53,6 +157,11 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  DivorcioRoute: DivorcioRoute,
+  InventarioRoute: InventarioRoute,
+  LinksRoute: LinksRoute,
+  PensaoEGuardaRoute: PensaoEGuardaRoute,
+  UniaoEstavelRoute: UniaoEstavelRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

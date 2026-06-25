@@ -94,7 +94,7 @@ function Index() {
 
   // Scroll spy — highlight current section in nav
   useEffect(() => {
-    const ids = ["inicio", "sobre", "areas", "contato"];
+    const ids = ["inicio", "sobre", "areas", "depoimentos", "faq", "contato"];
     const onScroll = () => {
       let current = "inicio";
       for (const id of ids) {
@@ -133,6 +133,8 @@ function Index() {
     { label: "Início", href: "#inicio" },
     { label: "Sobre Nós", href: "#sobre" },
     { label: "Áreas de Atuação", href: "#areas" },
+    { label: "Depoimentos", href: "#depoimentos" },
+    { label: "FAQ", href: "#faq" },
     { label: "Contato", href: "#contato" },
   ];
 
@@ -463,7 +465,7 @@ function Index() {
       </section>
 
       {/* DEPOIMENTOS */}
-      <section className="relative py-28 lg:py-36" style={{ backgroundColor: "#262626" }}>
+      <section id="depoimentos" className="relative py-28 lg:py-36" style={{ backgroundColor: "#262626" }}>
         <div className="absolute inset-0 opacity-[0.04] bg-cover bg-center" style={{ backgroundImage: `url(${bgMarble})` }} />
         <div className="relative max-w-7xl mx-auto px-6 lg:px-10">
           <div className="text-center mb-16 max-w-3xl mx-auto">
@@ -499,8 +501,10 @@ function Index() {
       </section>
 
       {/* FAQ */}
-      <section className="relative py-28 lg:py-36" style={{ backgroundColor: "#2b2b2b" }}>
-        <div className="max-w-4xl mx-auto px-6 lg:px-10">
+      <section id="faq" className="relative py-28 lg:py-36 overflow-hidden" style={{ backgroundColor: "#2b2b2b" }}>
+        <div className="absolute inset-0 bg-cover bg-center bg-fixed" style={{ backgroundImage: `url(${bgBooks})` }} />
+        <div className="absolute inset-0" style={{ backgroundColor: "rgba(20,20,20,0.85)" }} />
+        <div className="relative max-w-4xl mx-auto px-6 lg:px-10">
           <div className="text-center mb-14">
             <div className="flex items-center justify-center gap-4 mb-6">
               <div className="w-16 h-px bg-gold" />
@@ -647,8 +651,10 @@ function Index() {
       </section>
 
       {/* LOCALIZAÇÃO — MAPA */}
-      <section id="localizacao" className="relative py-24 lg:py-28" style={{ backgroundColor: "#1f1f1f" }}>
-        <div className="max-w-7xl mx-auto px-6 lg:px-10">
+      <section id="localizacao" className="relative py-24 lg:py-28 overflow-hidden" style={{ backgroundColor: "#1f1f1f" }}>
+        <div className="absolute inset-0 bg-cover bg-center bg-fixed" style={{ backgroundImage: `url(${imgEscritorio})` }} />
+        <div className="absolute inset-0" style={{ backgroundColor: "rgba(0,0,0,0.85)" }} />
+        <div className="relative max-w-7xl mx-auto px-6 lg:px-10">
           <div className="text-center mb-12">
             <div className="flex items-center justify-center gap-4 mb-6">
               <div className="w-16 h-px bg-gold" />
@@ -664,7 +670,7 @@ function Index() {
               src="https://maps.google.com/maps?q=Avenida%20Guanabara,%201669,%20Centro,%20Gurupi,%20Tocantins&t=&z=15&ie=UTF8&iwloc=&output=embed"
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
-              className="w-full h-[350px] md:h-[420px] rounded-sm grayscale invert contrast-[90%] hue-rotate-180"
+              className="w-full h-[350px] md:h-[420px] rounded-2xl shadow-2xl shadow-black/60"
               style={{ border: 0 }}
             />
           </motion.div>
