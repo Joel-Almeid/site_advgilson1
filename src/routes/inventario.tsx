@@ -1,6 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
 import LegalLanding from "@/components/LegalLanding";
 import bgMarble from "@/assets/bg-marble.jpg";
+import bgBooks from "@/assets/bg-books.jpg";
+
+const CANONICAL = "https://gilsoncarvalho.com/inventario";
 
 export const Route = createFileRoute("/inventario")({
   head: () => ({
@@ -9,7 +12,9 @@ export const Route = createFileRoute("/inventario")({
       { name: "description", content: "Resolução rápida de partilhas, planejamento tributário e mediação entre herdeiros." },
       { property: "og:title", content: "Inventário e Partilha — Gilson Carvalho Advocacia" },
       { property: "og:description", content: "O valor econômico não deve prevalecer sobre os laços afetivos." },
+      { property: "og:url", content: CANONICAL },
     ],
+    links: [{ rel: "canonical", href: CANONICAL }],
   }),
   component: InventarioPage,
 });
@@ -21,6 +26,9 @@ function InventarioPage() {
       heroTitle="O valor econômico não deve prevalecer sobre os laços afetivos."
       heroSubtitle="Conduzimos inventários e partilhas com rapidez, otimização tributária e mediação respeitosa entre herdeiros — preservando o patrimônio e a família."
       heroImage={bgMarble}
+      painsImage={bgBooks}
+      solutionsImage={bgMarble}
+      finalImage={bgBooks}
       ctaText="Resolver meu Inventário"
       whatsappMessage="Olá, preciso de orientação sobre inventário e partilha."
       pains={[

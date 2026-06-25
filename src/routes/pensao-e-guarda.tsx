@@ -1,6 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
 import LegalLanding from "@/components/LegalLanding";
 import bgBooks from "@/assets/bg-books.jpg";
+import bgMarble from "@/assets/bg-marble.jpg";
+
+const CANONICAL = "https://gilsoncarvalho.com/pensao-e-guarda";
 
 export const Route = createFileRoute("/pensao-e-guarda")({
   head: () => ({
@@ -9,7 +12,9 @@ export const Route = createFileRoute("/pensao-e-guarda")({
       { name: "description", content: "Garantia de direitos, regulamentação de visitas e revisão de pensão. Proteção absoluta do futuro dos seus filhos." },
       { property: "og:title", content: "Guarda e Pensão — Gilson Carvalho Advocacia" },
       { property: "og:description", content: "Proteção absoluta do bem-estar e do futuro dos seus filhos." },
+      { property: "og:url", content: CANONICAL },
     ],
+    links: [{ rel: "canonical", href: CANONICAL }],
   }),
   component: PensaoGuardaPage,
 });
@@ -21,6 +26,9 @@ function PensaoGuardaPage() {
       heroTitle="Proteção absoluta do bem-estar e do futuro dos seus filhos."
       heroSubtitle="Garantimos direitos, regulamentamos visitas e ajustamos pensões com sensibilidade e técnica — colocando o melhor interesse das crianças em primeiro lugar."
       heroImage={bgBooks}
+      painsImage={bgMarble}
+      solutionsImage={bgBooks}
+      finalImage={bgMarble}
       ctaText="Proteger meus Filhos"
       whatsappMessage="Olá, gostaria de orientação sobre guarda e pensão."
       pains={[
