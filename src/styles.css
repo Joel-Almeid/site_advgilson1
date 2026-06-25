@@ -298,3 +298,15 @@ body { font-family: 'Inter', sans-serif; background: #333333; color: #e8e6e1; }
     z-index: 50;
   }
 }
+/* WhatsApp CTA pulsing badge — subtle every 8s */
+@keyframes wa-pulse-cta {
+  0%, 86%, 100% { transform: scale(1); box-shadow: 0 18px 40px -18px rgba(37,211,102,.45); }
+  90% { transform: scale(1.035); box-shadow: 0 22px 55px -18px rgba(37,211,102,.75); }
+  94% { transform: scale(1); }
+}
+.wa-pulse-cta { animation: wa-pulse-cta 8s ease-in-out infinite; will-change: transform; }
+@keyframes wa-pulse-label {
+  0%, 85%, 100% { opacity: 1; }
+  88%, 95% { opacity: .55; }
+}
+.wa-pulse-cta .wa-pulse-label { animation: wa-pulse-label 8s ease-in-out infinite; }
