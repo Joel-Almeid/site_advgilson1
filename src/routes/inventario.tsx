@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import LegalLanding from "@/components/LegalLanding";
 import bgMarble from "@/assets/bg-marble.jpg";
 import bgBooks from "@/assets/bg-books.jpg";
+import { jsonLdScript } from "@/lib/seo";
 
 const CANONICAL = "https://gilsoncarvalho.com/inventario";
 
@@ -15,6 +16,7 @@ export const Route = createFileRoute("/inventario")({
       { property: "og:url", content: CANONICAL },
     ],
     links: [{ rel: "canonical", href: CANONICAL }],
+    scripts: [jsonLdScript({ url: CANONICAL })],
   }),
   component: InventarioPage,
 });
