@@ -462,6 +462,3 @@ export default function LegalLanding(p: LandingProps) {
     </div>
   );
 }
-
-{/* Suppress unused import warning — Link kept for future internal navigation */}
-export const __unused_link = Link;
