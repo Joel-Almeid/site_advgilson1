@@ -1,4 +1,3 @@
-import { Link } from "@tanstack/react-router";
 import { motion } from "framer-motion";
 import { ChevronRight, Check, AlertTriangle, Shield, MapPin, Phone, Mail, CheckCircle2 } from "lucide-react";
 import { FaWhatsapp, FaInstagram } from "react-icons/fa";
