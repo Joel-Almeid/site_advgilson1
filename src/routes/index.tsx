@@ -210,17 +210,21 @@ function Index() {
         {/* Dark gradient veil to keep text readable on mobile */}
         <div className="lg:hidden absolute inset-0 z-0 pointer-events-none bg-gradient-to-b from-black/70 via-black/55 to-black/85" />
 
-        {/* DESKTOP FULLSCREEN PORTRAIT */}
-        <motion.img
-          src={imgGilson}
-          alt="Dr. Gilson Carvalho"
+        {/* DESKTOP — Editorial Portrait Stage (cover-style with gold tint & caption) */}
+        <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9, ease: "easeOut" }}
           aria-hidden="true"
-          draggable={false}
-          className="hidden lg:block hero-portrait-premium drop-shadow-[0_30px_50px_rgba(0,0,0,0.7)]"
-        />
+          className="hero-portrait-stage drop-shadow-[0_30px_50px_rgba(0,0,0,0.7)]"
+        >
+          <img src={imgGilson} alt="" draggable={false} className="hero-portrait-img select-none" />
+          <div className="hero-portrait-tint" />
+          <div className="hero-portrait-caption">
+            <div className="text-[10px] tracking-[0.4em] uppercase text-gold mb-1">Dr. Gilson Carvalho</div>
+            <div className="font-serif-luxe text-lg text-stone-50 leading-tight">Advocacia · Família & Sucessões</div>
+          </div>
+        </motion.div>
 
 
         
