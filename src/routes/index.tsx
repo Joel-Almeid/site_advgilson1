@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import {
   Users, FileText, Home, Shield, MapPin, Mail, Phone,
-  Check, ChevronRight, Menu, X, Star, Instagram
+  Check, ChevronRight, Menu, X, Star, Instagram, Clock, Lock, Globe,
 } from "lucide-react";
 import { FaWhatsapp } from "react-icons/fa";
 import { motion } from "framer-motion";
@@ -28,7 +28,9 @@ export const Route = createFileRoute("/")({
 });
 
 const WHATSAPP = "5563984474070";
-const waLink = (msg = "Olá, gostaria de agendar uma consulta jurídica.") =>
+const WA_DEFAULT_MSG =
+  "Olá, Dr. Gilson. Acessei seu site e gostaria de uma orientação jurídica. Poderia me informar sobre disponibilidade para uma consulta?";
+const waLink = (msg = WA_DEFAULT_MSG) =>
   `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(msg)}`;
 
 const INSTAGRAM_URL = "https://www.instagram.com/gilsoncarvalho.adv/";
@@ -100,7 +102,7 @@ function Index() {
 
   // Scroll spy — highlight current section in nav
   useEffect(() => {
-    const ids = ["inicio", "sobre", "areas", "depoimentos", "faq", "contato"];
+    const ids = ["inicio", "sobre", "como-trabalhamos", "areas", "depoimentos", "faq", "contato"];
     const onScroll = () => {
       let current = "inicio";
       for (const id of ids) {
@@ -138,6 +140,7 @@ function Index() {
   const navLinks = [
     { label: "Início", href: "#inicio" },
     { label: "Sobre Nós", href: "#sobre" },
+    { label: "Como Trabalhamos", href: "#como-trabalhamos" },
     { label: "Áreas de Atuação", href: "#areas" },
     { label: "Depoimentos", href: "#depoimentos" },
     { label: "FAQ", href: "#faq" },
@@ -208,17 +211,21 @@ function Index() {
         {/* Dark gradient veil to keep text readable on mobile */}
         <div className="lg:hidden absolute inset-0 z-0 pointer-events-none bg-gradient-to-b from-black/70 via-black/55 to-black/85" />
 
-        {/* DESKTOP FULLSCREEN PORTRAIT */}
-        <motion.img
-          src={imgGilson}
-          alt="Dr. Gilson Carvalho"
+        {/* DESKTOP — Editorial Portrait Stage (cover-style with gold tint & caption) */}
+        <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9, ease: "easeOut" }}
           aria-hidden="true"
-          draggable={false}
-          className="hidden lg:block hero-portrait-premium drop-shadow-[0_30px_50px_rgba(0,0,0,0.7)]"
-        />
+          className="hero-portrait-stage drop-shadow-[0_30px_50px_rgba(0,0,0,0.7)]"
+        >
+          <img src={imgGilson} alt="" draggable={false} className="hero-portrait-img select-none" />
+          <div className="hero-portrait-tint" />
+          <div className="hero-portrait-caption">
+            <div className="text-[10px] tracking-[0.4em] uppercase text-gold mb-1">Dr. Gilson Carvalho</div>
+            <div className="font-serif-luxe text-lg text-stone-50 leading-tight">Advocacia · Família & Sucessões</div>
+          </div>
+        </motion.div>
 
 
         
@@ -291,6 +298,72 @@ function Index() {
           ))}
         </div>
       </div>
+
+      {/* COMO TRABALHAMOS — Infra & Atendimento */}
+      <section id="como-trabalhamos" className="relative py-24 lg:py-28" style={{ backgroundColor: "#1f1f1f" }}>
+        <div className="absolute inset-0 opacity-[0.04] bg-cover bg-center" style={{ backgroundImage: `url(${bgMarble})` }} />
+        <div className="relative max-w-7xl mx-auto px-6 lg:px-10">
+          <div className="text-center mb-14">
+            <div className="flex items-center justify-center gap-4 mb-6">
+              <div className="w-12 h-px bg-gold" />
+              <span className="text-xs tracking-[0.3em] uppercase text-gold">Como Trabalhamos</span>
+              <div className="w-12 h-px bg-gold" />
+            </div>
+            <h2 className="font-serif-luxe text-4xl md:text-5xl text-stone-50">
+              Infraestrutura premium para um <em className="text-gold-gradient not-italic">atendimento sem fricção.</em>
+            </h2>
+          </div>
+          <motion.div {...reveal} className="grid md:grid-cols-3 gap-6">
+            {[
+              {
+                Icon: Clock,
+                title: "Resposta em até 2h",
+                desc: "Fluxo de triagem automatizado e acompanhamento dedicado. Seu primeiro contato recebe retorno em até 2 horas em dias úteis.",
+              },
+              {
+                Icon: Lock,
+                title: "Segurança Bancária",
+                desc: "Transmissão de documentos sob criptografia TLS e infraestrutura protegida por Cloudflare — sigilo profissional reforçado por tecnologia.",
+              },
+              {
+                Icon: Globe,
+                title: "Atendimento Nacional",
+                desc: "Dupla habilitação OAB/TO e OAB/RJ permite atuação direta em todo o território nacional, presencial ou por videoconferência.",
+              },
+            ].map(({ Icon, title, desc }) => (
+              <div key={title} className="card-hover-gold relative p-8 border border-gold/20" style={{ backgroundColor: "rgba(30,30,30,0.7)" }}>
+                <div className="absolute top-0 left-0 w-8 h-px bg-gold" />
+                <div className="absolute top-0 left-0 w-px h-8 bg-gold" />
+                <span className="inline-flex items-center justify-center w-12 h-12 border border-gold/50 mb-5">
+                  <Icon size={22} className="text-gold" strokeWidth={1.3} />
+                </span>
+                <h4 className="font-serif-luxe text-2xl text-stone-50 mb-3">{title}</h4>
+                <p className="text-stone-300 text-sm leading-relaxed">{desc}</p>
+              </div>
+            ))}
+          </motion.div>
+
+          {/* OAB SEAL — Selo de Autenticidade */}
+          <div className="mt-16 flex flex-col items-center text-center">
+            <span className="text-[10px] tracking-[0.4em] uppercase text-stone-400 mb-4">Habilitação Interestadual</span>
+            <div className="flex flex-wrap items-center justify-center gap-5">
+              <div className="oab-seal px-6 py-4 bg-black/40">
+                <div className="text-[9px] text-stone-400 mb-1">ORDEM DOS ADVOGADOS DO BRASIL</div>
+                <div className="text-gold text-lg font-bold">OAB / TO · 2.591</div>
+              </div>
+              <div className="oab-seal px-6 py-4 bg-black/40">
+                <div className="text-[9px] text-stone-400 mb-1">ORDEM DOS ADVOGADOS DO BRASIL</div>
+                <div className="text-gold text-lg font-bold">OAB / RJ · 256.131</div>
+              </div>
+            </div>
+            <p className="mt-5 text-xs tracking-[0.2em] uppercase text-stone-400 max-w-xl">
+              Dupla inscrição ativa · Atuação plena em todo o Brasil
+            </p>
+          </div>
+        </div>
+      </section>
+
+
 
 
       {/* TRADIÇÃO ÉTICA RESULTADO */}
@@ -745,7 +818,7 @@ function Index() {
             className="wa-tooltip relative mr-1 px-4 py-2 border border-gold/40 text-[11px] tracking-[0.2em] uppercase text-stone-100 shadow-2xl"
             style={{ backgroundColor: "#1a1a1a" }}
           >
-            <span className="text-gold">Agendar consulta privada…</span>
+            <span className="text-gold">Agendar Consulta Privada</span>
             <span className="absolute -bottom-1 right-6 w-2 h-2 rotate-45 border-r border-b border-gold/40" style={{ backgroundColor: "#1a1a1a" }} />
           </div>
         )}
@@ -753,13 +826,19 @@ function Index() {
           href={waLink()}
           target="_blank"
           rel="noopener"
-          aria-label="Falar no WhatsApp"
-          className="wa-ping wa-pulse-cta relative flex items-center justify-center w-16 h-16 rounded-full shadow-2xl shadow-green-900/50 hover:scale-110 transition-transform"
+          aria-label="Falar com o Dr. Gilson"
+          className="wa-ping wa-pulse-cta relative inline-flex items-center gap-3 pl-2 pr-5 py-2 rounded-full shadow-2xl shadow-green-900/50 hover:scale-105 transition-transform"
           style={{ backgroundColor: "#25D366" }}
         >
-          <FaWhatsapp className="w-9 h-9 text-white" />
+          <span className="flex items-center justify-center w-12 h-12 rounded-full" style={{ backgroundColor: "#1faa55" }}>
+            <FaWhatsapp className="w-7 h-7 text-white" />
+          </span>
+          <span className="wa-pulse-label text-[11px] tracking-[0.2em] uppercase font-semibold" style={{ color: "#0d2418" }}>
+            Falar com o Dr. Gilson
+          </span>
         </a>
       </div>
+
     </div>
   );
 }

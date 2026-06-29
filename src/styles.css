@@ -310,3 +310,60 @@ body { font-family: 'Inter', sans-serif; background: #333333; color: #e8e6e1; }
   88%, 95% { opacity: .55; }
 }
 .wa-pulse-cta .wa-pulse-label { animation: wa-pulse-label 8s ease-in-out infinite; }
+
+/* ---- Hero Portrait Editorial Stage (desktop only) ---- */
+.hero-portrait-stage { display: none; }
+@media (min-width: 1024px) {
+  .hero-portrait-stage {
+    display: block;
+    position: absolute;
+    right: 0; bottom: 0;
+    height: 100%;
+    max-height: 92vh;
+    width: auto;
+    z-index: 10;
+    pointer-events: none;
+    aspect-ratio: 3 / 4;
+  }
+  .hero-portrait-stage .hero-portrait-img {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    object-fit: cover;
+    object-position: top center;
+    transform: scale(1.05);
+    transform-origin: bottom right;
+    -webkit-mask-image: linear-gradient(to bottom, #000 55%, rgba(0,0,0,0.55) 80%, transparent 100%);
+            mask-image: linear-gradient(to bottom, #000 55%, rgba(0,0,0,0.55) 80%, transparent 100%);
+  }
+  .hero-portrait-tint {
+    position: absolute; inset: 0;
+    background-color: #c9a55a;
+    mix-blend-mode: overlay;
+    opacity: 0.10;
+    -webkit-mask-image: linear-gradient(to bottom, #000 55%, rgba(0,0,0,0.55) 80%, transparent 100%);
+            mask-image: linear-gradient(to bottom, #000 55%, rgba(0,0,0,0.55) 80%, transparent 100%);
+  }
+  .hero-portrait-caption {
+    position: absolute; left: 0; right: 0; bottom: 0;
+    padding: 4rem 1.5rem 2rem;
+    background: linear-gradient(to top, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.65) 45%, transparent 100%);
+    text-align: right;
+  }
+}
+
+/* ---- OAB Seal — selo de autenticidade ---- */
+.oab-seal {
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  letter-spacing: 0.18em;
+  border: 1px solid var(--gold);
+  position: relative;
+}
+.oab-seal::before, .oab-seal::after {
+  content: "";
+  position: absolute;
+  width: 10px; height: 10px;
+  border: 1px solid var(--gold);
+}
+.oab-seal::before { top: -5px; left: -5px; border-right: 0; border-bottom: 0; }
+.oab-seal::after  { bottom: -5px; right: -5px; border-left: 0; border-top: 0; }
+

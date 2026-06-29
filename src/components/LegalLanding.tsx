@@ -380,18 +380,20 @@ export default function LegalLanding(p: LandingProps) {
         </div>
       </section>
 
-      {/* ONDE ESTAMOS */}
-      <section className="relative py-20 lg:py-24" style={{ backgroundColor: "#1f1f1f" }}>
+      {/* FOOTER — apenas logo, endereço completo e mapa */}
+      <footer className="relative pt-14 pb-8 border-t border-gold/20" style={{ backgroundColor: "#1a1a1a" }}>
         <div className="max-w-6xl mx-auto px-6 lg:px-10">
-          <div className="text-center mb-10">
-            <div className="flex items-center justify-center gap-4 mb-5">
-              <div className="w-12 h-px bg-gold" />
-              <span className="text-xs tracking-[0.3em] uppercase text-gold">Onde Estamos</span>
-              <div className="w-12 h-px bg-gold" />
-            </div>
-            <h3 className="font-serif-luxe text-3xl md:text-4xl text-stone-50">Escritório em Gurupi/TO</h3>
-            <a href={MAPS_URL} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 mt-3 text-stone-300 hover:text-gold transition-colors text-sm">
-              <MapPin size={14} className="text-gold" /> Av. Guanabara, nº 1669, Centro — Gurupi/TO
+          <div className="flex flex-col items-center text-center mb-10 gap-4">
+            <img src={logo} alt="Gilson Carvalho Advocacia" className="h-14" loading="lazy" decoding="async" />
+            <p className="text-[10px] tracking-[0.3em] uppercase text-gold">OAB/TO 2.591 · OAB/RJ 256.131</p>
+            <a
+              href={MAPS_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 text-stone-200 hover:text-gold transition-colors text-sm"
+            >
+              <MapPin size={14} className="text-gold" />
+              Av. Guanabara, nº 1669, Centro — Gurupi, Tocantins · CEP 77403-010
             </a>
           </div>
           <div className="border border-gold/20 overflow-hidden shadow-2xl shadow-black/40">
@@ -399,42 +401,18 @@ export default function LegalLanding(p: LandingProps) {
               title="Localização do escritório — Av. Guanabara, 1669, Centro, Gurupi/TO"
               src={MAPS_EMBED}
               width="100%"
-              height="360"
+              height="320"
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
               style={{ border: 0 }}
             />
           </div>
-        </div>
-      </section>
-
-      {/* FOOTER simplificado */}
-      <footer className="relative pt-14 pb-8 border-t border-gold/20" style={{ backgroundColor: "#1a1a1a" }}>
-        <div className="max-w-6xl mx-auto px-6 lg:px-10">
-          <div className="grid md:grid-cols-2 gap-8 items-start mb-10">
-            <div>
-              <img src={logo} alt="Gilson Carvalho" className="h-14 mb-4" loading="lazy" decoding="async" />
-              <p className="text-xs tracking-[0.25em] uppercase text-gold mb-1">OAB/TO 2.591 · OAB/RJ 256.131</p>
-              <p className="text-stone-400 text-sm">Direito de Família e Sucessões · Atendimento sigiloso.</p>
-            </div>
-            <div className="space-y-2 text-sm md:text-right">
-              <a href={MAPS_URL} target="_blank" rel="noopener noreferrer" className="block text-stone-300 hover:text-gold transition-colors">
-                Av. Guanabara, nº 1669, Centro — Gurupi/TO
-              </a>
-              <a href={`tel:+${WHATSAPP}`} className="block text-stone-300 hover:text-gold transition-colors">
-                +55 (63) 98447-4070
-              </a>
-              <a href={`mailto:${EMAIL}`} className="block text-stone-300 hover:text-gold transition-colors">
-                {EMAIL}
-              </a>
-              <a href={waLink(p.whatsappMessage)} target="_blank" rel="noopener" className="inline-flex items-center gap-2 text-gold hover:opacity-80 transition-opacity pt-1">
-                <FaWhatsapp /> Falar no WhatsApp
-              </a>
-            </div>
-          </div>
-          <p className="text-xs text-stone-500 text-center pt-6 border-t border-white/5">© 2026 Gilson Carvalho — Advocacia. Todos os direitos reservados.</p>
+          <p className="text-xs text-stone-500 text-center mt-8 pt-6 border-t border-white/5">
+            © 2026 Gilson Carvalho — Advocacia. Todos os direitos reservados.
+          </p>
         </div>
       </footer>
+
 
       {/* WHATSAPP FLOAT */}
       <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-2">
@@ -452,13 +430,19 @@ export default function LegalLanding(p: LandingProps) {
           href={waLink(p.whatsappMessage)}
           target="_blank"
           rel="noopener"
-          aria-label="Falar no WhatsApp"
-          className="wa-ping wa-pulse-cta relative flex items-center justify-center w-16 h-16 rounded-full shadow-2xl shadow-green-900/50 hover:scale-110 transition-transform"
+          aria-label="Falar com o Dr. Gilson"
+          className="wa-ping wa-pulse-cta relative inline-flex items-center gap-3 pl-2 pr-5 py-2 rounded-full shadow-2xl shadow-green-900/50 hover:scale-105 transition-transform"
           style={{ backgroundColor: "#25D366" }}
         >
-          <FaWhatsapp className="w-9 h-9 text-white" />
+          <span className="flex items-center justify-center w-12 h-12 rounded-full" style={{ backgroundColor: "#1faa55" }}>
+            <FaWhatsapp className="w-7 h-7 text-white" />
+          </span>
+          <span className="wa-pulse-label text-[11px] tracking-[0.2em] uppercase font-semibold" style={{ color: "#0d2418" }}>
+            Falar com o Dr. Gilson
+          </span>
         </a>
       </div>
     </div>
   );
 }
+
