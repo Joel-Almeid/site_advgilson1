@@ -817,7 +817,7 @@ function Index() {
             className="wa-tooltip relative mr-1 px-4 py-2 border border-gold/40 text-[11px] tracking-[0.2em] uppercase text-stone-100 shadow-2xl"
             style={{ backgroundColor: "#1a1a1a" }}
           >
-            <span className="text-gold">Agendar consulta privada…</span>
+            <span className="text-gold">Agendar Consulta Privada</span>
             <span className="absolute -bottom-1 right-6 w-2 h-2 rotate-45 border-r border-b border-gold/40" style={{ backgroundColor: "#1a1a1a" }} />
           </div>
         )}
@@ -825,13 +825,19 @@ function Index() {
           href={waLink()}
           target="_blank"
           rel="noopener"
-          aria-label="Falar no WhatsApp"
-          className="wa-ping wa-pulse-cta relative flex items-center justify-center w-16 h-16 rounded-full shadow-2xl shadow-green-900/50 hover:scale-110 transition-transform"
+          aria-label="Falar com o Dr. Gilson"
+          className="wa-ping wa-pulse-cta relative inline-flex items-center gap-3 pl-2 pr-5 py-2 rounded-full shadow-2xl shadow-green-900/50 hover:scale-105 transition-transform"
           style={{ backgroundColor: "#25D366" }}
         >
-          <FaWhatsapp className="w-9 h-9 text-white" />
+          <span className="flex items-center justify-center w-12 h-12 rounded-full" style={{ backgroundColor: "#1faa55" }}>
+            <FaWhatsapp className="w-7 h-7 text-white" />
+          </span>
+          <span className="wa-pulse-label text-[11px] tracking-[0.2em] uppercase font-semibold" style={{ color: "#0d2418" }}>
+            Falar com o Dr. Gilson
+          </span>
         </a>
       </div>
+
     </div>
   );
 }
