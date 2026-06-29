@@ -28,7 +28,9 @@ export const Route = createFileRoute("/")({
 });
 
 const WHATSAPP = "5563984474070";
-const waLink = (msg = "Olá, gostaria de agendar uma consulta jurídica.") =>
+const WA_DEFAULT_MSG =
+  "Olá, Dr. Gilson. Acessei seu site e gostaria de uma orientação jurídica. Poderia me informar sobre disponibilidade para uma consulta?";
+const waLink = (msg = WA_DEFAULT_MSG) =>
   `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(msg)}`;
 
 const INSTAGRAM_URL = "https://www.instagram.com/gilsoncarvalho.adv/";
