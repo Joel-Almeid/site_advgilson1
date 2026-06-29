@@ -298,6 +298,72 @@ function Index() {
         </div>
       </div>
 
+      {/* COMO TRABALHAMOS — Infra & Atendimento */}
+      <section id="como-trabalhamos" className="relative py-24 lg:py-28" style={{ backgroundColor: "#1f1f1f" }}>
+        <div className="absolute inset-0 opacity-[0.04] bg-cover bg-center" style={{ backgroundImage: `url(${bgMarble})` }} />
+        <div className="relative max-w-7xl mx-auto px-6 lg:px-10">
+          <div className="text-center mb-14">
+            <div className="flex items-center justify-center gap-4 mb-6">
+              <div className="w-12 h-px bg-gold" />
+              <span className="text-xs tracking-[0.3em] uppercase text-gold">Como Trabalhamos</span>
+              <div className="w-12 h-px bg-gold" />
+            </div>
+            <h2 className="font-serif-luxe text-4xl md:text-5xl text-stone-50">
+              Infraestrutura premium para um <em className="text-gold-gradient not-italic">atendimento sem fricção.</em>
+            </h2>
+          </div>
+          <motion.div {...reveal} className="grid md:grid-cols-3 gap-6">
+            {[
+              {
+                Icon: Clock,
+                title: "Resposta em até 2h",
+                desc: "Fluxo de triagem automatizado e acompanhamento dedicado. Seu primeiro contato recebe retorno em até 2 horas em dias úteis.",
+              },
+              {
+                Icon: Lock,
+                title: "Segurança Bancária",
+                desc: "Transmissão de documentos sob criptografia TLS e infraestrutura protegida por Cloudflare — sigilo profissional reforçado por tecnologia.",
+              },
+              {
+                Icon: Globe,
+                title: "Atendimento Nacional",
+                desc: "Dupla habilitação OAB/TO e OAB/RJ permite atuação direta em todo o território nacional, presencial ou por videoconferência.",
+              },
+            ].map(({ Icon, title, desc }) => (
+              <div key={title} className="card-hover-gold relative p-8 border border-gold/20" style={{ backgroundColor: "rgba(30,30,30,0.7)" }}>
+                <div className="absolute top-0 left-0 w-8 h-px bg-gold" />
+                <div className="absolute top-0 left-0 w-px h-8 bg-gold" />
+                <span className="inline-flex items-center justify-center w-12 h-12 border border-gold/50 mb-5">
+                  <Icon size={22} className="text-gold" strokeWidth={1.3} />
+                </span>
+                <h4 className="font-serif-luxe text-2xl text-stone-50 mb-3">{title}</h4>
+                <p className="text-stone-300 text-sm leading-relaxed">{desc}</p>
+              </div>
+            ))}
+          </motion.div>
+
+          {/* OAB SEAL — Selo de Autenticidade */}
+          <div className="mt-16 flex flex-col items-center text-center">
+            <span className="text-[10px] tracking-[0.4em] uppercase text-stone-400 mb-4">Habilitação Interestadual</span>
+            <div className="flex flex-wrap items-center justify-center gap-5">
+              <div className="oab-seal px-6 py-4 bg-black/40">
+                <div className="text-[9px] text-stone-400 mb-1">ORDEM DOS ADVOGADOS DO BRASIL</div>
+                <div className="text-gold text-lg font-bold">OAB / TO · 2.591</div>
+              </div>
+              <div className="oab-seal px-6 py-4 bg-black/40">
+                <div className="text-[9px] text-stone-400 mb-1">ORDEM DOS ADVOGADOS DO BRASIL</div>
+                <div className="text-gold text-lg font-bold">OAB / RJ · 256.131</div>
+              </div>
+            </div>
+            <p className="mt-5 text-xs tracking-[0.2em] uppercase text-stone-400 max-w-xl">
+              Dupla inscrição ativa · Atuação plena em todo o Brasil
+            </p>
+          </div>
+        </div>
+      </section>
+
+
+
 
       {/* TRADIÇÃO ÉTICA RESULTADO */}
       <section id="sobre" className="relative py-28 lg:py-36" style={{ backgroundColor: "#2b2b2b" }}>
