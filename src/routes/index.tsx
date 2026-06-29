@@ -102,7 +102,7 @@ function Index() {
 
   // Scroll spy — highlight current section in nav
   useEffect(() => {
-    const ids = ["inicio", "sobre", "areas", "depoimentos", "faq", "contato"];
+    const ids = ["inicio", "sobre", "como-trabalhamos", "areas", "depoimentos", "faq", "contato"];
     const onScroll = () => {
       let current = "inicio";
       for (const id of ids) {
