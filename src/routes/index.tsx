@@ -140,6 +140,7 @@ function Index() {
   const navLinks = [
     { label: "Início", href: "#inicio" },
     { label: "Sobre Nós", href: "#sobre" },
+    { label: "Como Trabalhamos", href: "#como-trabalhamos" },
     { label: "Áreas de Atuação", href: "#areas" },
     { label: "Depoimentos", href: "#depoimentos" },
     { label: "FAQ", href: "#faq" },
