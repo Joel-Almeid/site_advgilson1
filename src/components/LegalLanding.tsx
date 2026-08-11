@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { ChevronRight, Check, AlertTriangle, Shield, MapPin, Phone, Mail, CheckCircle2 } from "lucide-react";
+import { ChevronRight, Check, ShieldAlert, Scale, FileText, Gavel, Lock, Shield, MapPin, Phone, Mail, CheckCircle2 } from "lucide-react";
 import { FaWhatsapp, FaInstagram } from "react-icons/fa";
 import { useEffect, useState } from "react";
 import logo from "@/assets/logo_gilson.png";
