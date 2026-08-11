@@ -64,32 +64,43 @@ export default function LegalLanding(p: LandingProps) {
     return `(${d.slice(0, 2)}) ${d.slice(2, 7)}-${d.slice(7)}`;
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (sending) return;
-    setSending(true);
-    try {
-      await fetch(`https://formsubmit.co/ajax/${FORM_TARGET_EMAIL}`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json", Accept: "application/json" },
-        body: JSON.stringify({
-          _subject: `Nova solicitação — ${p.eyebrow}`,
-          _template: "table",
-          _captcha: "false",
-          interesse: p.eyebrow,
-          nome: form.nome,
-          telefone: form.telefone,
-          email: form.email,
-          mensagem: form.mensagem,
-        }),
-      });
-    } catch {
-      /* silencioso — exibimos sucesso mesmo offline para não travar conversão */
-    } finally {
-      setSent(true);
-      setSending(false);
+    const nome = form.nome.trim();
+    const telefone = form.telefone.trim();
+    const mensagem = form.mensagem.trim();
+    if (!nome || !telefone || !mensagem) {
+      setError("Preencha nome, telefone e a descrição do seu caso.");
+      return;
     }
+    setError("");
+    setSending(true);
+
+    // Abre o WhatsApp imediatamente (evita bloqueio de pop-up)
+    const texto = `Olá, Dr. Gilson! Meu nome é ${nome}. Gostaria de um atendimento sobre: ${p.eyebrow} — ${mensagem}. Telefone: ${telefone}${form.email.trim() ? ` · E-mail: ${form.email.trim()}` : ""}`;
+    window.open(waLink(texto), "_blank", "noopener");
+
+    // Envia cópia por e-mail em segundo plano
+    void fetch(`https://formsubmit.co/ajax/${FORM_TARGET_EMAIL}`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json", Accept: "application/json" },
+      body: JSON.stringify({
+        _subject: `Nova solicitação — ${p.eyebrow}`,
+        _template: "table",
+        _captcha: "false",
+        interesse: p.eyebrow,
+        nome,
+        telefone,
+        email: form.email,
+        mensagem,
+      }),
+    }).catch(() => {});
+
+    setSent(true);
+    setSending(false);
   };
+
 
   const painsBg = p.painsImage ?? p.heroImage;
   const solutionsBg = p.solutionsImage ?? p.heroImage;
