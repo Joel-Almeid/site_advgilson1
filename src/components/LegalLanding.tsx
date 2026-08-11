@@ -333,9 +333,11 @@ export default function LegalLanding(p: LandingProps) {
                       placeholder="Conte um pouco sobre a sua necessidade…"
                     />
                   </div>
-                  <button type="submit" disabled={sending} className="w-full gold-gradient text-charcoal-deep font-medium py-3.5 text-sm tracking-[0.25em] uppercase hover:shadow-2xl hover:shadow-amber-900/40 transition-all disabled:opacity-60">
-                    {sending ? "Enviando…" : "Solicitar Atendimento Privado"}
+                  {error && <p className="text-[12px] text-red-300">{error}</p>}
+                  <button type="submit" disabled={sending} className="cta-pulse-gold w-full gold-gradient text-charcoal-deep font-medium py-3.5 text-sm tracking-[0.25em] uppercase hover:shadow-2xl hover:shadow-amber-900/40 transition-all disabled:opacity-60">
+                    {sending ? "Abrindo WhatsApp…" : "Enviar pelo WhatsApp"}
                   </button>
+
                   <p className="text-[11px] text-stone-400 text-center leading-relaxed pt-1">
                     🔒 Dados protegidos sob sigilo profissional · LGPD
                   </p>
