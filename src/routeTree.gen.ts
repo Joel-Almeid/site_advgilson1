@@ -10,15 +10,30 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as UniaoEstavelRouteImport } from './routes/uniao-estavel'
+import { Route as TrabalhistaExecutivoRouteImport } from './routes/trabalhista-executivo'
+import { Route as PrevidenciarioRouteImport } from './routes/previdenciario'
 import { Route as PensaoEGuardaRouteImport } from './routes/pensao-e-guarda'
 import { Route as LinksRouteImport } from './routes/links'
 import { Route as InventarioRouteImport } from './routes/inventario'
+import { Route as ImobiliarioRouteImport } from './routes/imobiliario'
 import { Route as DivorcioRouteImport } from './routes/divorcio'
+import { Route as DireitoDigitalRouteImport } from './routes/direito-digital'
+import { Route as DireitoBancarioRouteImport } from './routes/direito-bancario'
 import { Route as IndexRouteImport } from './routes/index'
 
 const UniaoEstavelRoute = UniaoEstavelRouteImport.update({
   id: '/uniao-estavel',
   path: '/uniao-estavel',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TrabalhistaExecutivoRoute = TrabalhistaExecutivoRouteImport.update({
+  id: '/trabalhista-executivo',
+  path: '/trabalhista-executivo',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PrevidenciarioRoute = PrevidenciarioRouteImport.update({
+  id: '/previdenciario',
+  path: '/previdenciario',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PensaoEGuardaRoute = PensaoEGuardaRouteImport.update({
@@ -36,9 +51,24 @@ const InventarioRoute = InventarioRouteImport.update({
   path: '/inventario',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ImobiliarioRoute = ImobiliarioRouteImport.update({
+  id: '/imobiliario',
+  path: '/imobiliario',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const DivorcioRoute = DivorcioRouteImport.update({
   id: '/divorcio',
   path: '/divorcio',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DireitoDigitalRoute = DireitoDigitalRouteImport.update({
+  id: '/direito-digital',
+  path: '/direito-digital',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DireitoBancarioRoute = DireitoBancarioRouteImport.update({
+  id: '/direito-bancario',
+  path: '/direito-bancario',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -49,62 +79,97 @@ const IndexRoute = IndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/direito-bancario': typeof DireitoBancarioRoute
+  '/direito-digital': typeof DireitoDigitalRoute
   '/divorcio': typeof DivorcioRoute
+  '/imobiliario': typeof ImobiliarioRoute
   '/inventario': typeof InventarioRoute
   '/links': typeof LinksRoute
   '/pensao-e-guarda': typeof PensaoEGuardaRoute
+  '/previdenciario': typeof PrevidenciarioRoute
+  '/trabalhista-executivo': typeof TrabalhistaExecutivoRoute
   '/uniao-estavel': typeof UniaoEstavelRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/direito-bancario': typeof DireitoBancarioRoute
+  '/direito-digital': typeof DireitoDigitalRoute
   '/divorcio': typeof DivorcioRoute
+  '/imobiliario': typeof ImobiliarioRoute
   '/inventario': typeof InventarioRoute
   '/links': typeof LinksRoute
   '/pensao-e-guarda': typeof PensaoEGuardaRoute
+  '/previdenciario': typeof PrevidenciarioRoute
+  '/trabalhista-executivo': typeof TrabalhistaExecutivoRoute
   '/uniao-estavel': typeof UniaoEstavelRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/direito-bancario': typeof DireitoBancarioRoute
+  '/direito-digital': typeof DireitoDigitalRoute
   '/divorcio': typeof DivorcioRoute
+  '/imobiliario': typeof ImobiliarioRoute
   '/inventario': typeof InventarioRoute
   '/links': typeof LinksRoute
   '/pensao-e-guarda': typeof PensaoEGuardaRoute
+  '/previdenciario': typeof PrevidenciarioRoute
+  '/trabalhista-executivo': typeof TrabalhistaExecutivoRoute
   '/uniao-estavel': typeof UniaoEstavelRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/direito-bancario'
+    | '/direito-digital'
     | '/divorcio'
+    | '/imobiliario'
     | '/inventario'
     | '/links'
     | '/pensao-e-guarda'
+    | '/previdenciario'
+    | '/trabalhista-executivo'
     | '/uniao-estavel'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/direito-bancario'
+    | '/direito-digital'
     | '/divorcio'
+    | '/imobiliario'
     | '/inventario'
     | '/links'
     | '/pensao-e-guarda'
+    | '/previdenciario'
+    | '/trabalhista-executivo'
     | '/uniao-estavel'
   id:
     | '__root__'
     | '/'
+    | '/direito-bancario'
+    | '/direito-digital'
     | '/divorcio'
+    | '/imobiliario'
     | '/inventario'
     | '/links'
     | '/pensao-e-guarda'
+    | '/previdenciario'
+    | '/trabalhista-executivo'
     | '/uniao-estavel'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  DireitoBancarioRoute: typeof DireitoBancarioRoute
+  DireitoDigitalRoute: typeof DireitoDigitalRoute
   DivorcioRoute: typeof DivorcioRoute
+  ImobiliarioRoute: typeof ImobiliarioRoute
   InventarioRoute: typeof InventarioRoute
   LinksRoute: typeof LinksRoute
   PensaoEGuardaRoute: typeof PensaoEGuardaRoute
+  PrevidenciarioRoute: typeof PrevidenciarioRoute
+  TrabalhistaExecutivoRoute: typeof TrabalhistaExecutivoRoute
   UniaoEstavelRoute: typeof UniaoEstavelRoute
 }
 
@@ -115,6 +180,20 @@ declare module '@tanstack/react-router' {
       path: '/uniao-estavel'
       fullPath: '/uniao-estavel'
       preLoaderRoute: typeof UniaoEstavelRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/trabalhista-executivo': {
+      id: '/trabalhista-executivo'
+      path: '/trabalhista-executivo'
+      fullPath: '/trabalhista-executivo'
+      preLoaderRoute: typeof TrabalhistaExecutivoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/previdenciario': {
+      id: '/previdenciario'
+      path: '/previdenciario'
+      fullPath: '/previdenciario'
+      preLoaderRoute: typeof PrevidenciarioRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/pensao-e-guarda': {
@@ -138,11 +217,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof InventarioRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/imobiliario': {
+      id: '/imobiliario'
+      path: '/imobiliario'
+      fullPath: '/imobiliario'
+      preLoaderRoute: typeof ImobiliarioRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/divorcio': {
       id: '/divorcio'
       path: '/divorcio'
       fullPath: '/divorcio'
       preLoaderRoute: typeof DivorcioRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/direito-digital': {
+      id: '/direito-digital'
+      path: '/direito-digital'
+      fullPath: '/direito-digital'
+      preLoaderRoute: typeof DireitoDigitalRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/direito-bancario': {
+      id: '/direito-bancario'
+      path: '/direito-bancario'
+      fullPath: '/direito-bancario'
+      preLoaderRoute: typeof DireitoBancarioRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -157,10 +257,15 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  DireitoBancarioRoute: DireitoBancarioRoute,
+  DireitoDigitalRoute: DireitoDigitalRoute,
   DivorcioRoute: DivorcioRoute,
+  ImobiliarioRoute: ImobiliarioRoute,
   InventarioRoute: InventarioRoute,
   LinksRoute: LinksRoute,
   PensaoEGuardaRoute: PensaoEGuardaRoute,
+  PrevidenciarioRoute: PrevidenciarioRoute,
+  TrabalhistaExecutivoRoute: TrabalhistaExecutivoRoute,
   UniaoEstavelRoute: UniaoEstavelRoute,
 }
 export const routeTree = rootRouteImport

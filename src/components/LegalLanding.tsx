@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { ChevronRight, Check, AlertTriangle, Shield, MapPin, Phone, Mail, CheckCircle2 } from "lucide-react";
+import { ChevronRight, Check, ShieldAlert, Scale, FileText, Gavel, Lock, Shield, MapPin, Phone, Mail, CheckCircle2 } from "lucide-react";
 import { FaWhatsapp, FaInstagram } from "react-icons/fa";
 import { useEffect, useState } from "react";
 import logo from "@/assets/logo_gilson.png";
@@ -14,6 +14,8 @@ const MAPS_EMBED = "https://www.google.com/maps?q=Av.%20Guanabara%2C%201669%2C%2
 
 export const waLink = (msg: string) =>
   `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(msg)}`;
+
+const PAIN_ICONS = [ShieldAlert, Scale, FileText, Gavel, Lock];
 
 const reveal = {
   initial: { opacity: 0, y: 24 },
@@ -41,6 +43,7 @@ export default function LegalLanding(p: LandingProps) {
   const [form, setForm] = useState({ nome: "", telefone: "", email: "", mensagem: "" });
   const [sent, setSent] = useState(false);
   const [sending, setSending] = useState(false);
+  const [error, setError] = useState("");
   const [waTipVisible, setWaTipVisible] = useState(false);
   const [waTipKey, setWaTipKey] = useState(0);
 
@@ -62,32 +65,43 @@ export default function LegalLanding(p: LandingProps) {
     return `(${d.slice(0, 2)}) ${d.slice(2, 7)}-${d.slice(7)}`;
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (sending) return;
-    setSending(true);
-    try {
-      await fetch(`https://formsubmit.co/ajax/${FORM_TARGET_EMAIL}`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json", Accept: "application/json" },
-        body: JSON.stringify({
-          _subject: `Nova solicitação — ${p.eyebrow}`,
-          _template: "table",
-          _captcha: "false",
-          interesse: p.eyebrow,
-          nome: form.nome,
-          telefone: form.telefone,
-          email: form.email,
-          mensagem: form.mensagem,
-        }),
-      });
-    } catch {
-      /* silencioso — exibimos sucesso mesmo offline para não travar conversão */
-    } finally {
-      setSent(true);
-      setSending(false);
+    const nome = form.nome.trim();
+    const telefone = form.telefone.trim();
+    const mensagem = form.mensagem.trim();
+    if (!nome || !telefone || !mensagem) {
+      setError("Preencha nome, telefone e a descrição do seu caso.");
+      return;
     }
+    setError("");
+    setSending(true);
+
+    // Abre o WhatsApp imediatamente (evita bloqueio de pop-up)
+    const texto = `Olá, Dr. Gilson! Meu nome é ${nome}. Gostaria de um atendimento sobre: ${p.eyebrow} — ${mensagem}. Telefone: ${telefone}${form.email.trim() ? ` · E-mail: ${form.email.trim()}` : ""}`;
+    window.open(waLink(texto), "_blank", "noopener");
+
+    // Envia cópia por e-mail em segundo plano
+    void fetch(`https://formsubmit.co/ajax/${FORM_TARGET_EMAIL}`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json", Accept: "application/json" },
+      body: JSON.stringify({
+        _subject: `Nova solicitação — ${p.eyebrow}`,
+        _template: "table",
+        _captcha: "false",
+        interesse: p.eyebrow,
+        nome,
+        telefone,
+        email: form.email,
+        mensagem,
+      }),
+    }).catch(() => {});
+
+    setSent(true);
+    setSending(false);
   };
+
 
   const painsBg = p.painsImage ?? p.heroImage;
   const solutionsBg = p.solutionsImage ?? p.heroImage;
@@ -134,12 +148,13 @@ export default function LegalLanding(p: LandingProps) {
             {p.heroSubtitle}
           </motion.p>
           <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
-            <a href="#triagem" className="inline-flex items-center justify-center gap-3 text-charcoal-deep font-semibold px-7 py-4 text-xs tracking-[0.25em] uppercase hover:shadow-2xl hover:shadow-amber-900/40 transition-all" style={{ backgroundColor: "#bfa15f" }}>
+            <a href="#triagem" className="cta-pulse-gold inline-flex items-center justify-center gap-3 text-charcoal-deep font-semibold px-7 py-4 text-xs tracking-[0.25em] uppercase hover:shadow-2xl hover:shadow-amber-900/40 transition-all" style={{ backgroundColor: "#bfa15f" }}>
               <FaWhatsapp className="w-4 h-4" /> {p.ctaText}
             </a>
-            <a href={waLink(p.whatsappMessage)} target="_blank" rel="noopener" className="inline-flex items-center justify-center gap-2 border text-gold font-medium px-7 py-4 text-xs tracking-[0.25em] uppercase hover:bg-gold hover:text-charcoal-deep transition-colors" style={{ borderColor: "#bfa15f" }}>
+            <a href={waLink(p.whatsappMessage)} target="_blank" rel="noopener" className="cta-pulse-gold inline-flex items-center justify-center gap-2 border text-gold font-medium px-7 py-4 text-xs tracking-[0.25em] uppercase hover:bg-gold hover:text-charcoal-deep transition-colors" style={{ borderColor: "#bfa15f" }}>
               Falar Agora
             </a>
+
           </div>
         </div>
       </section>
@@ -158,14 +173,18 @@ export default function LegalLanding(p: LandingProps) {
             <h2 className="font-serif-luxe text-4xl md:text-5xl text-stone-50">Desafios que enfrentamos juntos</h2>
           </div>
           <motion.div {...reveal} className="grid md:grid-cols-3 gap-6">
-            {p.pains.map((it) => (
-              <div key={it.title} className="relative p-8 border border-gold/20" style={{ backgroundColor: "rgba(30,30,30,0.7)" }}>
-                <AlertTriangle size={26} className="text-gold mb-5" strokeWidth={1.3} />
-                <h4 className="font-serif-luxe text-xl text-stone-50 mb-3">{it.title}</h4>
-                <p className="text-stone-300 text-sm leading-relaxed">{it.desc}</p>
-              </div>
-            ))}
+            {p.pains.map((it, i) => {
+              const PainIcon = PAIN_ICONS[i % PAIN_ICONS.length];
+              return (
+                <div key={it.title} className="relative p-8 border border-gold/20" style={{ backgroundColor: "rgba(30,30,30,0.7)" }}>
+                  <PainIcon size={28} className="text-gold mb-5" strokeWidth={1.3} />
+                  <h4 className="font-serif-luxe text-xl text-stone-50 mb-3">{it.title}</h4>
+                  <p className="text-stone-300 text-sm leading-relaxed">{it.desc}</p>
+                </div>
+              );
+            })}
           </motion.div>
+
         </div>
       </section>
 
@@ -315,9 +334,11 @@ export default function LegalLanding(p: LandingProps) {
                       placeholder="Conte um pouco sobre a sua necessidade…"
                     />
                   </div>
-                  <button type="submit" disabled={sending} className="w-full gold-gradient text-charcoal-deep font-medium py-3.5 text-sm tracking-[0.25em] uppercase hover:shadow-2xl hover:shadow-amber-900/40 transition-all disabled:opacity-60">
-                    {sending ? "Enviando…" : "Solicitar Atendimento Privado"}
+                  {error && <p className="text-[12px] text-red-300">{error}</p>}
+                  <button type="submit" disabled={sending} className="cta-pulse-gold w-full gold-gradient text-charcoal-deep font-medium py-3.5 text-sm tracking-[0.25em] uppercase hover:shadow-2xl hover:shadow-amber-900/40 transition-all disabled:opacity-60">
+                    {sending ? "Abrindo WhatsApp…" : "Enviar pelo WhatsApp"}
                   </button>
+
                   <p className="text-[11px] text-stone-400 text-center leading-relaxed pt-1">
                     🔒 Dados protegidos sob sigilo profissional · LGPD
                   </p>
