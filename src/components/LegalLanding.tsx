@@ -158,14 +158,18 @@ export default function LegalLanding(p: LandingProps) {
             <h2 className="font-serif-luxe text-4xl md:text-5xl text-stone-50">Desafios que enfrentamos juntos</h2>
           </div>
           <motion.div {...reveal} className="grid md:grid-cols-3 gap-6">
-            {p.pains.map((it) => (
-              <div key={it.title} className="relative p-8 border border-gold/20" style={{ backgroundColor: "rgba(30,30,30,0.7)" }}>
-                <AlertTriangle size={26} className="text-gold mb-5" strokeWidth={1.3} />
-                <h4 className="font-serif-luxe text-xl text-stone-50 mb-3">{it.title}</h4>
-                <p className="text-stone-300 text-sm leading-relaxed">{it.desc}</p>
-              </div>
-            ))}
+            {p.pains.map((it, i) => {
+              const PainIcon = PAIN_ICONS[i % PAIN_ICONS.length];
+              return (
+                <div key={it.title} className="relative p-8 border border-gold/20" style={{ backgroundColor: "rgba(30,30,30,0.7)" }}>
+                  <PainIcon size={28} className="text-gold mb-5" strokeWidth={1.3} />
+                  <h4 className="font-serif-luxe text-xl text-stone-50 mb-3">{it.title}</h4>
+                  <p className="text-stone-300 text-sm leading-relaxed">{it.desc}</p>
+                </div>
+              );
+            })}
           </motion.div>
+
         </div>
       </section>
 
