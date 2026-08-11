@@ -148,12 +148,13 @@ export default function LegalLanding(p: LandingProps) {
             {p.heroSubtitle}
           </motion.p>
           <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
-            <a href="#triagem" className="inline-flex items-center justify-center gap-3 text-charcoal-deep font-semibold px-7 py-4 text-xs tracking-[0.25em] uppercase hover:shadow-2xl hover:shadow-amber-900/40 transition-all" style={{ backgroundColor: "#bfa15f" }}>
+            <a href="#triagem" className="cta-pulse-gold inline-flex items-center justify-center gap-3 text-charcoal-deep font-semibold px-7 py-4 text-xs tracking-[0.25em] uppercase hover:shadow-2xl hover:shadow-amber-900/40 transition-all" style={{ backgroundColor: "#bfa15f" }}>
               <FaWhatsapp className="w-4 h-4" /> {p.ctaText}
             </a>
-            <a href={waLink(p.whatsappMessage)} target="_blank" rel="noopener" className="inline-flex items-center justify-center gap-2 border text-gold font-medium px-7 py-4 text-xs tracking-[0.25em] uppercase hover:bg-gold hover:text-charcoal-deep transition-colors" style={{ borderColor: "#bfa15f" }}>
+            <a href={waLink(p.whatsappMessage)} target="_blank" rel="noopener" className="cta-pulse-gold inline-flex items-center justify-center gap-2 border text-gold font-medium px-7 py-4 text-xs tracking-[0.25em] uppercase hover:bg-gold hover:text-charcoal-deep transition-colors" style={{ borderColor: "#bfa15f" }}>
               Falar Agora
             </a>
+
           </div>
         </div>
       </section>
