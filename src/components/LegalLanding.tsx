@@ -3,14 +3,15 @@ import { ChevronRight, Check, ShieldAlert, Scale, FileText, Gavel, Lock, Shield,
 import { FaWhatsapp, FaInstagram } from "react-icons/fa";
 import { useEffect, useState } from "react";
 import logo from "@/assets/logo_gilson.png";
-import imgGilsonAuthority from "@/assets/foto2gilson.png";
+import imgGilsonAuthority from "@/assets/fotogilson3.png";
+import { initAnalytics, trackLead, trackPageView, trackWhatsApp } from "@/lib/analytics";
 
 const WHATSAPP = "5563984474070";
-const INSTAGRAM_URL = "https://www.instagram.com/gilsoncarvalho.adv/";
+const INSTAGRAM_URL = "https://instagram.com/gilsoncarvalho.adv";
 const EMAIL = "advogado@gilsoncarvalho.com";
-const FORM_TARGET_EMAIL = "joelabreumartinsdealmeida@gmail.com";
 const MAPS_URL = "https://maps.google.com/?q=Av.+Guanabara,+1669,+Centro+-+Gurupi,+TO";
 const MAPS_EMBED = "https://www.google.com/maps?q=Av.%20Guanabara%2C%201669%2C%20Centro%20-%20Gurupi%2C%20TO&output=embed";
+
 
 export const waLink = (msg: string) =>
   `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(msg)}`;
@@ -48,6 +49,11 @@ export default function LegalLanding(p: LandingProps) {
   const [waTipKey, setWaTipKey] = useState(0);
 
   useEffect(() => {
+    initAnalytics();
+    trackPageView(typeof window !== "undefined" ? window.location.pathname : p.eyebrow, p.eyebrow);
+  }, [p.eyebrow]);
+
+  useEffect(() => {
     const id = setInterval(() => {
       setWaTipKey((k) => k + 1);
       setWaTipVisible(true);
@@ -56,6 +62,7 @@ export default function LegalLanding(p: LandingProps) {
     }, 8000);
     return () => clearInterval(id);
   }, []);
+
 
   const maskPhone = (v: string) => {
     const d = v.replace(/\D/g, "").slice(0, 11);
