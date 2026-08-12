@@ -85,29 +85,19 @@ export default function LegalLanding(p: LandingProps) {
     setError("");
     setSending(true);
 
-    // Abre o WhatsApp imediatamente (evita bloqueio de pop-up)
     const texto = `Olá, Dr. Gilson! Meu nome é ${nome}. Gostaria de um atendimento sobre: ${p.eyebrow} — ${mensagem}. Telefone: ${telefone}${form.email.trim() ? ` · E-mail: ${form.email.trim()}` : ""}`;
-    window.open(waLink(texto), "_blank", "noopener");
+    const link = waLink(texto);
+    setWaFinalLink(link);
 
-    // Envia cópia por e-mail em segundo plano
-    void fetch(`https://formsubmit.co/ajax/${FORM_TARGET_EMAIL}`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json", Accept: "application/json" },
-      body: JSON.stringify({
-        _subject: `Nova solicitação — ${p.eyebrow}`,
-        _template: "table",
-        _captcha: "false",
-        interesse: p.eyebrow,
-        nome,
-        telefone,
-        email: form.email,
-        mensagem,
-      }),
-    }).catch(() => {});
+    trackLead(p.eyebrow);
+    trackWhatsApp("formulario_triagem");
+
+    window.open(link, "_blank", "noopener");
 
     setSent(true);
     setSending(false);
   };
+
 
 
   const painsBg = p.painsImage ?? p.heroImage;
