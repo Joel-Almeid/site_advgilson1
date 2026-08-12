@@ -255,7 +255,7 @@ function Index() {
             <div className="mt-10 flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
               <MagneticLink
                 href={waLink()}
-                onClick={() => trackWhatsApp("hero")}
+                
                 target="_blank"
                 rel="noopener"
                 onClick={() => trackWhatsApp("cta")}
