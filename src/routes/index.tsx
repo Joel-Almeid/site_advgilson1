@@ -11,8 +11,9 @@ import {
 } from "@/components/ui/accordion";
 
 import logo from "@/assets/logo_gilson.png";
+import { initAnalytics, trackLead, trackPageView, trackWhatsApp } from "@/lib/analytics";
 import imgGilson from "@/assets/gilsonfoto1.png";
-import imgGilson2 from "@/assets/foto2gilson.png";
+import imgGilson2 from "@/assets/fotogilson3.png";
 import imgEscritorio from "@/assets/escritorio.png";
 import bgBooks from "@/assets/bg-books.jpg";
 import bgMarble from "@/assets/bg-marble.jpg";
@@ -89,6 +90,11 @@ function Index() {
   const [activeSection, setActiveSection] = useState("inicio");
 
   useEffect(() => {
+    initAnalytics();
+    trackPageView("/", "Home — Gilson Carvalho Advocacia");
+  }, []);
+
+  useEffect(() => {
     const id = setInterval(() => {
       setWaTipKey((k) => k + 1);
       setWaTipVisible(true);
@@ -125,7 +131,9 @@ function Index() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const msg = `Olá, sou ${form.nome}.%0ATelefone: ${form.telefone}%0AE-mail: ${form.email}%0AÁrea de interesse: ${form.area}%0ANecessidade: ${form.mensagem}`;
-    window.open(`https://wa.me/${WHATSAPP}?text=${msg}`, "_blank");
+    trackLead(form.area || "Home");
+    trackWhatsApp("formulario_home");
+    window.open(`https://wa.me/${WHATSAPP}?text=${msg}`, "_blank", "noopener");
   };
 
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
@@ -168,7 +176,7 @@ function Index() {
               );
             })}
           </nav>
-          <MagneticLink href={waLink()} target="_blank" rel="noopener" className="hidden lg:inline-flex items-center gap-2 border text-gold px-5 py-2.5 text-xs tracking-[0.2em] uppercase hover:bg-gold hover:text-charcoal-deep" style={{ borderColor: "var(--gold)" }}>
+          <MagneticLink href={waLink()} target="_blank" rel="noopener" onClick={() => trackWhatsApp("cta")} className="hidden lg:inline-flex items-center gap-2 border text-gold px-5 py-2.5 text-xs tracking-[0.2em] uppercase hover:bg-gold hover:text-charcoal-deep" style={{ borderColor: "var(--gold)" }}>
             Falar com Advogado
           </MagneticLink>
           <button onClick={() => setMenuOpen(!menuOpen)} className="lg:hidden text-gold" aria-label="Abrir menu">
@@ -182,7 +190,7 @@ function Index() {
                 {l.label}
               </a>
             ))}
-            <a href={waLink()} target="_blank" rel="noopener" onClick={() => setMenuOpen(false)} className="inline-flex items-center gap-2 border border-gold text-gold px-5 py-2.5 text-xs tracking-[0.2em] uppercase">
+            <a href={waLink()} target="_blank" rel="noopener" onClick={() => trackWhatsApp("cta")} onClick={() => setMenuOpen(false)} className="inline-flex items-center gap-2 border border-gold text-gold px-5 py-2.5 text-xs tracking-[0.2em] uppercase">
               Falar com Advogado
             </a>
           </div>
@@ -249,6 +257,7 @@ function Index() {
                 href={waLink()}
                 target="_blank"
                 rel="noopener"
+                onClick={() => trackWhatsApp("cta")}
                 className="inline-flex items-center justify-center gap-3 text-charcoal-deep font-semibold px-7 py-4 text-xs tracking-[0.25em] uppercase hover:shadow-2xl hover:shadow-amber-900/40"
                 style={{ backgroundColor: "#bfa15f" }}
               >
@@ -320,6 +329,8 @@ function Index() {
                   <img
                     src={imgGilson2}
                     alt="Dr. Gilson Carvalho — Advogado"
+                    loading="lazy"
+                    decoding="async"
                     className="w-full max-w-[450px] h-auto object-cover rounded-lg mx-auto lg:mx-0 shadow-2xl shadow-black/60"
                     style={{ aspectRatio: "4/5" }}
                   />
@@ -386,7 +397,7 @@ function Index() {
             <div className="lg:col-span-5 order-1 lg:order-2">
               <div className="relative">
                 <div className="absolute -top-4 -right-4 w-32 h-32 border border-gold/60 hidden md:block" />
-                <img src={imgEscritorio} alt="Escritório Gilson Carvalho" className="relative w-full h-auto shadow-2xl" />
+                <img src={imgEscritorio} alt="Escritório Gilson Carvalho" loading="lazy" decoding="async" className="relative w-full h-auto shadow-2xl" />
               </div>
             </div>
           </div>
@@ -688,7 +699,7 @@ function Index() {
         <div className="max-w-7xl mx-auto px-6 lg:px-10">
           <div className="grid md:grid-cols-3 gap-12 mb-16">
             <div>
-              <img src={logo} alt="Gilson Carvalho" className="h-16 mb-6" />
+              <img src={logo} alt="Gilson Carvalho" loading="lazy" decoding="async" className="h-16 mb-6" />
               <p className="text-sm text-stone-400 leading-relaxed max-w-xs mb-6">
                 Excelência jurídica com ética, transparência e dedicação total ao seu caso.
               </p>
@@ -738,14 +749,14 @@ function Index() {
       </footer>
 
       {/* WHATSAPP FLOAT */}
-      <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-2">
+      <div className="fixed right-4 sm:right-6 bottom-24 sm:bottom-6 z-40 flex flex-col items-end gap-2">
         {waTipVisible && (
           <div
             key={waTipKey}
             className="wa-tooltip relative mr-1 px-4 py-2 border border-gold/40 text-[11px] tracking-[0.2em] uppercase text-stone-100 shadow-2xl"
             style={{ backgroundColor: "#1a1a1a" }}
           >
-            <span className="text-gold">Agendar consulta privada…</span>
+            <span className="text-gold">Agendar Consulta · Linha Direta</span>
             <span className="absolute -bottom-1 right-6 w-2 h-2 rotate-45 border-r border-b border-gold/40" style={{ backgroundColor: "#1a1a1a" }} />
           </div>
         )}
@@ -753,6 +764,7 @@ function Index() {
           href={waLink()}
           target="_blank"
           rel="noopener"
+          onClick={() => trackWhatsApp("float")}
           aria-label="Falar no WhatsApp"
           className="wa-ping wa-pulse-cta relative flex items-center justify-center w-16 h-16 rounded-full shadow-2xl shadow-green-900/50 hover:scale-110 transition-transform"
           style={{ backgroundColor: "#25D366" }}
