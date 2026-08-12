@@ -22,7 +22,17 @@ const CANONICAL = "https://gilsoncarvalho.com/";
 
 export const Route = createFileRoute("/")({
   head: () => ({
-    meta: [{ property: "og:url", content: CANONICAL }],
+    meta: [
+      { title: "Gilson Carvalho — Advocacia | Direito de Família e Sucessões em Gurupi/TO" },
+      { name: "description", content: "Ciência jurídica avançada e advocacia sob medida para proteger o seu patrimônio e seus direitos. OAB/TO 2.591 · OAB/RJ 256.131." },
+      { property: "og:title", content: "Gilson Carvalho — Advocacia | Ciência Jurídica Avançada" },
+      { property: "og:description", content: "Advocacia sob medida em Direito de Família e Sucessões. Atendimento sigiloso em todo o Brasil." },
+      { property: "og:type", content: "website" },
+      { property: "og:image", content: "https://gilsoncarvalho.com/og-gilson.jpg" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:image", content: "https://gilsoncarvalho.com/og-gilson.jpg" },
+      { property: "og:url", content: CANONICAL },
+    ],
     links: [{ rel: "canonical", href: CANONICAL }],
   }),
   component: Index,
@@ -32,7 +42,7 @@ const WHATSAPP = "5563984474070";
 const waLink = (msg = "Olá, gostaria de agendar uma consulta jurídica.") =>
   `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(msg)}`;
 
-const INSTAGRAM_URL = "https://www.instagram.com/gilsoncarvalho.adv/";
+const INSTAGRAM_URL = "https://instagram.com/gilsoncarvalho.adv";
 
 const reveal = {
   initial: { opacity: 0, y: 20 },
@@ -572,11 +582,11 @@ function Index() {
             </p>
             <div className="space-y-6">
               {[
-                { Icon: MapPin, label: "Endereço", value: "Av. Guanabara, nº 1669, Centro — Gurupi, Tocantins" },
-                { Icon: Mail, label: "E-mail", value: "advogado@gilsoncarvalho.com" },
-                { Icon: Phone, label: "WhatsApp", value: "+55 (63) 98447-4070" },
-              ].map(({ Icon, label, value }) => (
-                <div key={label} className="flex items-start gap-5 border-b border-white/5 pb-6">
+                { Icon: MapPin, label: "Endereço", value: "Av. Guanabara, nº 1669, Centro — Gurupi, Tocantins", href: "https://maps.google.com/?q=Av.+Guanabara,+1669,+Centro+-+Gurupi,+TO" },
+                { Icon: Mail, label: "E-mail", value: "advogado@gilsoncarvalho.com", href: "mailto:advogado@gilsoncarvalho.com" },
+                { Icon: Phone, label: "WhatsApp", value: "+55 (63) 98447-4070", href: waLink() },
+              ].map(({ Icon, label, value, href }) => (
+                <a key={label} href={href} target="_blank" rel="noopener noreferrer" onClick={() => { if (label === "WhatsApp") trackWhatsApp("contato"); }} className="flex items-start gap-5 border-b border-white/5 pb-6 hover:opacity-80 transition-opacity">
                   <div className="flex items-center justify-center w-12 h-12 border border-gold/40 shrink-0">
                     <Icon size={18} className="text-gold" />
                   </div>
@@ -584,7 +594,7 @@ function Index() {
                     <div className="text-[10px] tracking-[0.3em] uppercase text-gold mb-1">{label}</div>
                     <div className="text-stone-100">{value}</div>
                   </div>
-                </div>
+                </a>
               ))}
             </div>
             <div className="mt-10 flex items-center gap-4">
@@ -728,9 +738,9 @@ function Index() {
             <div>
               <h5 className="text-[10px] tracking-[0.3em] uppercase text-gold mb-6">Contato</h5>
               <ul className="space-y-3 text-sm text-stone-300">
-                <li>Av. Guanabara, 1669 — Gurupi/TO</li>
-                <li>advogado@gilsoncarvalho.com</li>
-                <li>+55 (63) 98447-4070</li>
+                <li><a href="https://maps.google.com/?q=Av.+Guanabara,+1669,+Centro+-+Gurupi,+TO" target="_blank" rel="noopener noreferrer" className="hover:text-gold transition-colors">Av. Guanabara, 1669 — Gurupi/TO</a></li>
+                <li><a href="mailto:advogado@gilsoncarvalho.com" className="hover:text-gold transition-colors">advogado@gilsoncarvalho.com</a></li>
+                <li><a href={waLink()} target="_blank" rel="noopener" onClick={() => trackWhatsApp("rodape")} className="hover:text-gold transition-colors">+55 (63) 98447-4070</a></li>
                 <li className="pt-3 text-stone-400">
                   <span className="block text-[10px] tracking-[0.3em] uppercase text-gold mb-1">Horário de Atendimento</span>
                   Segunda a Sexta · 09:00 às 18:00
