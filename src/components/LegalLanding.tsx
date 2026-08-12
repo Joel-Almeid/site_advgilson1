@@ -292,9 +292,20 @@ export default function LegalLanding(p: LandingProps) {
               {sent ? (
                 <div className="flex flex-col items-center text-center py-10 gap-4">
                   <CheckCircle2 size={56} className="text-gold" strokeWidth={1.2} />
-                  <p className="font-serif-luxe text-2xl text-stone-50">Sua Mensagem foi enviada com sucesso!</p>
-                  <p className="text-stone-400 text-sm">Em breve nossa equipe entrará em contato com você.</p>
+                  <p className="font-serif-luxe text-2xl text-stone-50">Triagem iniciada com sucesso!</p>
+                  <p className="text-stone-400 text-sm">Clique no botão verde abaixo para iniciar sua conversa privada no WhatsApp.</p>
+                  <a
+                    href={waFinalLink || waLink(p.whatsappMessage)}
+                    target="_blank"
+                    rel="noopener"
+                    onClick={() => trackWhatsApp("pos_triagem")}
+                    className="wa-pulse-cta mt-2 inline-flex items-center justify-center gap-3 px-6 py-4 text-xs tracking-[0.25em] uppercase font-semibold shadow-2xl shadow-green-900/30"
+                    style={{ backgroundColor: "#25D366", color: "#0d2418" }}
+                  >
+                    <FaWhatsapp className="w-5 h-5" /> Abrir conversa no WhatsApp
+                  </a>
                 </div>
+
               ) : (
                 <>
                   {[
