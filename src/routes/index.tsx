@@ -190,7 +190,7 @@ function Index() {
                 {l.label}
               </a>
             ))}
-            <a href={waLink()} target="_blank" rel="noopener" onClick={() => trackWhatsApp("cta")} onClick={() => setMenuOpen(false)} className="inline-flex items-center gap-2 border border-gold text-gold px-5 py-2.5 text-xs tracking-[0.2em] uppercase">
+            <a href={waLink()} target="_blank" rel="noopener" onClick={() => { trackWhatsApp("cta"); setMenuOpen(false); }} className="inline-flex items-center gap-2 border border-gold text-gold px-5 py-2.5 text-xs tracking-[0.2em] uppercase">
               Falar com Advogado
             </a>
           </div>
@@ -255,6 +255,7 @@ function Index() {
             <div className="mt-10 flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
               <MagneticLink
                 href={waLink()}
+                onClick={() => trackWhatsApp("hero")}
                 target="_blank"
                 rel="noopener"
                 onClick={() => trackWhatsApp("cta")}
