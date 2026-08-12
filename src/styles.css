@@ -320,3 +320,6 @@ body { font-family: 'Inter', sans-serif; background: #333333; color: #e8e6e1; }
 @media (prefers-reduced-motion: reduce) {
   .cta-pulse-gold { animation: none; }
 }
+
+/* Estrelas de prova social preenchidas em dourado */
+.fill-gold { fill: var(--gold); }

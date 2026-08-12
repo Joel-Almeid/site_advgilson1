@@ -13,6 +13,7 @@ import { Route as UniaoEstavelRouteImport } from './routes/uniao-estavel'
 import { Route as TrabalhistaExecutivoRouteImport } from './routes/trabalhista-executivo'
 import { Route as PrevidenciarioRouteImport } from './routes/previdenciario'
 import { Route as PensaoEGuardaRouteImport } from './routes/pensao-e-guarda'
+import { Route as PensaoRouteImport } from './routes/pensao'
 import { Route as LinksRouteImport } from './routes/links'
 import { Route as InventarioRouteImport } from './routes/inventario'
 import { Route as ImobiliarioRouteImport } from './routes/imobiliario'
@@ -39,6 +40,11 @@ const PrevidenciarioRoute = PrevidenciarioRouteImport.update({
 const PensaoEGuardaRoute = PensaoEGuardaRouteImport.update({
   id: '/pensao-e-guarda',
   path: '/pensao-e-guarda',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PensaoRoute = PensaoRouteImport.update({
+  id: '/pensao',
+  path: '/pensao',
   getParentRoute: () => rootRouteImport,
 } as any)
 const LinksRoute = LinksRouteImport.update({
@@ -85,6 +91,7 @@ export interface FileRoutesByFullPath {
   '/imobiliario': typeof ImobiliarioRoute
   '/inventario': typeof InventarioRoute
   '/links': typeof LinksRoute
+  '/pensao': typeof PensaoRoute
   '/pensao-e-guarda': typeof PensaoEGuardaRoute
   '/previdenciario': typeof PrevidenciarioRoute
   '/trabalhista-executivo': typeof TrabalhistaExecutivoRoute
@@ -98,6 +105,7 @@ export interface FileRoutesByTo {
   '/imobiliario': typeof ImobiliarioRoute
   '/inventario': typeof InventarioRoute
   '/links': typeof LinksRoute
+  '/pensao': typeof PensaoRoute
   '/pensao-e-guarda': typeof PensaoEGuardaRoute
   '/previdenciario': typeof PrevidenciarioRoute
   '/trabalhista-executivo': typeof TrabalhistaExecutivoRoute
@@ -112,6 +120,7 @@ export interface FileRoutesById {
   '/imobiliario': typeof ImobiliarioRoute
   '/inventario': typeof InventarioRoute
   '/links': typeof LinksRoute
+  '/pensao': typeof PensaoRoute
   '/pensao-e-guarda': typeof PensaoEGuardaRoute
   '/previdenciario': typeof PrevidenciarioRoute
   '/trabalhista-executivo': typeof TrabalhistaExecutivoRoute
@@ -127,6 +136,7 @@ export interface FileRouteTypes {
     | '/imobiliario'
     | '/inventario'
     | '/links'
+    | '/pensao'
     | '/pensao-e-guarda'
     | '/previdenciario'
     | '/trabalhista-executivo'
@@ -140,6 +150,7 @@ export interface FileRouteTypes {
     | '/imobiliario'
     | '/inventario'
     | '/links'
+    | '/pensao'
     | '/pensao-e-guarda'
     | '/previdenciario'
     | '/trabalhista-executivo'
@@ -153,6 +164,7 @@ export interface FileRouteTypes {
     | '/imobiliario'
     | '/inventario'
     | '/links'
+    | '/pensao'
     | '/pensao-e-guarda'
     | '/previdenciario'
     | '/trabalhista-executivo'
@@ -167,6 +179,7 @@ export interface RootRouteChildren {
   ImobiliarioRoute: typeof ImobiliarioRoute
   InventarioRoute: typeof InventarioRoute
   LinksRoute: typeof LinksRoute
+  PensaoRoute: typeof PensaoRoute
   PensaoEGuardaRoute: typeof PensaoEGuardaRoute
   PrevidenciarioRoute: typeof PrevidenciarioRoute
   TrabalhistaExecutivoRoute: typeof TrabalhistaExecutivoRoute
@@ -201,6 +214,13 @@ declare module '@tanstack/react-router' {
       path: '/pensao-e-guarda'
       fullPath: '/pensao-e-guarda'
       preLoaderRoute: typeof PensaoEGuardaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/pensao': {
+      id: '/pensao'
+      path: '/pensao'
+      fullPath: '/pensao'
+      preLoaderRoute: typeof PensaoRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/links': {
@@ -263,6 +283,7 @@ const rootRouteChildren: RootRouteChildren = {
   ImobiliarioRoute: ImobiliarioRoute,
   InventarioRoute: InventarioRoute,
   LinksRoute: LinksRoute,
+  PensaoRoute: PensaoRoute,
   PensaoEGuardaRoute: PensaoEGuardaRoute,
   PrevidenciarioRoute: PrevidenciarioRoute,
   TrabalhistaExecutivoRoute: TrabalhistaExecutivoRoute,
