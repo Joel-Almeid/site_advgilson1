@@ -44,7 +44,9 @@ export default function LegalLanding(p: LandingProps) {
   const [form, setForm] = useState({ nome: "", telefone: "", email: "", mensagem: "" });
   const [sent, setSent] = useState(false);
   const [sending, setSending] = useState(false);
+  const [waFinalLink, setWaFinalLink] = useState("");
   const [error, setError] = useState("");
+
   const [waTipVisible, setWaTipVisible] = useState(false);
   const [waTipKey, setWaTipKey] = useState(0);
 
