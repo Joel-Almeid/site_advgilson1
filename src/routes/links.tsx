@@ -10,7 +10,10 @@ import {
   FileText,
   HeartHandshake,
   ExternalLink,
+  Globe,
+  Share2,
 } from "lucide-react";
+import { toast } from "sonner";
 import logo from "@/assets/logo_gilson.png";
 import avatarAsset from "@/assets/fotogilsonlink.png.asset.json";
 import { trackWhatsApp, trackEvent } from "@/lib/analytics";
@@ -31,22 +34,25 @@ const handleWhatsAppClick = (label: string) => {
 export const Route = createFileRoute("/links")({
   head: () => ({
     meta: [
-      { title: "Gilson Carvalho — Links Oficiais" },
+      { title: "Dr. Gilson Carvalho | Cartão Virtual e Canais de Atendimento" },
       {
         name: "description",
         content:
-          "Canais oficiais do Dr. Gilson Carvalho. Agende sua consulta jurídica pelo WhatsApp, acesse o Instagram ou visualize a localização do escritório.",
+          "Acesse rapidamente nossos canais oficiais de atendimento, localização do escritório e agendamento de consultas jurídicas.",
       },
-      { property: "og:title", content: "Gilson Carvalho — Links Oficiais" },
+      { property: "og:title", content: "Dr. Gilson Carvalho | Cartão Virtual e Canais de Atendimento" },
       {
         property: "og:description",
-        content: "Agende sua consulta jurídica. Direito de Família, Sucessões e Proteção Patrimonial.",
+        content:
+          "Acesse rapidamente nossos canais oficiais de atendimento, localização do escritório e agendamento de consultas jurídicas.",
       },
       { property: "og:type", content: "website" },
-      { property: "og:url", content: "https://gilsoncarvalho.com/links" },
-      { name: "twitter:card", content: "summary" },
+      { property: "og:url", content: "https://edfedfedfedfedf.lovable.app/links" },
+      { property: "og:image", content: "https://edfedfedfedfedf.lovable.app/og-gilson.jpg" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:image", content: "https://edfedfedfedfedf.lovable.app/og-gilson.jpg" },
     ],
-    links: [{ rel: "canonical", href: "https://gilsoncarvalho.com/links" }],
+    links: [{ rel: "canonical", href: "https://edfedfedfedfedf.lovable.app/links" }],
   }),
   component: LinksPage,
 });
@@ -57,6 +63,7 @@ type ActionItem = {
   href?: string;
   to?: string;
   external?: boolean;
+  showExternalIcon?: boolean;
   variant?: "primary" | "default";
   Icon: React.ComponentType<{ size?: number; className?: string; strokeWidth?: number }>;
   onClick?: () => void;
@@ -70,7 +77,18 @@ const topActions: ActionItem[] = [
     external: true,
     variant: "primary",
     Icon: MessageCircle,
-    onClick: () => handleWhatsAppClick("links_whatsapp_agendar"),
+    onClick: () => {
+      handleWhatsAppClick("links_whatsapp_agendar");
+      trackEvent("click_link_whatsapp", { local: "links" });
+    },
+  },
+  {
+    label: "Site Oficial",
+    sublabel: "Conheça nosso portal corporativo",
+    to: "/",
+    showExternalIcon: true,
+    Icon: Globe,
+    onClick: () => trackEvent("click_link_site_oficial", { local: "links" }),
   },
   {
     label: "Localização do Escritório",
@@ -78,6 +96,7 @@ const topActions: ActionItem[] = [
     href: MAPS_URL,
     external: true,
     Icon: MapPin,
+    onClick: () => trackEvent("click_link_maps", { local: "links" }),
   },
   {
     label: "Instagram Oficial",
@@ -85,6 +104,7 @@ const topActions: ActionItem[] = [
     href: INSTAGRAM_URL,
     external: true,
     Icon: Instagram,
+    onClick: () => trackEvent("click_link_instagram", { local: "links" }),
   },
   {
     label: "Contato via E-mail Profissional",
@@ -92,15 +112,19 @@ const topActions: ActionItem[] = [
     href: EMAIL_URL,
     external: true,
     Icon: Mail,
+    onClick: () => trackEvent("click_link_email", { local: "links" }),
   },
 ];
 
 const serviceLinks: ActionItem[] = [
-  { label: "Divórcio Rápido e Justo", to: "/divorcio", Icon: Scale },
-  { label: "Guarda e Pensão Alimentícia", to: "/pensao-e-guarda", Icon: Users },
-  { label: "Inventário e Partilha de Bens", to: "/inventario", Icon: FileText },
-  { label: "União Estável e Proteção Patrimonial", to: "/uniao-estavel", Icon: HeartHandshake },
-];
+  { label: "Divórcio Rápido e Justo", to: "/divorcio", Icon: Scale, showExternalIcon: true },
+  { label: "Guarda e Pensão Alimentícia", to: "/pensao-e-guarda", Icon: Users, showExternalIcon: true },
+  { label: "Inventário e Partilha de Bens", to: "/inventario", Icon: FileText, showExternalIcon: true },
+  { label: "União Estável e Proteção Patrimonial", to: "/uniao-estavel", Icon: HeartHandshake, showExternalIcon: true },
+].map((it) => ({
+  ...it,
+  onClick: () => trackEvent("click_link_especialidade", { servico: it.label }),
+}));
 
 function LinkButton({
   item,
@@ -112,7 +136,7 @@ function LinkButton({
   const isPrimary = item.variant === "primary";
 
   const baseClass =
-    "group relative flex items-center gap-3 w-full px-5 py-4 rounded-xl border text-left transition-all duration-300 hover:-translate-y-0.5";
+    "group relative flex items-center gap-3 w-full px-5 py-4 rounded-xl border text-left transition-all duration-300 hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-[#2b2b2b]";
 
   const primaryClass =
     "bg-gradient-to-r from-[#25D366]/20 to-[#25D366]/5 border-[#25D366]/50 text-stone-50 hover:bg-[#25D366]/30 hover:border-[#25D366] hover:shadow-[0_12px_40px_-12px_rgba(37,211,102,0.35)]";
@@ -139,7 +163,7 @@ function LinkButton({
           <span className="block text-[11px] text-stone-400 mt-0.5">{item.sublabel}</span>
         )}
       </span>
-      {item.external ? (
+      {item.external || item.showExternalIcon ? (
         <ExternalLink size={14} className="text-stone-500 group-hover:text-gold transition-colors" />
       ) : (
         <span className="w-[14px]" aria-hidden="true" />
