@@ -186,7 +186,7 @@ function Index() {
               );
             })}
           </nav>
-          <MagneticLink href={waLink()} target="_blank" rel="noopener" onClick={() => trackWhatsApp("cta")} className="hidden lg:inline-flex items-center gap-2 border text-gold px-5 py-2.5 text-xs tracking-[0.2em] uppercase hover:bg-gold hover:text-charcoal-deep" style={{ borderColor: "var(--gold)" }}>
+          <MagneticLink href={waLink()} target="_blank" rel="noopener noreferrer" onClick={() => trackWhatsApp("cta")} className="hidden lg:inline-flex items-center gap-2 border text-gold px-5 py-2.5 text-xs tracking-[0.2em] uppercase hover:bg-gold hover:text-charcoal-deep" style={{ borderColor: "var(--gold)" }}>
             Falar com Advogado
           </MagneticLink>
           <button onClick={() => setMenuOpen(!menuOpen)} className="lg:hidden text-gold" aria-label="Abrir menu">
@@ -200,7 +200,7 @@ function Index() {
                 {l.label}
               </a>
             ))}
-            <a href={waLink()} target="_blank" rel="noopener" onClick={() => { trackWhatsApp("cta"); setMenuOpen(false); }} className="inline-flex items-center gap-2 border border-gold text-gold px-5 py-2.5 text-xs tracking-[0.2em] uppercase">
+            <a href={waLink()} target="_blank" rel="noopener noreferrer" onClick={() => { trackWhatsApp("cta"); setMenuOpen(false); }} className="inline-flex items-center gap-2 border border-gold text-gold px-5 py-2.5 text-xs tracking-[0.2em] uppercase">
               Falar com Advogado
             </a>
           </div>
@@ -267,7 +267,7 @@ function Index() {
                 href={waLink()}
                 
                 target="_blank"
-                rel="noopener"
+                rel="noopener noreferrer"
                 onClick={() => trackWhatsApp("cta")}
                 className="inline-flex items-center justify-center gap-3 text-charcoal-deep font-semibold px-7 py-4 text-xs tracking-[0.25em] uppercase hover:shadow-2xl hover:shadow-amber-900/40"
                 style={{ backgroundColor: "#bfa15f" }}
@@ -740,7 +740,7 @@ function Index() {
               <ul className="space-y-3 text-sm text-stone-300">
                 <li><a href="https://maps.google.com/?q=Av.+Guanabara,+1669,+Centro+-+Gurupi,+TO" target="_blank" rel="noopener noreferrer" className="hover:text-gold transition-colors">Av. Guanabara, 1669 — Gurupi/TO</a></li>
                 <li><a href="mailto:advogado@gilsoncarvalho.com" className="hover:text-gold transition-colors">advogado@gilsoncarvalho.com</a></li>
-                <li><a href={waLink()} target="_blank" rel="noopener" onClick={() => trackWhatsApp("rodape")} className="hover:text-gold transition-colors">+55 (63) 98447-4070</a></li>
+                <li><a href={waLink()} target="_blank" rel="noopener noreferrer" onClick={() => trackWhatsApp("rodape")} className="hover:text-gold transition-colors">+55 (63) 98447-4070</a></li>
                 <li className="pt-3 text-stone-400">
                   <span className="block text-[10px] tracking-[0.3em] uppercase text-gold mb-1">Horário de Atendimento</span>
                   Segunda a Sexta · 09:00 às 18:00
@@ -774,7 +774,7 @@ function Index() {
         <a
           href={waLink()}
           target="_blank"
-          rel="noopener"
+          rel="noopener noreferrer"
           onClick={() => trackWhatsApp("float")}
           aria-label="Falar no WhatsApp"
           className="wa-ping wa-pulse-cta relative flex items-center justify-center w-16 h-16 rounded-full shadow-2xl shadow-green-900/50 hover:scale-110 transition-transform"
