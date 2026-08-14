@@ -196,10 +196,44 @@ function LinkButton({
   );
 }
 
+function ShareButton() {
+  const handleShare = async () => {
+    trackEvent("click_link_compartilhar", { local: "links" });
+    const url = typeof window !== "undefined" ? window.location.href : "";
+    const data = {
+      title: "Dr. Gilson Carvalho — Advocacia",
+      text: "Canais oficiais de atendimento do Dr. Gilson Carvalho.",
+      url,
+    };
+    try {
+      if (typeof navigator !== "undefined" && navigator.share) {
+        await navigator.share(data);
+        return;
+      }
+      await navigator.clipboard.writeText(url);
+      toast.success("Link copiado com sucesso!");
+    } catch {
+      // usuário cancelou o compartilhamento nativo
+    }
+  };
+
+  return (
+    <button
+      type="button"
+      onClick={handleShare}
+      aria-label="Compartilhar cartão digital"
+      className="group inline-flex items-center gap-2 rounded-full border border-gold/40 bg-white/[0.04] backdrop-blur-md px-4 py-2 text-[10px] tracking-[0.22em] uppercase text-gold transition-all hover:bg-gold/15 hover:border-gold focus:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-[#2b2b2b]"
+    >
+      <Share2 size={14} strokeWidth={1.6} />
+      Compartilhar cartão digital
+    </button>
+  );
+}
+
 function LinksPage() {
   return (
     <div
-      className="min-h-screen relative flex flex-col items-center px-5 py-12 sm:py-16"
+      className="min-h-screen relative flex flex-col items-center px-5 py-12 pb-20 sm:py-16"
       style={{ backgroundColor: "#2b2b2b" }}
     >
       {/* Mármoro sutil e overlay de ruído */}
@@ -270,8 +304,12 @@ function LinksPage() {
           resultados seguros há mais de 20 anos.
         </motion.p>
 
+        <div className="mt-6">
+          <ShareButton />
+        </div>
+
         {/* Top actions */}
-        <ul className="mt-10 w-full space-y-3">
+        <ul className="mt-8 w-full space-y-3">
           {topActions.map((it, i) => (
             <LinkButton key={it.label} item={it} index={i} />
           ))}
