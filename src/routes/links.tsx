@@ -1,49 +1,195 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { motion } from "framer-motion";
-import { FaWhatsapp, FaInstagram } from "react-icons/fa";
-import { Globe, Scale, Users, FileText, HeartHandshake } from "lucide-react";
+import {
+  MessageCircle,
+  MapPin,
+  Instagram,
+  Mail,
+  Scale,
+  Users,
+  FileText,
+  HeartHandshake,
+  ExternalLink,
+} from "lucide-react";
 import logo from "@/assets/logo_gilson.png";
-import avatar from "@/assets/foto2gilson.png";
+import avatarAsset from "@/assets/fotogilsonlink.png.asset.json";
+import { trackWhatsApp, trackEvent } from "@/lib/analytics";
 
 const WHATSAPP = "5563984474070";
-const waLink = `https://wa.me/${WHATSAPP}?text=${encodeURIComponent("Olá, gostaria de agendar uma consulta jurídica.")}`;
+const waMessage = "Olá, Dr. Gilson! Gostaria de agendar uma consulta jurídica.";
+const waLink = `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(waMessage)}`;
 const INSTAGRAM_URL = "https://www.instagram.com/gilsoncarvalho.adv/";
+const MAPS_URL = "https://maps.google.com/?q=Av.+Guanabara,+1669,+Centro+-+Gurupi,+TO";
+const EMAIL_URL = "mailto:advogado@gilsoncarvalho.com";
+const AVATAR_URL = avatarAsset.url;
+
+const handleWhatsAppClick = (label: string) => {
+  trackWhatsApp(label);
+  trackEvent("click_whatsapp", { local: label, method: "whatsapp" });
+};
 
 export const Route = createFileRoute("/links")({
   head: () => ({
     meta: [
-      { title: "Gilson Carvalho — Links" },
-      { name: "description", content: "Especialista em Direito de Família e Sucessões há mais de 20 anos. Atuação estratégica e soluções seguras." },
-      { property: "og:title", content: "Gilson Carvalho — Links" },
-      { property: "og:description", content: "Especialista em Direito de Família e Sucessões há mais de 20 anos." },
+      { title: "Gilson Carvalho — Links Oficiais" },
+      {
+        name: "description",
+        content:
+          "Canais oficiais do Dr. Gilson Carvalho. Agende sua consulta jurídica pelo WhatsApp, acesse o Instagram ou visualize a localização do escritório.",
+      },
+      { property: "og:title", content: "Gilson Carvalho — Links Oficiais" },
+      {
+        property: "og:description",
+        content: "Agende sua consulta jurídica. Direito de Família, Sucessões e Proteção Patrimonial.",
+      },
+      { property: "og:type", content: "website" },
+      { property: "og:url", content: "https://gilsoncarvalho.com/links" },
+      { name: "twitter:card", content: "summary" },
     ],
+    links: [{ rel: "canonical", href: "https://gilsoncarvalho.com/links" }],
   }),
   component: LinksPage,
 });
 
-type LinkItem = {
+type ActionItem = {
   label: string;
+  sublabel?: string;
   href?: string;
   to?: string;
   external?: boolean;
+  variant?: "primary" | "default";
   Icon: React.ComponentType<{ size?: number; className?: string; strokeWidth?: number }>;
+  onClick?: () => void;
 };
 
-const items: LinkItem[] = [
-  { label: "Falar com Advogado (WhatsApp)", href: waLink, external: true, Icon: FaWhatsapp },
-  { label: "Site Oficial", to: "/", Icon: Globe },
+const topActions: ActionItem[] = [
+  {
+    label: "Agendar Consulta no WhatsApp",
+    sublabel: "Resposta em poucos minutos",
+    href: waLink,
+    external: true,
+    variant: "primary",
+    Icon: MessageCircle,
+    onClick: () => handleWhatsAppClick("links_whatsapp_agendar"),
+  },
+  {
+    label: "Localização do Escritório",
+    sublabel: "Como chegar",
+    href: MAPS_URL,
+    external: true,
+    Icon: MapPin,
+  },
+  {
+    label: "Instagram Oficial",
+    sublabel: "@gilsoncarvalho.adv",
+    href: INSTAGRAM_URL,
+    external: true,
+    Icon: Instagram,
+  },
+  {
+    label: "Contato via E-mail Profissional",
+    sublabel: "advogado@gilsoncarvalho.com",
+    href: EMAIL_URL,
+    external: true,
+    Icon: Mail,
+  },
+];
+
+const serviceLinks: ActionItem[] = [
   { label: "Divórcio Rápido e Justo", to: "/divorcio", Icon: Scale },
   { label: "Guarda e Pensão Alimentícia", to: "/pensao-e-guarda", Icon: Users },
-  { label: "Inventário e Partilha", to: "/inventario", Icon: FileText },
-  { label: "União Estável", to: "/uniao-estavel", Icon: HeartHandshake },
+  { label: "Inventário e Partilha de Bens", to: "/inventario", Icon: FileText },
+  { label: "União Estável e Proteção Patrimonial", to: "/uniao-estavel", Icon: HeartHandshake },
 ];
+
+function LinkButton({
+  item,
+  index,
+}: {
+  item: ActionItem;
+  index: number;
+}) {
+  const isPrimary = item.variant === "primary";
+
+  const baseClass =
+    "group relative flex items-center gap-3 w-full px-5 py-4 rounded-xl border text-left transition-all duration-300 hover:-translate-y-0.5";
+
+  const primaryClass =
+    "bg-gradient-to-r from-[#25D366]/20 to-[#25D366]/5 border-[#25D366]/50 text-stone-50 hover:bg-[#25D366]/30 hover:border-[#25D366] hover:shadow-[0_12px_40px_-12px_rgba(37,211,102,0.35)]";
+
+  const defaultClass =
+    "bg-white/[0.03] backdrop-blur-md border-gold/30 text-stone-100 hover:bg-gold/15 hover:border-gold hover:text-white hover:shadow-[0_12px_40px_-12px_rgba(201,165,90,0.25)]";
+
+  const className = `${baseClass} ${isPrimary ? primaryClass : defaultClass}`;
+
+  const inner = (
+    <>
+      <span
+        className={`flex items-center justify-center shrink-0 w-10 h-10 rounded-full border ${
+          isPrimary
+            ? "border-[#25D366]/40 bg-[#25D366]/10 text-[#25D366]"
+            : "border-gold/30 bg-gold/10 text-gold"
+        }`}
+      >
+        <item.Icon size={18} strokeWidth={1.5} />
+      </span>
+      <span className="flex-1 min-w-0">
+        <span className="block text-sm tracking-wider uppercase font-medium">{item.label}</span>
+        {item.sublabel && (
+          <span className="block text-[11px] text-stone-400 mt-0.5">{item.sublabel}</span>
+        )}
+      </span>
+      {item.external ? (
+        <ExternalLink size={14} className="text-stone-500 group-hover:text-gold transition-colors" />
+      ) : (
+        <span className="w-[14px]" aria-hidden="true" />
+      )}
+    </>
+  );
+
+  return (
+    <motion.li
+      initial={{ opacity: 0, y: 14 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.45, delay: 0.12 + index * 0.07, ease: "easeOut" }}
+    >
+      {item.external && item.href ? (
+        <a
+          href={item.href}
+          target="_blank"
+          rel="noopener noreferrer"
+          className={className}
+          onClick={item.onClick}
+        >
+          {inner}
+        </a>
+      ) : item.to ? (
+        <Link to={item.to} className={className} onClick={item.onClick}>
+          {inner}
+        </Link>
+      ) : null}
+    </motion.li>
+  );
+}
 
 function LinksPage() {
   return (
-    <div className="min-h-screen relative flex flex-col items-center px-5 py-12 sm:py-16" style={{ backgroundColor: "#333333" }}>
+    <div
+      className="min-h-screen relative flex flex-col items-center px-5 py-12 sm:py-16"
+      style={{ backgroundColor: "#2b2b2b" }}
+    >
+      {/* Mármoro sutil e overlay de ruído */}
+      <div
+        className="absolute inset-0 opacity-20 pointer-events-none"
+        style={{
+          backgroundImage:
+            "linear-gradient(135deg, rgba(201,165,90,0.08) 0%, transparent 40%, rgba(201,165,90,0.05) 100%)",
+        }}
+        aria-hidden="true"
+      />
       <div className="noise-overlay" aria-hidden="true" />
 
-      <div className="relative w-full max-w-md mx-auto flex flex-col items-center text-center">
+      <div className="relative z-10 w-full max-w-md mx-auto flex flex-col items-center text-center">
         {/* Avatar */}
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
@@ -51,72 +197,95 @@ function LinksPage() {
           transition={{ duration: 0.6, ease: "easeOut" }}
           className="relative"
         >
-          <div className="absolute inset-0 rounded-full blur-xl" style={{ backgroundColor: "rgba(191,161,95,0.35)" }} />
-          <div className="relative w-32 h-32 sm:w-36 sm:h-36 rounded-full overflow-hidden border-2" style={{ borderColor: "#bfa15f" }}>
-            <img src={avatar} alt="Gilson Carvalho" className="w-full h-full object-cover" />
+          <div
+            className="absolute inset-0 rounded-full blur-2xl"
+            style={{ backgroundColor: "rgba(201,165,90,0.35)" }}
+          />
+          <div
+            className="relative w-36 h-36 sm:w-40 sm:h-40 rounded-full overflow-hidden border-[3px] shadow-2xl"
+            style={{ borderColor: "#c9a55a" }}
+          >
+            <img
+              src={AVATAR_URL}
+              alt="Dr. Gilson Carvalho"
+              className="w-full h-full object-cover"
+              loading="eager"
+            />
           </div>
         </motion.div>
 
         {/* Name & subtitle */}
-        <h1 className="mt-6 font-serif-luxe text-3xl sm:text-4xl text-stone-50">Gilson Carvalho</h1>
-        <div className="mt-3 flex items-center gap-3">
-          <span className="text-[10px] tracking-[0.25em] uppercase text-gold border border-gold/40 px-2.5 py-0.5">OAB/TO 2.591</span>
-          <span className="text-[10px] tracking-[0.25em] uppercase text-gold border border-gold/40 px-2.5 py-0.5">OAB/RJ 256.131</span>
-        </div>
-        <p className="mt-5 text-stone-300 text-sm leading-relaxed max-w-sm">
-          Especialista em Direito de Família e Sucessões há mais de 20 anos. Atuação estratégica e soluções seguras.
-        </p>
+        <motion.h1
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.15 }}
+          className="mt-6 font-serif-luxe text-3xl sm:text-4xl text-stone-50"
+        >
+          Gilson Carvalho
+        </motion.h1>
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.22 }}
+          className="mt-3 flex flex-wrap items-center justify-center gap-2"
+        >
+          <span className="text-[10px] tracking-[0.22em] uppercase text-gold border border-gold/40 px-2.5 py-0.5">
+            OAB/TO 2.591
+          </span>
+          <span className="text-[10px] tracking-[0.22em] uppercase text-gold border border-gold/40 px-2.5 py-0.5">
+            OAB/RJ 256.131
+          </span>
+        </motion.div>
+        <motion.p
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.29 }}
+          className="mt-5 text-stone-300 text-sm leading-relaxed max-w-sm"
+        >
+          Advogado especialista em Direito de Família e Sucessões. Atuação estratégica, ética e
+          resultados seguros há mais de 20 anos.
+        </motion.p>
 
-        {/* Social row */}
-        <div className="mt-6 flex items-center gap-4">
-          <a href={INSTAGRAM_URL} target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="flex items-center justify-center w-10 h-10 border border-gold/40 hover:border-gold hover:text-gold text-stone-300 transition-colors">
-            <FaInstagram className="w-4 h-4" />
-          </a>
-          <a href={waLink} target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" className="flex items-center justify-center w-10 h-10 border border-gold/40 hover:border-gold hover:text-gold text-stone-300 transition-colors">
-            <FaWhatsapp className="w-4 h-4" />
-          </a>
-        </div>
-
-        {/* Links */}
-        <ul className="mt-10 w-full space-y-3.5">
-          {items.map((it, i) => {
-            const inner = (
-              <>
-                <it.Icon size={18} className="text-gold shrink-0" strokeWidth={1.5} />
-                <span className="flex-1 text-center text-sm tracking-wider uppercase">{it.label}</span>
-                <span className="w-[18px]" aria-hidden="true" />
-              </>
-            );
-            const className =
-              "group flex items-center gap-3 w-full px-5 py-4 rounded-xl border text-stone-100 transition-all hover:bg-gold hover:text-charcoal-deep hover:border-gold hover:-translate-y-0.5 hover:shadow-xl hover:shadow-amber-900/30";
-            const style: React.CSSProperties = { backgroundColor: "#333333", borderColor: "#bfa15f" };
-
-            return (
-              <motion.li
-                key={it.label}
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.4, delay: 0.1 + i * 0.06, ease: "easeOut" }}
-              >
-                {it.external && it.href ? (
-                  <a href={it.href} target="_blank" rel="noopener noreferrer" className={className} style={style}>
-                    {inner}
-                  </a>
-                ) : (
-                  <Link to={it.to!} className={className} style={style}>
-                    {inner}
-                  </Link>
-                )}
-              </motion.li>
-            );
-          })}
+        {/* Top actions */}
+        <ul className="mt-10 w-full space-y-3">
+          {topActions.map((it, i) => (
+            <LinkButton key={it.label} item={it} index={i} />
+          ))}
         </ul>
 
+        {/* Serviços principais */}
+        <motion.div
+          initial={{ opacity: 0, y: 14 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.55 }}
+          className="mt-8 w-full"
+        >
+          <div className="flex items-center gap-3 mb-4">
+            <div className="flex-1 h-px bg-gradient-to-r from-transparent via-gold/40 to-transparent" />
+            <span className="text-[11px] tracking-[0.25em] uppercase text-gold/80">
+              Especialidades
+            </span>
+            <div className="flex-1 h-px bg-gradient-to-r from-transparent via-gold/40 to-transparent" />
+          </div>
+          <ul className="w-full space-y-2.5">
+            {serviceLinks.map((it, i) => (
+              <LinkButton key={it.label} item={it} index={i + topActions.length} />
+            ))}
+          </ul>
+        </motion.div>
+
         {/* Footer */}
-        <div className="mt-14 flex flex-col items-center gap-3 opacity-70">
-          <img src={logo} alt="Gilson Carvalho" className="h-10 w-auto" />
-          <p className="text-[11px] tracking-[0.2em] uppercase text-stone-400">© 2026 Gilson Carvalho</p>
-        </div>
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.6, delay: 0.85 }}
+          className="mt-12 flex flex-col items-center gap-4"
+        >
+          <img src={logo} alt="Gilson Carvalho Advocacia" className="h-10 w-auto opacity-80" />
+          <p className="text-[11px] tracking-[0.18em] uppercase text-stone-400 text-center leading-relaxed">
+            Dr. Gilson Carvalho — OAB/TO 2.591 · OAB/RJ 256.131
+          </p>
+        </motion.div>
       </div>
     </div>
   );
