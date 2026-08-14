@@ -119,7 +119,7 @@ export default function LegalLanding(p: LandingProps) {
           <a
             href={waLink(p.whatsappMessage)}
             target="_blank"
-            rel="noopener"
+            rel="noopener noreferrer"
             onClick={() => trackWhatsApp("cta")}
             className="inline-flex items-center gap-2 px-4 py-2.5 text-xs tracking-[0.2em] uppercase font-semibold shadow-lg shadow-green-900/30 hover:scale-[1.03] transition-transform"
             style={{ backgroundColor: "#25D366", color: "#0d2418" }}
@@ -151,7 +151,7 @@ export default function LegalLanding(p: LandingProps) {
             <a href="#triagem" className="cta-pulse-gold inline-flex items-center justify-center gap-3 text-charcoal-deep font-semibold px-7 py-4 text-xs tracking-[0.25em] uppercase hover:shadow-2xl hover:shadow-amber-900/40 transition-all" style={{ backgroundColor: "#bfa15f" }}>
               <FaWhatsapp className="w-4 h-4" /> {p.ctaText}
             </a>
-            <a href={waLink(p.whatsappMessage)} target="_blank" rel="noopener" onClick={() => trackWhatsApp("cta")} className="cta-pulse-gold inline-flex items-center justify-center gap-2 border text-gold font-medium px-7 py-4 text-xs tracking-[0.25em] uppercase hover:bg-gold hover:text-charcoal-deep transition-colors" style={{ borderColor: "#bfa15f" }}>
+            <a href={waLink(p.whatsappMessage)} target="_blank" rel="noopener noreferrer" onClick={() => trackWhatsApp("cta")} className="cta-pulse-gold inline-flex items-center justify-center gap-2 border text-gold font-medium px-7 py-4 text-xs tracking-[0.25em] uppercase hover:bg-gold hover:text-charcoal-deep transition-colors" style={{ borderColor: "#bfa15f" }}>
               Falar Agora
             </a>
 
@@ -298,7 +298,7 @@ export default function LegalLanding(p: LandingProps) {
                   <a
                     href={waFinalLink || waLink(p.whatsappMessage)}
                     target="_blank"
-                    rel="noopener"
+                    rel="noopener noreferrer"
                     onClick={() => trackWhatsApp("pos_triagem")}
                     className="wa-pulse-cta mt-2 inline-flex items-center justify-center gap-3 px-6 py-4 text-xs tracking-[0.25em] uppercase font-semibold shadow-2xl shadow-green-900/30"
                     style={{ backgroundColor: "#25D366", color: "#0d2418" }}
@@ -362,7 +362,7 @@ export default function LegalLanding(p: LandingProps) {
               <a
                 href={waLink(p.whatsappMessage)}
                 target="_blank"
-                rel="noopener"
+                rel="noopener noreferrer"
             onClick={() => trackWhatsApp("cta")}
                 className="wa-pulse-cta relative flex items-center justify-center gap-3 text-charcoal-deep font-semibold px-6 py-4 text-xs tracking-[0.25em] uppercase shadow-2xl shadow-green-900/30"
                 style={{ backgroundColor: "#25D366", color: "#0d2418" }}
@@ -372,7 +372,7 @@ export default function LegalLanding(p: LandingProps) {
                 <ChevronRight size={16} />
               </a>
               <div className="p-6 border border-gold/20 space-y-4" style={{ backgroundColor: "rgba(20,20,20,0.85)" }}>
-                <a href={waLink(p.whatsappMessage)} target="_blank" rel="noopener" onClick={() => trackWhatsApp("telefone")} className="flex items-start gap-3 hover:opacity-80 transition-opacity">
+                <a href={waLink(p.whatsappMessage)} target="_blank" rel="noopener noreferrer" onClick={() => trackWhatsApp("telefone")} className="flex items-start gap-3 hover:opacity-80 transition-opacity">
                   <span className="flex items-center justify-center w-9 h-9 border border-gold/40 shrink-0">
                     <Phone size={14} className="text-gold" />
                   </span>
@@ -454,13 +454,13 @@ export default function LegalLanding(p: LandingProps) {
               <a href={MAPS_URL} target="_blank" rel="noopener noreferrer" className="block text-stone-300 hover:text-gold transition-colors">
                 Av. Guanabara, nº 1669, Centro — Gurupi/TO
               </a>
-              <a href={waLink(p.whatsappMessage)} target="_blank" rel="noopener" onClick={() => trackWhatsApp("telefone")} className="block text-stone-300 hover:text-gold transition-colors">
+              <a href={waLink(p.whatsappMessage)} target="_blank" rel="noopener noreferrer" onClick={() => trackWhatsApp("telefone")} className="block text-stone-300 hover:text-gold transition-colors">
                 +55 (63) 98447-4070
               </a>
               <a href={`mailto:${EMAIL}`} className="block text-stone-300 hover:text-gold transition-colors">
                 {EMAIL}
               </a>
-              <a href={waLink(p.whatsappMessage)} target="_blank" rel="noopener" onClick={() => trackWhatsApp("cta")} className="inline-flex items-center gap-2 text-gold hover:opacity-80 transition-opacity pt-1">
+              <a href={waLink(p.whatsappMessage)} target="_blank" rel="noopener noreferrer" onClick={() => trackWhatsApp("cta")} className="inline-flex items-center gap-2 text-gold hover:opacity-80 transition-opacity pt-1">
                 <FaWhatsapp /> Falar no WhatsApp
               </a>
             </div>
@@ -484,7 +484,7 @@ export default function LegalLanding(p: LandingProps) {
         <a
           href={waLink(p.whatsappMessage)}
           target="_blank"
-          rel="noopener"
+          rel="noopener noreferrer"
             onClick={() => trackWhatsApp("cta")}
           aria-label="Falar no WhatsApp"
           className="wa-ping wa-pulse-cta relative flex items-center justify-center w-16 h-16 rounded-full shadow-2xl shadow-green-900/50 hover:scale-110 transition-transform"
