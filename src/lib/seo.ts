@@ -1,15 +1,36 @@
 // Shared JSON-LD LocalBusiness payload for all pages
 export const LOCAL_BUSINESS_JSONLD = {
   "@context": "https://schema.org",
-  "@type": "LegalService",
+  "@type": ["LegalService", "Attorney"],
   name: "Gilson Carvalho — Advocacia",
-  image: "https://gilsoncarvalho.com/logo_gilson.png",
+  legalName: "Gilson Carvalho Advocacia",
+  description:
+    "Escritório de advocacia especializado em Direito de Família e Sucessões, com atuação em Gurupi/TO e em todo o Brasil.",
+  image: "https://gilsoncarvalho.com/og-gilson.jpg",
   logo: "https://gilsoncarvalho.com/logo_gilson.png",
   url: "https://gilsoncarvalho.com",
-  telephone: "+556398474070",
+  telephone: "+5563984474070",
   email: "advogado@gilsoncarvalho.com",
   priceRange: "$$$",
   areaServed: "BR",
+  founder: {
+    "@type": "Person",
+    name: "Gilson Carvalho",
+    jobTitle: "Advogado",
+    identifier: ["OAB/TO 2.591", "OAB/RJ 256.131"],
+    memberOf: {
+      "@type": "Organization",
+      name: "Ordem dos Advogados do Brasil",
+    },
+  },
+  knowsAbout: [
+    "Divórcio",
+    "Guarda e Pensão Alimentícia",
+    "Inventário e Partilha de Bens",
+    "União Estável",
+    "Direito de Família",
+    "Direito das Sucessões",
+  ],
   address: {
     "@type": "PostalAddress",
     streetAddress: "Av. Guanabara, nº 1669",
@@ -18,6 +39,12 @@ export const LOCAL_BUSINESS_JSONLD = {
     postalCode: "77400-000",
     addressCountry: "BR",
   },
+  geo: {
+    "@type": "GeoCoordinates",
+    latitude: -11.7292,
+    longitude: -49.0686,
+  },
+  hasMap: "https://maps.google.com/?q=Av.+Guanabara,+1669,+Centro+-+Gurupi,+TO",
   openingHoursSpecification: [
     {
       "@type": "OpeningHoursSpecification",
