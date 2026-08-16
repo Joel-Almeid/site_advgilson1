@@ -199,7 +199,7 @@ function LinkButton({
 
 function ShareButton() {
   const handleShare = async () => {
-    trackEvent("click_link_compartilhar", { local: "links" });
+    trackEvent("click_link_share", { local: "links" });
     const url = typeof window !== "undefined" ? window.location.href : "";
     const data = {
       title: "Dr. Gilson Carvalho — Advocacia",
