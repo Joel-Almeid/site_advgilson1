@@ -20,6 +20,7 @@ import { Route as ImobiliarioRouteImport } from './routes/imobiliario'
 import { Route as DivorcioRouteImport } from './routes/divorcio'
 import { Route as DireitoDigitalRouteImport } from './routes/direito-digital'
 import { Route as DireitoBancarioRouteImport } from './routes/direito-bancario'
+import { Route as SplatRouteImport } from './routes/$'
 import { Route as IndexRouteImport } from './routes/index'
 
 const UniaoEstavelRoute = UniaoEstavelRouteImport.update({
@@ -77,6 +78,11 @@ const DireitoBancarioRoute = DireitoBancarioRouteImport.update({
   path: '/direito-bancario',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SplatRoute = SplatRouteImport.update({
+  id: '/$',
+  path: '/$',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -85,6 +91,7 @@ const IndexRoute = IndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/$': typeof SplatRoute
   '/direito-bancario': typeof DireitoBancarioRoute
   '/direito-digital': typeof DireitoDigitalRoute
   '/divorcio': typeof DivorcioRoute
@@ -99,6 +106,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/$': typeof SplatRoute
   '/direito-bancario': typeof DireitoBancarioRoute
   '/direito-digital': typeof DireitoDigitalRoute
   '/divorcio': typeof DivorcioRoute
@@ -114,6 +122,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/$': typeof SplatRoute
   '/direito-bancario': typeof DireitoBancarioRoute
   '/direito-digital': typeof DireitoDigitalRoute
   '/divorcio': typeof DivorcioRoute
@@ -130,6 +139,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/$'
     | '/direito-bancario'
     | '/direito-digital'
     | '/divorcio'
@@ -144,6 +154,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/$'
     | '/direito-bancario'
     | '/direito-digital'
     | '/divorcio'
@@ -158,6 +169,7 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/$'
     | '/direito-bancario'
     | '/direito-digital'
     | '/divorcio'
@@ -173,6 +185,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  SplatRoute: typeof SplatRoute
   DireitoBancarioRoute: typeof DireitoBancarioRoute
   DireitoDigitalRoute: typeof DireitoDigitalRoute
   DivorcioRoute: typeof DivorcioRoute
@@ -265,6 +278,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DireitoBancarioRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/$': {
+      id: '/$'
+      path: '/$'
+      fullPath: '/$'
+      preLoaderRoute: typeof SplatRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -277,6 +297,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  SplatRoute: SplatRoute,
   DireitoBancarioRoute: DireitoBancarioRoute,
   DireitoDigitalRoute: DireitoDigitalRoute,
   DivorcioRoute: DivorcioRoute,
