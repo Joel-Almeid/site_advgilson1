@@ -11,6 +11,7 @@ import {
 } from "@/components/ui/accordion";
 
 import logo from "@/assets/logo_gilson.png";
+import { LOCAL_BUSINESS_JSONLD } from "@/lib/seo";
 import { initAnalytics, trackLead, trackPageView, trackWhatsApp } from "@/lib/analytics";
 import imgGilson from "@/assets/gilsonfoto1.png";
 import imgGilson2 from "@/assets/fotogilson3.png";
@@ -34,6 +35,19 @@ export const Route = createFileRoute("/")({
       { property: "og:url", content: CANONICAL },
     ],
     links: [{ rel: "canonical", href: CANONICAL }],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "WebSite",
+          name: "Gilson Carvalho — Advocacia",
+          url: CANONICAL,
+          inLanguage: "pt-BR",
+          publisher: { ...LOCAL_BUSINESS_JSONLD, "@context": undefined },
+        }),
+      },
+    ],
   }),
   component: Index,
 });
