@@ -139,6 +139,7 @@ function NotFoundPage() {
               >
                 <Link
                   to={link.to}
+                  onClick={() => trackEvent("click_404_lp", { destino: link.to, servico: link.label })}
                   className="group flex items-center gap-3 w-full px-4 py-3 rounded-xl border border-gold/30 bg-white/[0.03] backdrop-blur-md text-stone-100 transition-all hover:bg-gold/15 hover:border-gold hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-[#2b2b2b]"
                 >
                   <span className="flex items-center justify-center shrink-0 w-9 h-9 rounded-full border border-gold/30 bg-gold/10 text-gold">
