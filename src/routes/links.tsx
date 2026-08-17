@@ -267,6 +267,9 @@ function LinksPage() {
             <img
               src={AVATAR_URL}
               alt="Dr. Gilson Carvalho"
+              width={160}
+              height={160}
+              decoding="async"
               className="w-full h-full object-cover"
               loading="eager"
             />
@@ -344,7 +347,7 @@ function LinksPage() {
           transition={{ duration: 0.6, delay: 0.85 }}
           className="mt-12 flex flex-col items-center gap-4"
         >
-          <img src={logo} alt="Gilson Carvalho Advocacia" className="h-10 w-auto opacity-80" />
+          <img src={logo} alt="Gilson Carvalho Advocacia" width={170} height={40} loading="lazy" decoding="async" className="h-10 w-auto opacity-80" />
           <p className="text-[11px] tracking-[0.18em] uppercase text-stone-400 text-center leading-relaxed">
             Dr. Gilson Carvalho — OAB/TO 2.591 · OAB/RJ 256.131
           </p>

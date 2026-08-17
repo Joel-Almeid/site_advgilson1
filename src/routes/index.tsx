@@ -183,7 +183,7 @@ function Index() {
       <header className="fixed top-0 left-0 right-0 z-50 backdrop-blur-md border-b border-white/5" style={{ backgroundColor: "rgba(29,29,29,0.85)" }}>
         <div className="max-w-7xl mx-auto px-6 lg:px-10 h-20 flex items-center justify-between">
           <a href="#inicio" className="flex items-center gap-3">
-            <img src={logo} alt="Gilson Carvalho Advocacia" className="h-12 w-auto" />
+            <img src={logo} alt="Gilson Carvalho Advocacia" width={200} height={48} loading="eager" decoding="async" className="h-12 w-auto" />
           </a>
           <nav className="hidden lg:flex items-center gap-10">
             {navLinks.map(l => {
@@ -354,6 +354,8 @@ function Index() {
                   <img
                     src={imgGilson2}
                     alt="Dr. Gilson Carvalho — Advogado"
+                    width={450}
+                    height={563}
                     loading="lazy"
                     decoding="async"
                     className="w-full max-w-[450px] h-auto object-cover rounded-lg mx-auto lg:mx-0 shadow-2xl shadow-black/60"
@@ -422,7 +424,7 @@ function Index() {
             <div className="lg:col-span-5 order-1 lg:order-2">
               <div className="relative">
                 <div className="absolute -top-4 -right-4 w-32 h-32 border border-gold/60 hidden md:block" />
-                <img src={imgEscritorio} alt="Escritório Gilson Carvalho" loading="lazy" decoding="async" className="relative w-full h-auto shadow-2xl" />
+                <img src={imgEscritorio} alt="Escritório Gilson Carvalho" width={1200} height={800} loading="lazy" decoding="async" className="relative w-full h-auto shadow-2xl" />
               </div>
             </div>
           </div>
@@ -724,7 +726,7 @@ function Index() {
         <div className="max-w-7xl mx-auto px-6 lg:px-10">
           <div className="grid md:grid-cols-3 gap-12 mb-16">
             <div>
-              <img src={logo} alt="Gilson Carvalho" loading="lazy" decoding="async" className="h-16 mb-6" />
+              <img src={logo} alt="Gilson Carvalho" width={260} height={64} loading="lazy" decoding="async" className="h-16 mb-6" />
               <p className="text-sm text-stone-400 leading-relaxed max-w-xs mb-6">
                 Excelência jurídica com ética, transparência e dedicação total ao seu caso.
               </p>

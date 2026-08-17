@@ -114,7 +114,7 @@ export default function LegalLanding(p: LandingProps) {
       <header className="fixed top-0 left-0 right-0 z-50 backdrop-blur-md border-b border-white/5" style={{ backgroundColor: "rgba(29,29,29,0.85)" }}>
         <div className="max-w-7xl mx-auto px-6 lg:px-10 h-20 flex items-center justify-between">
           <a href="#topo" className="flex items-center gap-3">
-            <img src={logo} alt="Gilson Carvalho Advocacia" className="h-12 w-auto" loading="eager" decoding="async" />
+            <img src={logo} alt="Gilson Carvalho Advocacia" width={200} height={48} className="h-12 w-auto" loading="eager" decoding="async" />
           </a>
           <a
             href={waLink(p.whatsappMessage)}
@@ -241,6 +241,10 @@ export default function LegalLanding(p: LandingProps) {
                 <img
                   src={imgGilsonAuthority}
                   alt="Dr. Gilson Carvalho — Advogado especialista em Direito de Família e Sucessões"
+                  width={450}
+                  height={563}
+                  loading="lazy"
+                  decoding="async"
                   className="w-full h-auto object-cover shadow-2xl shadow-black/60"
                   style={{ aspectRatio: "4/5" }}
                   loading="lazy"
@@ -446,7 +450,7 @@ export default function LegalLanding(p: LandingProps) {
         <div className="max-w-6xl mx-auto px-6 lg:px-10">
           <div className="grid md:grid-cols-2 gap-8 items-start mb-10">
             <div>
-              <img src={logo} alt="Gilson Carvalho" className="h-14 mb-4" loading="lazy" decoding="async" />
+              <img src={logo} alt="Gilson Carvalho" width={230} height={56} className="h-14 mb-4" loading="lazy" decoding="async" />
               <p className="text-xs tracking-[0.25em] uppercase text-gold mb-1">OAB/TO 2.591 · OAB/RJ 256.131</p>
               <p className="text-stone-400 text-sm">Direito de Família e Sucessões · Atendimento sigiloso.</p>
             </div>
