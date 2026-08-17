@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { Home, Scale, Users, FileText, HeartHandshake } from "lucide-react";
 
 import logo from "@/assets/logo_gilson.png";
-import { trackWhatsApp } from "@/lib/analytics";
+import { trackWhatsApp, trackEvent } from "@/lib/analytics";
 
 const WHATSAPP = "5563984474070";
 const waMessage = "Olá, Dr. Gilson! Gostaria de agendar uma consulta jurídica.";
@@ -54,6 +54,10 @@ function NotFoundPage() {
           transition={{ duration: 0.5 }}
           src={logo}
           alt="Gilson Carvalho Advocacia"
+          width={220}
+          height={56}
+          loading="eager"
+          decoding="async"
           className="h-14 w-auto opacity-90 mb-8"
         />
 
@@ -94,7 +98,10 @@ function NotFoundPage() {
             href={waLink}
             target="_blank"
             rel="noopener noreferrer"
-            onClick={() => trackWhatsApp("404_whatsapp")}
+            onClick={() => {
+              trackWhatsApp("404_whatsapp");
+              trackEvent("click_404_whatsapp", { local: "404" });
+            }}
             className="cta-pulse-gold inline-flex items-center justify-center gap-2 w-full sm:w-auto rounded-full px-6 py-3.5 text-sm font-semibold tracking-wide text-white transition-all hover:brightness-110 focus:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-[#2b2b2b]"
             style={{ background: "linear-gradient(135deg, #25D366 0%, #128C7E 100%)" }}
           >
@@ -103,6 +110,7 @@ function NotFoundPage() {
           </a>
           <Link
             to="/"
+            onClick={() => trackEvent("click_404_home", { local: "404" })}
             className="inline-flex items-center justify-center gap-2 w-full sm:w-auto rounded-full border border-gold/40 bg-white/[0.04] backdrop-blur-md px-6 py-3.5 text-sm font-medium tracking-wide text-gold transition-all hover:bg-gold/15 hover:border-gold focus:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-[#2b2b2b]"
           >
             <Home size={16} />
@@ -131,6 +139,7 @@ function NotFoundPage() {
               >
                 <Link
                   to={link.to}
+                  onClick={() => trackEvent("click_404_lp", { destino: link.to, servico: link.label })}
                   className="group flex items-center gap-3 w-full px-4 py-3 rounded-xl border border-gold/30 bg-white/[0.03] backdrop-blur-md text-stone-100 transition-all hover:bg-gold/15 hover:border-gold hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-[#2b2b2b]"
                 >
                   <span className="flex items-center justify-center shrink-0 w-9 h-9 rounded-full border border-gold/30 bg-gold/10 text-gold">
