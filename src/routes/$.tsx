@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { Home, Scale, Users, FileText, HeartHandshake } from "lucide-react";
 
 import logo from "@/assets/logo_gilson.png";
-import { trackWhatsApp } from "@/lib/analytics";
+import { trackWhatsApp, trackEvent } from "@/lib/analytics";
 
 const WHATSAPP = "5563984474070";
 const waMessage = "Olá, Dr. Gilson! Gostaria de agendar uma consulta jurídica.";
@@ -54,6 +54,10 @@ function NotFoundPage() {
           transition={{ duration: 0.5 }}
           src={logo}
           alt="Gilson Carvalho Advocacia"
+          width={220}
+          height={56}
+          loading="eager"
+          decoding="async"
           className="h-14 w-auto opacity-90 mb-8"
         />
 
@@ -94,7 +98,10 @@ function NotFoundPage() {
             href={waLink}
             target="_blank"
             rel="noopener noreferrer"
-            onClick={() => trackWhatsApp("404_whatsapp")}
+            onClick={() => {
+              trackWhatsApp("404_whatsapp");
+              trackEvent("click_404_whatsapp", { local: "404" });
+            }}
             className="cta-pulse-gold inline-flex items-center justify-center gap-2 w-full sm:w-auto rounded-full px-6 py-3.5 text-sm font-semibold tracking-wide text-white transition-all hover:brightness-110 focus:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-[#2b2b2b]"
             style={{ background: "linear-gradient(135deg, #25D366 0%, #128C7E 100%)" }}
           >
