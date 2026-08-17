@@ -110,6 +110,7 @@ function NotFoundPage() {
           </a>
           <Link
             to="/"
+            onClick={() => trackEvent("click_404_home", { local: "404" })}
             className="inline-flex items-center justify-center gap-2 w-full sm:w-auto rounded-full border border-gold/40 bg-white/[0.04] backdrop-blur-md px-6 py-3.5 text-sm font-medium tracking-wide text-gold transition-all hover:bg-gold/15 hover:border-gold focus:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-[#2b2b2b]"
           >
             <Home size={16} />
