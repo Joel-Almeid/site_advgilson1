@@ -247,8 +247,6 @@ export default function LegalLanding(p: LandingProps) {
                   decoding="async"
                   className="w-full h-auto object-cover shadow-2xl shadow-black/60"
                   style={{ aspectRatio: "4/5" }}
-                  loading="lazy"
-                  decoding="async"
                 />
               </div>
             </div>
