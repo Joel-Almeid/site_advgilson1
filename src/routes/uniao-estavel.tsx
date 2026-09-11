@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import LegalLanding from "@/components/LegalLanding";
 import bgBooks from "@/assets/bg-books.jpg";
 import bgMarble from "@/assets/bg-marble.jpg";
+import temaImg from "@/assets/tema-uniao.jpg";
 import { jsonLdScript } from "@/lib/seo";
 
 const CANONICAL = "https://gilsoncarvalho.com/uniao-estavel";
@@ -31,8 +32,8 @@ function UniaoEstavelPage() {
       eyebrow="Direito de Família"
       heroTitle="Planejamento seguro para os seus próximos passos e para o seu patrimônio."
       heroSubtitle="Reconhecimento, dissolução e contratos de união estável estruturados com técnica — preservando autonomia, afeto e patrimônio."
-      heroImage={bgBooks}
-      painsImage={bgMarble}
+      heroImage={temaImg}
+      painsImage={temaImg}
       solutionsImage={bgBooks}
       finalImage={bgMarble}
       ctaText="Planejar com Segurança"

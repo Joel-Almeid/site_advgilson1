@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import LegalLanding from "@/components/LegalLanding";
 import bgMarble from "@/assets/bg-marble.jpg";
 import bgBooks from "@/assets/bg-books.jpg";
+import temaImg from "@/assets/tema-inventario.jpg";
 import { jsonLdScript } from "@/lib/seo";
 
 const CANONICAL = "https://gilsoncarvalho.com/inventario";
@@ -31,8 +32,8 @@ function InventarioPage() {
       eyebrow="Sucessões"
       heroTitle="O valor econômico não deve prevalecer sobre os laços afetivos."
       heroSubtitle="Conduzimos inventários e partilhas com rapidez, otimização tributária e mediação respeitosa entre herdeiros — preservando o patrimônio e a família."
-      heroImage={bgMarble}
-      painsImage={bgBooks}
+      heroImage={temaImg}
+      painsImage={temaImg}
       solutionsImage={bgMarble}
       finalImage={bgBooks}
       ctaText="Resolver meu Inventário"

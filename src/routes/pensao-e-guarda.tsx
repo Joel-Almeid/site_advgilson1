@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import LegalLanding from "@/components/LegalLanding";
 import bgBooks from "@/assets/bg-books.jpg";
 import bgMarble from "@/assets/bg-marble.jpg";
+import temaImg from "@/assets/tema-guarda.jpg";
 import { jsonLdScript } from "@/lib/seo";
 
 const CANONICAL = "https://gilsoncarvalho.com/pensao-e-guarda";
@@ -31,8 +32,8 @@ function PensaoGuardaPage() {
       eyebrow="Família · Filhos"
       heroTitle="Proteção absoluta do bem-estar e do futuro dos seus filhos."
       heroSubtitle="Garantimos direitos, regulamentamos visitas e ajustamos pensões com sensibilidade e técnica — colocando o melhor interesse das crianças em primeiro lugar."
-      heroImage={bgBooks}
-      painsImage={bgMarble}
+      heroImage={temaImg}
+      painsImage={temaImg}
       solutionsImage={bgBooks}
       finalImage={bgMarble}
       ctaText="Proteger meus Filhos"

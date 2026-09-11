@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import LegalLanding from "@/components/LegalLanding";
 import bgMarble from "@/assets/bg-marble.jpg";
 import bgBooks from "@/assets/bg-books.jpg";
+import temaImg from "@/assets/tema-divorcio.jpg";
 import { jsonLdScript } from "@/lib/seo";
 
 const CANONICAL = "https://gilsoncarvalho.com/divorcio";
@@ -31,8 +32,8 @@ function DivorcioPage() {
       eyebrow="Direito de Família"
       heroTitle="Um final mais justo representa um recomeço mais tranquilo."
       heroSubtitle="Conduzimos seu divórcio com agilidade, discrição absoluta e proteção patrimonial, transformando um momento difícil em um recomeço seguro."
-      heroImage={bgMarble}
-      painsImage={bgBooks}
+      heroImage={temaImg}
+      painsImage={temaImg}
       solutionsImage={bgMarble}
       finalImage={bgBooks}
       ctaText="Iniciar Conversa Sigilosa"
