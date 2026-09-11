@@ -30,4 +30,7 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
+  <url><loc>https://gilsoncarvalho.com/regularizacao-imobiliaria</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://gilsoncarvalho.com/regularizacao-fundiaria</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://gilsoncarvalho.com/direito-fundiario</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
 </urlset>

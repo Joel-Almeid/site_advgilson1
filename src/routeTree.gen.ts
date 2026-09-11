@@ -11,6 +11,8 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as UniaoEstavelRouteImport } from './routes/uniao-estavel'
 import { Route as TrabalhistaExecutivoRouteImport } from './routes/trabalhista-executivo'
+import { Route as RegularizacaoImobiliariaRouteImport } from './routes/regularizacao-imobiliaria'
+import { Route as RegularizacaoFundiariaRouteImport } from './routes/regularizacao-fundiaria'
 import { Route as PrevidenciarioRouteImport } from './routes/previdenciario'
 import { Route as PensaoEGuardaRouteImport } from './routes/pensao-e-guarda'
 import { Route as PensaoRouteImport } from './routes/pensao'
@@ -18,6 +20,7 @@ import { Route as LinksRouteImport } from './routes/links'
 import { Route as InventarioRouteImport } from './routes/inventario'
 import { Route as ImobiliarioRouteImport } from './routes/imobiliario'
 import { Route as DivorcioRouteImport } from './routes/divorcio'
+import { Route as DireitoFundiarioRouteImport } from './routes/direito-fundiario'
 import { Route as DireitoDigitalRouteImport } from './routes/direito-digital'
 import { Route as DireitoBancarioRouteImport } from './routes/direito-bancario'
 import { Route as SplatRouteImport } from './routes/$'
@@ -31,6 +34,17 @@ const UniaoEstavelRoute = UniaoEstavelRouteImport.update({
 const TrabalhistaExecutivoRoute = TrabalhistaExecutivoRouteImport.update({
   id: '/trabalhista-executivo',
   path: '/trabalhista-executivo',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RegularizacaoImobiliariaRoute =
+  RegularizacaoImobiliariaRouteImport.update({
+    id: '/regularizacao-imobiliaria',
+    path: '/regularizacao-imobiliaria',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const RegularizacaoFundiariaRoute = RegularizacaoFundiariaRouteImport.update({
+  id: '/regularizacao-fundiaria',
+  path: '/regularizacao-fundiaria',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PrevidenciarioRoute = PrevidenciarioRouteImport.update({
@@ -68,6 +82,11 @@ const DivorcioRoute = DivorcioRouteImport.update({
   path: '/divorcio',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DireitoFundiarioRoute = DireitoFundiarioRouteImport.update({
+  id: '/direito-fundiario',
+  path: '/direito-fundiario',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const DireitoDigitalRoute = DireitoDigitalRouteImport.update({
   id: '/direito-digital',
   path: '/direito-digital',
@@ -94,6 +113,7 @@ export interface FileRoutesByFullPath {
   '/$': typeof SplatRoute
   '/direito-bancario': typeof DireitoBancarioRoute
   '/direito-digital': typeof DireitoDigitalRoute
+  '/direito-fundiario': typeof DireitoFundiarioRoute
   '/divorcio': typeof DivorcioRoute
   '/imobiliario': typeof ImobiliarioRoute
   '/inventario': typeof InventarioRoute
@@ -101,6 +121,8 @@ export interface FileRoutesByFullPath {
   '/pensao': typeof PensaoRoute
   '/pensao-e-guarda': typeof PensaoEGuardaRoute
   '/previdenciario': typeof PrevidenciarioRoute
+  '/regularizacao-fundiaria': typeof RegularizacaoFundiariaRoute
+  '/regularizacao-imobiliaria': typeof RegularizacaoImobiliariaRoute
   '/trabalhista-executivo': typeof TrabalhistaExecutivoRoute
   '/uniao-estavel': typeof UniaoEstavelRoute
 }
@@ -109,6 +131,7 @@ export interface FileRoutesByTo {
   '/$': typeof SplatRoute
   '/direito-bancario': typeof DireitoBancarioRoute
   '/direito-digital': typeof DireitoDigitalRoute
+  '/direito-fundiario': typeof DireitoFundiarioRoute
   '/divorcio': typeof DivorcioRoute
   '/imobiliario': typeof ImobiliarioRoute
   '/inventario': typeof InventarioRoute
@@ -116,6 +139,8 @@ export interface FileRoutesByTo {
   '/pensao': typeof PensaoRoute
   '/pensao-e-guarda': typeof PensaoEGuardaRoute
   '/previdenciario': typeof PrevidenciarioRoute
+  '/regularizacao-fundiaria': typeof RegularizacaoFundiariaRoute
+  '/regularizacao-imobiliaria': typeof RegularizacaoImobiliariaRoute
   '/trabalhista-executivo': typeof TrabalhistaExecutivoRoute
   '/uniao-estavel': typeof UniaoEstavelRoute
 }
@@ -125,6 +150,7 @@ export interface FileRoutesById {
   '/$': typeof SplatRoute
   '/direito-bancario': typeof DireitoBancarioRoute
   '/direito-digital': typeof DireitoDigitalRoute
+  '/direito-fundiario': typeof DireitoFundiarioRoute
   '/divorcio': typeof DivorcioRoute
   '/imobiliario': typeof ImobiliarioRoute
   '/inventario': typeof InventarioRoute
@@ -132,6 +158,8 @@ export interface FileRoutesById {
   '/pensao': typeof PensaoRoute
   '/pensao-e-guarda': typeof PensaoEGuardaRoute
   '/previdenciario': typeof PrevidenciarioRoute
+  '/regularizacao-fundiaria': typeof RegularizacaoFundiariaRoute
+  '/regularizacao-imobiliaria': typeof RegularizacaoImobiliariaRoute
   '/trabalhista-executivo': typeof TrabalhistaExecutivoRoute
   '/uniao-estavel': typeof UniaoEstavelRoute
 }
@@ -142,6 +170,7 @@ export interface FileRouteTypes {
     | '/$'
     | '/direito-bancario'
     | '/direito-digital'
+    | '/direito-fundiario'
     | '/divorcio'
     | '/imobiliario'
     | '/inventario'
@@ -149,6 +178,8 @@ export interface FileRouteTypes {
     | '/pensao'
     | '/pensao-e-guarda'
     | '/previdenciario'
+    | '/regularizacao-fundiaria'
+    | '/regularizacao-imobiliaria'
     | '/trabalhista-executivo'
     | '/uniao-estavel'
   fileRoutesByTo: FileRoutesByTo
@@ -157,6 +188,7 @@ export interface FileRouteTypes {
     | '/$'
     | '/direito-bancario'
     | '/direito-digital'
+    | '/direito-fundiario'
     | '/divorcio'
     | '/imobiliario'
     | '/inventario'
@@ -164,6 +196,8 @@ export interface FileRouteTypes {
     | '/pensao'
     | '/pensao-e-guarda'
     | '/previdenciario'
+    | '/regularizacao-fundiaria'
+    | '/regularizacao-imobiliaria'
     | '/trabalhista-executivo'
     | '/uniao-estavel'
   id:
@@ -172,6 +206,7 @@ export interface FileRouteTypes {
     | '/$'
     | '/direito-bancario'
     | '/direito-digital'
+    | '/direito-fundiario'
     | '/divorcio'
     | '/imobiliario'
     | '/inventario'
@@ -179,6 +214,8 @@ export interface FileRouteTypes {
     | '/pensao'
     | '/pensao-e-guarda'
     | '/previdenciario'
+    | '/regularizacao-fundiaria'
+    | '/regularizacao-imobiliaria'
     | '/trabalhista-executivo'
     | '/uniao-estavel'
   fileRoutesById: FileRoutesById
@@ -188,6 +225,7 @@ export interface RootRouteChildren {
   SplatRoute: typeof SplatRoute
   DireitoBancarioRoute: typeof DireitoBancarioRoute
   DireitoDigitalRoute: typeof DireitoDigitalRoute
+  DireitoFundiarioRoute: typeof DireitoFundiarioRoute
   DivorcioRoute: typeof DivorcioRoute
   ImobiliarioRoute: typeof ImobiliarioRoute
   InventarioRoute: typeof InventarioRoute
@@ -195,6 +233,8 @@ export interface RootRouteChildren {
   PensaoRoute: typeof PensaoRoute
   PensaoEGuardaRoute: typeof PensaoEGuardaRoute
   PrevidenciarioRoute: typeof PrevidenciarioRoute
+  RegularizacaoFundiariaRoute: typeof RegularizacaoFundiariaRoute
+  RegularizacaoImobiliariaRoute: typeof RegularizacaoImobiliariaRoute
   TrabalhistaExecutivoRoute: typeof TrabalhistaExecutivoRoute
   UniaoEstavelRoute: typeof UniaoEstavelRoute
 }
@@ -213,6 +253,20 @@ declare module '@tanstack/react-router' {
       path: '/trabalhista-executivo'
       fullPath: '/trabalhista-executivo'
       preLoaderRoute: typeof TrabalhistaExecutivoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/regularizacao-imobiliaria': {
+      id: '/regularizacao-imobiliaria'
+      path: '/regularizacao-imobiliaria'
+      fullPath: '/regularizacao-imobiliaria'
+      preLoaderRoute: typeof RegularizacaoImobiliariaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/regularizacao-fundiaria': {
+      id: '/regularizacao-fundiaria'
+      path: '/regularizacao-fundiaria'
+      fullPath: '/regularizacao-fundiaria'
+      preLoaderRoute: typeof RegularizacaoFundiariaRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/previdenciario': {
@@ -264,6 +318,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DivorcioRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/direito-fundiario': {
+      id: '/direito-fundiario'
+      path: '/direito-fundiario'
+      fullPath: '/direito-fundiario'
+      preLoaderRoute: typeof DireitoFundiarioRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/direito-digital': {
       id: '/direito-digital'
       path: '/direito-digital'
@@ -300,6 +361,7 @@ const rootRouteChildren: RootRouteChildren = {
   SplatRoute: SplatRoute,
   DireitoBancarioRoute: DireitoBancarioRoute,
   DireitoDigitalRoute: DireitoDigitalRoute,
+  DireitoFundiarioRoute: DireitoFundiarioRoute,
   DivorcioRoute: DivorcioRoute,
   ImobiliarioRoute: ImobiliarioRoute,
   InventarioRoute: InventarioRoute,
@@ -307,6 +369,8 @@ const rootRouteChildren: RootRouteChildren = {
   PensaoRoute: PensaoRoute,
   PensaoEGuardaRoute: PensaoEGuardaRoute,
   PrevidenciarioRoute: PrevidenciarioRoute,
+  RegularizacaoFundiariaRoute: RegularizacaoFundiariaRoute,
+  RegularizacaoImobiliariaRoute: RegularizacaoImobiliariaRoute,
   TrabalhistaExecutivoRoute: TrabalhistaExecutivoRoute,
   UniaoEstavelRoute: UniaoEstavelRoute,
 }

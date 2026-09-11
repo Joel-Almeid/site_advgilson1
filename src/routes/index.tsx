@@ -598,7 +598,8 @@ function Index() {
             </p>
             <div className="space-y-6">
               {[
-                { Icon: MapPin, label: "Endereço", value: "Av. Guanabara, nº 1669, Centro — Gurupi, Tocantins", href: "https://maps.google.com/?q=Av.+Guanabara,+1669,+Centro+-+Gurupi,+TO" },
+                { Icon: MapPin, label: "Matriz · Gurupi/TO", value: "Av. Guanabara, nº 1669, Centro — Gurupi, Tocantins", href: "https://maps.google.com/?q=Av.+Guanabara,+1669,+Centro+-+Gurupi,+TO" },
+                { Icon: MapPin, label: "Filial · Rio de Janeiro/RJ", value: "Rio de Janeiro/RJ — atendimento com hora marcada", href: "https://maps.app.goo.gl/aHr8H2udhfHtgt7r5" },
                 { Icon: Mail, label: "E-mail", value: "advogado@gilsoncarvalho.com", href: "mailto:advogado@gilsoncarvalho.com" },
                 { Icon: Phone, label: "WhatsApp", value: "+55 (63) 98447-4070", href: waLink() },
               ].map(({ Icon, label, value, href }) => (
@@ -705,8 +706,22 @@ function Index() {
               <span className="text-xs tracking-[0.3em] uppercase text-gold">Onde Estamos</span>
               <div className="w-16 h-px bg-gold" />
             </div>
-            <h2 className="font-serif-luxe text-4xl md:text-5xl text-stone-50 mb-3">Nosso Escritório</h2>
-            <p className="text-stone-400 text-sm md:text-base">Av. Guanabara, nº 1669, Centro — Gurupi/TO</p>
+            <h2 className="font-serif-luxe text-4xl md:text-5xl text-stone-50 mb-3">Nossos Escritórios</h2>
+            <p className="text-stone-400 text-sm md:text-base mb-8">Atuação em Tocantins e Rio de Janeiro</p>
+            <div className="grid md:grid-cols-2 gap-6 text-left max-w-4xl mx-auto">
+              <a href="https://maps.google.com/?q=Av.+Guanabara,+1669,+Centro+-+Gurupi,+TO" target="_blank" rel="noopener noreferrer" className="card-hover-gold block p-6 border border-gold/25" style={{ backgroundColor: "rgba(30,30,30,0.7)" }}>
+                <div className="text-[10px] tracking-[0.3em] uppercase text-gold mb-2">Matriz</div>
+                <div className="font-serif-luxe text-xl text-stone-50 mb-2">Gurupi — Tocantins</div>
+                <p className="text-stone-300 text-sm">Av. Guanabara, nº 1669, Centro — Gurupi/TO</p>
+                <span className="inline-flex items-center gap-2 mt-3 text-[11px] tracking-[0.2em] uppercase text-gold"><MapPin size={13} /> Ver no mapa</span>
+              </a>
+              <a href="https://maps.app.goo.gl/aHr8H2udhfHtgt7r5" target="_blank" rel="noopener noreferrer" className="card-hover-gold block p-6 border border-gold/25" style={{ backgroundColor: "rgba(30,30,30,0.7)" }}>
+                <div className="text-[10px] tracking-[0.3em] uppercase text-gold mb-2">Filial</div>
+                <div className="font-serif-luxe text-xl text-stone-50 mb-2">Rio de Janeiro — RJ</div>
+                <p className="text-stone-300 text-sm">Atendimento presencial mediante agendamento prévio.</p>
+                <span className="inline-flex items-center gap-2 mt-3 text-[11px] tracking-[0.2em] uppercase text-gold"><MapPin size={13} /> Ver no mapa</span>
+              </a>
+            </div>
           </div>
           <motion.div {...reveal} className="relative border border-gold/30 p-2 shadow-2xl shadow-black/60">
             <iframe
@@ -754,7 +769,8 @@ function Index() {
             <div>
               <h5 className="text-[10px] tracking-[0.3em] uppercase text-gold mb-6">Contato</h5>
               <ul className="space-y-3 text-sm text-stone-300">
-                <li><a href="https://maps.google.com/?q=Av.+Guanabara,+1669,+Centro+-+Gurupi,+TO" target="_blank" rel="noopener noreferrer" className="hover:text-gold transition-colors">Av. Guanabara, 1669 — Gurupi/TO</a></li>
+                <li><a href="https://maps.google.com/?q=Av.+Guanabara,+1669,+Centro+-+Gurupi,+TO" target="_blank" rel="noopener noreferrer" className="hover:text-gold transition-colors"><span className="block text-[10px] tracking-[0.3em] uppercase text-gold">Matriz · Gurupi/TO</span>Av. Guanabara, 1669 — Gurupi/TO</a></li>
+                <li><a href="https://maps.app.goo.gl/aHr8H2udhfHtgt7r5" target="_blank" rel="noopener noreferrer" className="hover:text-gold transition-colors"><span className="block text-[10px] tracking-[0.3em] uppercase text-gold">Filial · Rio de Janeiro/RJ</span>Rio de Janeiro/RJ — ver no mapa</a></li>
                 <li><a href="mailto:advogado@gilsoncarvalho.com" className="hover:text-gold transition-colors">advogado@gilsoncarvalho.com</a></li>
                 <li><a href={waLink()} target="_blank" rel="noopener noreferrer" onClick={() => trackWhatsApp("rodape")} className="hover:text-gold transition-colors">+55 (63) 98447-4070</a></li>
                 <li className="pt-3 text-stone-400">
