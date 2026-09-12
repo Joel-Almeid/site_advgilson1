@@ -38,6 +38,17 @@ function RegularizacaoImobiliariaPage() {
       finalImage={bgBooks}
       ctaText="Regularizar meu Imóvel"
       whatsappMessage="Olá, preciso de orientação sobre regularização imobiliária."
+      routePath="/regularizacao-imobiliaria"
+      videoFile="regularizacao-imobiliaria.mp4"
+      authorityText="Gilson Carvalho alia mais de 20 anos de experiência jurídica à atuação estratégica em Direito Imobiliário e Fundiário. Com vasta expertise também em Família e Sucessões, garante a segurança patrimonial e a regularização dos seus bens com total discrição e precisão técnica."
+      instagramLinks={[
+        "https://www.instagram.com/p/DErrVxfzoHX/?stkn=dDNkM3hwbzVwNW1l",
+        "https://www.instagram.com/p/DEcTdy4s5eq/?stkn=MWZlZWtvb3VnYjBiYQ==",
+        "https://www.instagram.com/p/DEVansRsKR4/?stkn=NTYxZWM1cTBuM3Y=",
+        "https://www.instagram.com/p/DEPoDkxxg7_/?stkn=MWtvbXQ2dHE3b3RvbA==",
+        "https://www.instagram.com/p/DDwfEgktP_X/?stkn=MTRreGhiNGE2Y2dsMw==",
+        "https://www.instagram.com/p/DDspdrKzOR8/?stkn=MTJoZzFiNjFtdXpocw==",
+      ]}
       pains={[
         { title: "Imóvel sem escritura", desc: "Posse antiga sem registro impede venda, financiamento e transmissão aos herdeiros." },
         { title: "Registro divergente", desc: "Área, metragem ou proprietário desatualizados na matrícula geram bloqueio em qualquer negócio." },

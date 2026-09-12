@@ -38,6 +38,17 @@ function UniaoEstavelPage() {
       finalImage={bgMarble}
       ctaText="Planejar com Segurança"
       whatsappMessage="Olá, gostaria de orientação sobre união estável."
+      routePath="/uniao-estavel"
+      videoFile="uniao-estavel.mp4"
+      authorityText="Gilson Carvalho é especialista em Direito de Família e Sucessões com mais de 20 anos de atuação. Dedica-se a proteger o patrimônio e garantir a paz em momentos de transição familiar, oferecendo excelência jurídica e sigilo absoluto."
+      instagramLinks={[
+        "https://www.instagram.com/p/DGIlXQ4TC9T/?stkn=bmd3cWtvOG8wb2Jm",
+        "https://www.instagram.com/p/DFYaqNLz287/?stkn=MTU5ZzN5MmRoM3hpbw==",
+        "https://www.instagram.com/p/DFKhwCwzjMZ/?stkn=MTc3eHE0anJmMDZyNQ==",
+        "https://www.instagram.com/p/DFIESV7zzvP/?stkn=MTFoMTJld2U0cTB4eA==",
+        "https://www.instagram.com/p/DE7J3JFz3WX/?stkn=MWlqcjZpb2pnaTducA==",
+        "https://www.instagram.com/p/DEzW3NuTUn2/?stkn=MWJ2bXR0YWZkMW9jOA==",
+      ]}
       pains={[
         { title: "Vulnerabilidade patrimonial", desc: "Conviver sem contrato escrito pode gerar partilhas inesperadas e conflitos futuros." },
         { title: "Reconhecimento contestado", desc: "Dificuldade em comprovar a união em momentos sensíveis — herança, plano de saúde, previdência." },

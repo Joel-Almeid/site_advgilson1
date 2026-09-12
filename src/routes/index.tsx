@@ -370,11 +370,12 @@ function Index() {
                 Conheça quem atua em prol dos seus direitos.
               </h3>
               <p className="text-stone-300 leading-relaxed text-[15px] md:text-base">
-                Advogado desde o ano de 2004, com atuação nos estados do Tocantins e Rio de Janeiro,
-                marcada pela promoção dos Direitos Humanos e atuação no Direito de Família e Sucessões.
-                Professor universitário desde o ano de 2006. Especialização em Direito Civil e Direito
-                Processual pela PUC/GO em 2006 e mestrado em Direito (Processo, Justiça e Direitos Humanos)
-                em 2016 pela UCP-Petrópolis. MBA em Gestão na Advocacia pelo IPOG em 2024.
+                Advogado desde 2004, com sólida atuação nos estados do Tocantins e Rio de Janeiro.
+                Professor universitário há mais de 15 anos, une a excelência acadêmica à prática jurídica
+                estratégica. Possui Mestrado em Direito (Processo, Justiça e Direitos Humanos) pela UCP-RJ
+                e tripla especialização: Direito Civil e Processual Civil (PUC/GO), Advocacia Estratégica
+                em Família e Sucessões, e MBA em Gestão na Advocacia pelo IPOG. Uma trajetória marcada pela
+                ética, transparência e proteção incansável dos direitos de seus clientes.
               </p>
 
               <div className="mt-12 grid grid-cols-1 sm:grid-cols-3 gap-6 border-t border-gold/20 pt-8">

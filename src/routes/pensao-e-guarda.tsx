@@ -38,6 +38,17 @@ function PensaoGuardaPage() {
       finalImage={bgMarble}
       ctaText="Proteger meus Filhos"
       whatsappMessage="Olá, gostaria de orientação sobre guarda e pensão."
+      routePath="/pensao-e-guarda"
+      videoFile="pensao-e-guarda.mp4"
+      authorityText="Gilson Carvalho é especialista em Direito de Família e Sucessões com mais de 20 anos de atuação. Dedica-se a proteger o patrimônio e garantir a paz em momentos de transição familiar, oferecendo excelência jurídica e sigilo absoluto."
+      instagramLinks={[
+        "https://www.instagram.com/gilsoncarvalho.adv/p/DTZDVpqjK3C/",
+        "https://www.instagram.com/gilsoncarvalho.adv/p/DS517c6kkCw/",
+        "https://www.instagram.com/gilsoncarvalho.adv/p/DQwL52qjy-3/",
+        "https://www.instagram.com/gilsoncarvalho.adv/p/DQuCkKNAe-Q/",
+        "https://www.instagram.com/gilsoncarvalho.adv/p/DQrd_CvEmcL/",
+        "https://www.instagram.com/p/DJjmkOcRRef/?stkn=MTE3ZTZxcGFiY2tjaA==",
+      ]}
       pains={[
         { title: "Convívio ameaçado", desc: "Dificuldade em manter contato regular e qualitativo com os filhos após a separação." },
         { title: "Pensão desajustada", desc: "Valores incompatíveis com a realidade atual — seja por insuficiência ou por excesso." },

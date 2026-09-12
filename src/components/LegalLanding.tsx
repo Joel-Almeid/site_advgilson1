@@ -27,6 +27,11 @@ const reveal = {
   transition: { duration: 0.7, ease: "easeOut" as const },
 };
 
+/** Renderiza um comentário HTML real no DOM, sem ocupar espaço no layout. */
+function HtmlComment({ text }: { text: string }) {
+  return <span style={{ display: "none" }} dangerouslySetInnerHTML={{ __html: `<!-- ${text} -->` }} />;
+}
+
 export type LandingProps = {
   eyebrow: string;
   heroTitle: string;
@@ -36,6 +41,12 @@ export type LandingProps = {
   solutionsImage?: string;
   authorityImage?: string;
   finalImage?: string;
+  authorityText?: string;
+  /** Nome do arquivo em /public, ex.: "divorcio.mp4" */
+  videoFile?: string;
+  /** Rota usada nos comentários HTML dos links do Instagram, ex.: "/divorcio" */
+  routePath?: string;
+  instagramLinks?: string[];
   pains: { title: string; desc: string }[];
   solutions: { title: string; desc: string }[];
   ctaText: string;
@@ -219,7 +230,8 @@ export default function LegalLanding(p: LandingProps) {
             <div>
               <span className="inline-block text-[10px] tracking-[0.35em] uppercase text-gold border border-gold/40 px-4 py-2 mb-6">Dr. Gilson Carvalho</span>
               <p className="text-stone-200 text-lg leading-relaxed mb-6">
-                Gilson Carvalho é especialista em <strong className="text-gold">Direito de Família e Sucessões</strong> com mais de <strong className="text-gold">20 anos de atuação estratégica</strong>. Dedica-se a proteger o patrimônio e garantir a paz em momentos de transição familiar, com total discrição e excelência jurídica.
+                {p.authorityText ??
+                  "Gilson Carvalho é especialista em Direito de Família e Sucessões com mais de 20 anos de atuação. Dedica-se a proteger o patrimônio e garantir a paz em momentos de transição familiar, oferecendo excelência jurídica e sigilo absoluto."}
               </p>
               <div className="flex flex-wrap items-center gap-3 mb-8">
                 <span className="text-[10px] tracking-[0.25em] uppercase text-gold border border-gold/40 px-3 py-1.5">OAB/TO 2.591</span>
@@ -257,45 +269,63 @@ export default function LegalLanding(p: LandingProps) {
           </div>
 
           <motion.div {...reveal} className="grid lg:grid-cols-2 gap-12 items-center">
-            {/* Moldura de celular — placeholder de Reels */}
+            {/* VÍDEO PRINCIPAL — reprodutor único */}
             <div className="mx-auto w-[260px] sm:w-[290px]">
               <div className="relative rounded-[2.2rem] border-[6px] p-2 shadow-2xl shadow-black/60" style={{ borderColor: "#1a1a1a", backgroundColor: "#141414" }}>
-                <div className="absolute left-1/2 -translate-x-1/2 top-3 h-1.5 w-16 rounded-full bg-black/70" />
-                <a
-                  href={INSTAGRAM_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={() => trackEvent("click_instagram", { local: "secao_escritorio" })}
-                  className="group relative flex aspect-[9/16] w-full items-center justify-center overflow-hidden rounded-[1.7rem] border border-gold/25"
-                  style={{ backgroundColor: "#0f0f0f" }}
-                >
-                  <div className="absolute inset-0 bg-cover bg-center opacity-30" style={{ backgroundImage: `url(${p.authorityImage ?? p.heroImage})` }} />
-                  <div className="absolute inset-0" style={{ backgroundColor: "rgba(15,15,15,0.8)" }} />
-                  <div className="relative flex flex-col items-center gap-3 text-center px-6">
-                    <PlayCircle size={54} className="text-gold transition-transform group-hover:scale-110" strokeWidth={1} />
-                    <span className="text-[10px] tracking-[0.3em] uppercase text-stone-300">Vídeo em breve</span>
-                    <span className="text-[11px] text-stone-400 leading-relaxed">Reels e Stories do escritório no Instagram</span>
-                  </div>
-                </a>
+                <div className="absolute left-1/2 -translate-x-1/2 top-3 h-1.5 w-16 rounded-full bg-black/70 z-10" />
+                <div className="relative aspect-[9/16] w-full overflow-hidden rounded-[1.7rem] border border-gold/25" style={{ backgroundColor: "#0f0f0f" }}>
+                  {p.videoFile ? (
+                    <>
+                      <HtmlComment text={`ARQUIVO DO VIDEO: ${p.videoFile}`} />
+                      <video
+                        src={`/${p.videoFile}`}
+                        controls
+                        playsInline
+                        preload="metadata"
+                        poster={p.authorityImage ?? p.heroImage}
+                        className="h-full w-full object-cover"
+                        onPlay={() => trackEvent("play_video_bastidores", { rota: p.routePath ?? "" })}
+                      />
+                      <div className="pointer-events-none absolute inset-0" style={{ backgroundColor: "rgba(15,15,15,0.18)" }} />
+                    </>
+                  ) : (
+                    <a
+                      href={INSTAGRAM_URL}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={() => trackEvent("click_instagram", { local: "secao_escritorio" })}
+                      className="group relative flex h-full w-full items-center justify-center"
+                    >
+                      <div className="absolute inset-0 bg-cover bg-center opacity-30" style={{ backgroundImage: `url(${p.authorityImage ?? p.heroImage})` }} />
+                      <div className="absolute inset-0" style={{ backgroundColor: "rgba(15,15,15,0.8)" }} />
+                      <div className="relative flex flex-col items-center gap-3 text-center px-6">
+                        <PlayCircle size={54} className="text-gold transition-transform group-hover:scale-110" strokeWidth={1} />
+                        <span className="text-[10px] tracking-[0.3em] uppercase text-stone-300">Vídeo em breve</span>
+                      </div>
+                    </a>
+                  )}
+                </div>
               </div>
             </div>
 
             <div>
               <div className="grid grid-cols-3 gap-3 mb-8">
-                {[0, 1, 2, 3, 4, 5].map((i) => (
-                  <a
-                    key={i}
-                    href={INSTAGRAM_URL}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    onClick={() => trackEvent("click_instagram", { local: "grade_instagram" })}
-                    className="group relative aspect-square overflow-hidden border border-gold/20"
-                    aria-label="Ver publicações no Instagram"
-                  >
-                    <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: `url(${i % 2 === 0 ? painsBg : finalBg})` }} />
-                    <div className="absolute inset-0 transition-colors group-hover:bg-black/60" style={{ backgroundColor: "rgba(15,15,15,0.8)" }} />
-                    <FaInstagram className="absolute inset-0 m-auto w-5 h-5 text-gold opacity-70 group-hover:opacity-100 transition-opacity" />
-                  </a>
+                {(p.instagramLinks ?? Array(6).fill(INSTAGRAM_URL)).slice(0, 6).map((href, i) => (
+                  <div key={href + i} className="contents">
+                    <HtmlComment text={`LINK ${i + 1} DO INSTAGRAM - ${p.routePath ?? ""}`} />
+                    <a
+                      href={href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={() => trackEvent("click_instagram", { local: "grade_instagram", posicao: i + 1, rota: p.routePath ?? "" })}
+                      className="group relative aspect-square overflow-hidden border border-gold/20 focus:outline-none focus:ring-2 focus:ring-gold"
+                      aria-label={`Ver publicação ${i + 1} no Instagram`}
+                    >
+                      <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: `url(${i % 2 === 0 ? painsBg : finalBg})` }} />
+                      <div className="absolute inset-0 transition-colors group-hover:bg-black/60" style={{ backgroundColor: "rgba(15,15,15,0.8)" }} />
+                      <FaInstagram className="absolute inset-0 m-auto w-5 h-5 text-gold opacity-70 group-hover:opacity-100 transition-opacity" />
+                    </a>
+                  </div>
                 ))}
               </div>
               <a

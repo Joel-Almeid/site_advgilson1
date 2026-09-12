@@ -38,6 +38,17 @@ function InventarioPage() {
       finalImage={bgBooks}
       ctaText="Resolver meu Inventário"
       whatsappMessage="Olá, preciso de orientação sobre inventário e partilha."
+      routePath="/inventario"
+      videoFile="inventario.mp4"
+      authorityText="Gilson Carvalho é especialista em Direito de Família e Sucessões com mais de 20 anos de atuação. Dedica-se a proteger o patrimônio e garantir a paz em momentos de transição familiar, oferecendo excelência jurídica e sigilo absoluto."
+      instagramLinks={[
+        "https://www.instagram.com/p/DPhiaqgCXny/?stkn=aDlrYzYxMnFiZmI4",
+        "https://www.instagram.com/p/DHYTrYZRxdC/?stkn=MWV0YWluMjdncDBvcA==",
+        "https://www.instagram.com/p/DHTGmY8zOB1/?stkn=MTU0Y3JtZzFvd3R1cQ==",
+        "https://www.instagram.com/p/DG8owoczP9D/?stkn=cTM1MnJ6OXZoaWt3",
+        "https://www.instagram.com/p/DG3CoarTXIO/?stkn=MWRtZDE5ZDMzeHUzNg==",
+        "https://www.instagram.com/p/DGdxp10zp24/?stkn=MXgwdHN2cDVqcmV5eQ==",
+      ]}
       pains={[
         { title: "Processos arrastados", desc: "Inventários que se prolongam por anos, gerando custos e bloqueando o patrimônio." },
         { title: "Carga tributária excessiva", desc: "Pagamento de impostos acima do necessário por falta de planejamento adequado." },
