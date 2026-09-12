@@ -38,6 +38,17 @@ function DireitoFundiarioPage() {
       finalImage={bgBooks}
       ctaText="Proteger minha Propriedade"
       whatsappMessage="Olá, preciso de orientação sobre conflito de posse / direito fundiário."
+      routePath="/direito-fundiario"
+      videoFile="direito-fundiario.mp4"
+      authorityText="Gilson Carvalho alia mais de 20 anos de experiência jurídica à atuação estratégica em Direito Imobiliário e Fundiário. Com vasta expertise também em Família e Sucessões, garante a segurança patrimonial e a regularização dos seus bens com total discrição e precisão técnica."
+      instagramLinks={[
+        "https://www.instagram.com/p/DDIV7PbTEpo/?stkn=em55djNtaXd5ajFx",
+        "https://www.instagram.com/p/DDF6Ac4TY8B/?stkn=NGQ1ZGZveWJqNm04",
+        "https://www.instagram.com/p/DCtsjqfMpZM/?stkn=MXVscTRpYXJmY214Zw==",
+        "https://www.instagram.com/p/DCjY5XbPiMC/?stkn=ZHc0dGtpZm1zZTkx",
+        "https://www.instagram.com/p/DCeQGu4NuFe/?stkn=MXh1emZ4cHU4ZmFpYw==",
+        "https://www.instagram.com/p/DCWuW8rPHoY/?stkn=MWtiOWtlcnI5ZzJ4aA==",
+      ]}
       pains={[
         { title: "Invasão de área", desc: "Ocupação indevida da propriedade exigindo resposta judicial imediata e liminar." },
         { title: "Disputa de divisas", desc: "Conflitos com confrontantes sobre limites, cercas e faixas de terra produtiva." },

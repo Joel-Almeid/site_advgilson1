@@ -38,6 +38,17 @@ function RegularizacaoFundiariaPage() {
       finalImage={bgBooks}
       ctaText="Regularizar minha Terra"
       whatsappMessage="Olá, preciso de orientação sobre regularização fundiária."
+      routePath="/regularizacao-fundiaria"
+      videoFile="regularizacao-fundiaria.mp4"
+      authorityText="Gilson Carvalho alia mais de 20 anos de experiência jurídica à atuação estratégica em Direito Imobiliário e Fundiário. Com vasta expertise também em Família e Sucessões, garante a segurança patrimonial e a regularização dos seus bens com total discrição e precisão técnica."
+      instagramLinks={[
+        "https://www.instagram.com/p/DDo6XeQzwRA/?stkn=ZTd1M3Q3anNweGh5",
+        "https://www.instagram.com/p/DDhMKXoztay/?stkn=NHliZzY0OG03Z2o=",
+        "https://www.instagram.com/p/DDfgKg4T8rb/?stkn=MXhtaXE3ZmhsZnhxeA==",
+        "https://www.instagram.com/p/DDaF8uCT6xz/?stkn=MTZkOW12cm9mcmVmeg==",
+        "https://www.instagram.com/p/DDXQm5bMg0t/?stkn=MTBxeDdrZnN1eGkxMQ==",
+        "https://www.instagram.com/p/DDMn17rMBpb/?stkn=cTljN2F0emZlOWFp",
+      ]}
       pains={[
         { title: "Terra sem título", desc: "Décadas de ocupação produtiva sem documento que assegure a propriedade." },
         { title: "Limites indefinidos", desc: "Ausência de georreferenciamento gera sobreposição de áreas e disputas com vizinhos." },

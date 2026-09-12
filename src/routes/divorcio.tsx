@@ -38,6 +38,17 @@ function DivorcioPage() {
       finalImage={bgBooks}
       ctaText="Iniciar Conversa Sigilosa"
       whatsappMessage="Olá, gostaria de conversar sobre divórcio."
+      routePath="/divorcio"
+      videoFile="divorcio.mp4"
+      authorityText="Gilson Carvalho é especialista em Direito de Família e Sucessões com mais de 20 anos de atuação. Dedica-se a proteger o patrimônio e garantir a paz em momentos de transição familiar, oferecendo excelência jurídica e sigilo absoluto."
+      instagramLinks={[
+        "https://www.instagram.com/gilsoncarvalho.adv/p/DPTzaueAcUj/",
+        "https://www.instagram.com/p/DTbMkXKEvGL/?stkn=MXUxejEyOTM5dHAwZg==",
+        "https://www.instagram.com/p/DQcAjSVD9GD/?stkn=OWZqbHF3bDBtcmtn",
+        "https://www.instagram.com/p/DQCQrzyCVMS/?stkn=MTRkeTJyaXZ0M2h4cQ==",
+        "https://www.instagram.com/p/DP2FOkSD88Y/?stkn=cmR5bXIydWZmM2h5",
+        "https://www.instagram.com/gilsoncarvalho.adv/p/DPT0TKtjpyA/",
+      ]}
       pains={[
         { title: "Insegurança patrimonial", desc: "Receio de perder bens conquistados ou de uma partilha injusta na separação." },
         { title: "Conflitos prolongados", desc: "Discussões intermináveis que prolongam o sofrimento e oneram financeiramente." },
