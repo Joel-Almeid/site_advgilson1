@@ -3,6 +3,7 @@ import LegalLanding from "@/components/LegalLanding";
 import bgBooks from "@/assets/bg-books.jpg";
 import bgMarble from "@/assets/bg-marble.jpg";
 import temaImg from "@/assets/tema-guarda.jpg";
+import { CalendarDays, HandCoins, HeartHandshake, ShieldCheck } from "lucide-react";
 import { jsonLdScript } from "@/lib/seo";
 
 const CANONICAL = "https://gilsoncarvalho.com/pensao-e-guarda";
@@ -55,10 +56,10 @@ function PensaoGuardaPage() {
         { title: "Decisões unilaterais", desc: "Falta de diálogo nas escolhas educacionais, médicas e de rotina dos filhos." },
       ]}
       solutions={[
-        { title: "Regulamentação de Guarda", desc: "Guarda compartilhada ou unilateral, sempre orientada pelo melhor interesse da criança." },
-        { title: "Fixação e Revisão de Pensão", desc: "Cálculo técnico realista, ações de revisão para mais ou para menos conforme mudança de cenário." },
-        { title: "Regulamentação de Visitas", desc: "Estabelecimento claro de períodos, feriados e férias — eliminando atritos recorrentes." },
-        { title: "Execução de Alimentos", desc: "Atuação firme para garantir o cumprimento dos valores devidos ao seu filho." },
+        { title: "Regulamentação de Guarda", desc: "Guarda compartilhada ou unilateral, sempre orientada pelo melhor interesse da criança.", icon: ShieldCheck },
+        { title: "Fixação e Revisão de Pensão", desc: "Cálculo técnico realista, ações de revisão para mais ou para menos conforme mudança de cenário.", icon: HandCoins },
+        { title: "Regulamentação de Visitas", desc: "Estabelecimento claro de períodos, feriados e férias — eliminando atritos recorrentes.", icon: CalendarDays },
+        { title: "Execução de Alimentos", desc: "Atuação firme para garantir o cumprimento dos valores devidos ao seu filho.", icon: HeartHandshake },
       ]}
     />
   );

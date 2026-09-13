@@ -2,7 +2,8 @@ import { createFileRoute } from "@tanstack/react-router";
 import LegalLanding from "@/components/LegalLanding";
 import bgBooks from "@/assets/bg-books.jpg";
 import bgMarble from "@/assets/bg-marble.jpg";
-import temaImg from "@/assets/tema-uniao.jpg";
+import temaImg from "@/assets/tema-uniao-nova.jpg";
+import { Briefcase, FileText, Handshake, Scale } from "lucide-react";
 import { jsonLdScript } from "@/lib/seo";
 
 const CANONICAL = "https://gilsoncarvalho.com/uniao-estavel";
@@ -55,10 +56,10 @@ function UniaoEstavelPage() {
         { title: "Dissolução conflituosa", desc: "Encerramento da relação sem clareza sobre direitos, bens e eventuais alimentos." },
       ]}
       solutions={[
-        { title: "Contrato de União Estável", desc: "Definição clara de regime de bens, autonomia patrimonial e regras de convivência." },
-        { title: "Reconhecimento Judicial e Extrajudicial", desc: "Comprovação técnica da união para garantir direitos previdenciários, sucessórios e patrimoniais." },
-        { title: "Dissolução Consensual", desc: "Encerramento estruturado, com partilha equilibrada e proteção de cada parte." },
-        { title: "Planejamento Patrimonial do Casal", desc: "Holdings, doações e regimes personalizados para proteger o que vocês construíram juntos." },
+        { title: "Contrato de União Estável", desc: "Definição clara de regime de bens, autonomia patrimonial e regras de convivência.", icon: FileText },
+        { title: "Reconhecimento Judicial e Extrajudicial", desc: "Comprovação técnica da união para garantir direitos previdenciários, sucessórios e patrimoniais.", icon: Scale },
+        { title: "Dissolução Consensual", desc: "Encerramento estruturado, com partilha equilibrada e proteção de cada parte.", icon: Handshake },
+        { title: "Planejamento Patrimonial do Casal", desc: "Holdings, doações e regimes personalizados para proteger o que vocês construíram juntos.", icon: Briefcase },
       ]}
     />
   );

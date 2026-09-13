@@ -3,6 +3,7 @@ import LegalLanding from "@/components/LegalLanding";
 import bgMarble from "@/assets/bg-marble.jpg";
 import bgBooks from "@/assets/bg-books.jpg";
 import temaImg from "@/assets/tema-imobiliaria.jpg";
+import { Building2, FileCheck2, KeyRound, SearchCheck } from "lucide-react";
 import { jsonLdScript } from "@/lib/seo";
 
 const CANONICAL = "https://gilsoncarvalho.com/regularizacao-imobiliaria";
@@ -55,10 +56,10 @@ function RegularizacaoImobiliariaPage() {
         { title: "Contrato de gaveta", desc: "Compra informal sem transferência formal deixa o comprador sem qualquer garantia real." },
       ]}
       solutions={[
-        { title: "Escrituração e Registro", desc: "Condução completa em cartório até a matrícula atualizada em seu nome." },
-        { title: "Retificação de Área e Matrícula", desc: "Correção administrativa ou judicial de metragem, confrontantes e dados do imóvel." },
-        { title: "Adjudicação Compulsória", desc: "Ação para obter a escritura quando o vendedor desapareceu ou se recusa a outorgá-la." },
-        { title: "Due Diligence Imobiliária", desc: "Análise de riscos, certidões e ônus antes da compra — evitando prejuízos irreversíveis." },
+        { title: "Escrituração e Registro", desc: "Condução completa em cartório até a matrícula atualizada em seu nome.", icon: FileCheck2 },
+        { title: "Retificação de Área e Matrícula", desc: "Correção administrativa ou judicial de metragem, confrontantes e dados do imóvel.", icon: Building2 },
+        { title: "Adjudicação Compulsória", desc: "Ação para obter a escritura quando o vendedor desapareceu ou se recusa a outorgá-la.", icon: KeyRound },
+        { title: "Due Diligence Imobiliária", desc: "Análise de riscos, certidões e ônus antes da compra — evitando prejuízos irreversíveis.", icon: SearchCheck },
       ]}
     />
   );
