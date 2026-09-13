@@ -1,9 +1,10 @@
 import { motion } from "framer-motion";
-import { ChevronRight, Check, ShieldAlert, Scale, FileText, Gavel, Lock, Shield, MapPin, Phone, Mail, PlayCircle } from "lucide-react";
+import { ChevronRight, Check, ShieldAlert, Scale, FileText, Gavel, Lock, MapPin, Phone, Mail, PlayCircle, X, Maximize2, ExternalLink, type LucideIcon } from "lucide-react";
 import { FaWhatsapp, FaInstagram } from "react-icons/fa";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import logo from "@/assets/logo_gilson.png";
 import imgGilsonAuthority from "@/assets/fotogilson3.png";
+import { Button } from "@/components/ui/button";
 import { initAnalytics, trackEvent, trackPageView, trackWhatsApp } from "@/lib/analytics";
 
 const WHATSAPP = "5563984474070";
@@ -48,17 +49,20 @@ export type LandingProps = {
   routePath?: string;
   instagramLinks?: string[];
   pains: { title: string; desc: string }[];
-  solutions: { title: string; desc: string }[];
+  solutions: { title: string; desc: string; icon: LucideIcon }[];
   ctaText: string;
   whatsappMessage: string;
 };
 
 export default function LegalLanding(p: LandingProps) {
-
-
-
   const [waTipVisible, setWaTipVisible] = useState(false);
   const [waTipKey, setWaTipKey] = useState(0);
+  const [selectedPoster, setSelectedPoster] = useState<number | null>(null);
+  const closePosterRef = useRef<HTMLButtonElement>(null);
+
+  const galleryPrefix = p.routePath?.replace(/^\//, "") ?? "divorcio";
+  const galleryImages = Array.from({ length: 6 }, (_, index) => `/${galleryPrefix}${index + 1}.png`);
+  const videoInstagramUrl = p.instagramLinks?.[0] ?? INSTAGRAM_URL;
 
   useEffect(() => {
     initAnalytics();
@@ -74,6 +78,31 @@ export default function LegalLanding(p: LandingProps) {
     }, 8000);
     return () => clearInterval(id);
   }, []);
+
+  useEffect(() => {
+    if (selectedPoster === null) return;
+
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    closePosterRef.current?.focus();
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setSelectedPoster(null);
+    };
+    window.addEventListener("keydown", closeOnEscape);
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      window.removeEventListener("keydown", closeOnEscape);
+    };
+  }, [selectedPoster]);
+
+  const openPoster = (index: number) => {
+    setSelectedPoster(index);
+    trackEvent("view_cartaz_modal", {
+      rota: p.routePath ?? "",
+      cartaz: index + 1,
+      arquivo: `${galleryPrefix}${index + 1}.png`,
+    });
+  };
 
 
 
@@ -179,11 +208,13 @@ export default function LegalLanding(p: LandingProps) {
             <h2 className="font-serif-luxe text-4xl md:text-5xl text-stone-50">Soluções jurídicas estratégicas</h2>
           </div>
           <motion.div {...reveal} className="grid md:grid-cols-2 gap-6">
-            {p.solutions.map((it) => (
+            {p.solutions.map((it) => {
+              const SolutionIcon = it.icon;
+              return (
               <div key={it.title} className="card-hover-gold relative p-8 border border-gold/20" style={{ backgroundColor: "rgba(30,30,30,0.7)" }}>
                 <div className="flex items-start gap-4">
                   <span className="flex items-center justify-center w-10 h-10 border border-gold/50 shrink-0">
-                    <Shield size={16} className="text-gold" />
+                    <SolutionIcon size={18} className="text-gold" strokeWidth={1.4} />
                   </span>
                   <div>
                     <h4 className="font-serif-luxe text-xl text-stone-50 mb-2">{it.title}</h4>
@@ -191,7 +222,8 @@ export default function LegalLanding(p: LandingProps) {
                   </div>
                 </div>
               </div>
-            ))}
+              );
+            })}
           </motion.div>
         </div>
       </section>
@@ -306,26 +338,34 @@ export default function LegalLanding(p: LandingProps) {
                   )}
                 </div>
               </div>
+              {/* INSIRA AQUI O LINK DO INSTAGRAM PARA ESTE VIDEO ESPECÍFICO */}
+              <HtmlComment text="INSIRA AQUI O LINK DO INSTAGRAM PARA ESTE VIDEO ESPECÍFICO" />
+              <a
+                href={videoInstagramUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => trackEvent("click_instagram", { local: "video_completo", rota: p.routePath ?? "" })}
+                className="mt-4 inline-flex w-full items-center justify-center gap-2 border border-gold/40 px-4 py-3 text-[10px] tracking-[0.2em] uppercase text-gold transition-colors hover:bg-gold hover:text-charcoal-deep focus:outline-none focus:ring-2 focus:ring-gold"
+              >
+                <ExternalLink size={14} /> Assistir vídeo completo no Instagram
+              </a>
             </div>
 
             <div>
               <div className="grid grid-cols-3 gap-3 mb-8">
-                {(p.instagramLinks ?? Array(6).fill(INSTAGRAM_URL)).slice(0, 6).map((href, i) => (
-                  <div key={href + i} className="contents">
-                    <HtmlComment text={`LINK ${i + 1} DO INSTAGRAM - ${p.routePath ?? ""}`} />
-                    <a
-                      href={href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      onClick={() => trackEvent("click_instagram", { local: "grade_instagram", posicao: i + 1, rota: p.routePath ?? "" })}
-                      className="group relative aspect-square overflow-hidden border border-gold/20 focus:outline-none focus:ring-2 focus:ring-gold"
-                      aria-label={`Ver publicação ${i + 1} no Instagram`}
-                    >
-                      <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: `url(${i % 2 === 0 ? painsBg : finalBg})` }} />
-                      <div className="absolute inset-0 transition-colors group-hover:bg-black/60" style={{ backgroundColor: "rgba(15,15,15,0.8)" }} />
-                      <FaInstagram className="absolute inset-0 m-auto w-5 h-5 text-gold opacity-70 group-hover:opacity-100 transition-opacity" />
-                    </a>
-                  </div>
+                {galleryImages.map((src, i) => (
+                  <Button
+                    key={src}
+                    type="button"
+                    variant="ghost"
+                    onClick={() => openPoster(i)}
+                    className="group relative h-auto aspect-square overflow-hidden rounded-none border border-gold/20 p-0 focus-visible:ring-2 focus-visible:ring-gold"
+                    aria-label={`Ampliar cartaz ${i + 1}`}
+                  >
+                    <img src={src} alt={`Cartaz informativo ${i + 1} — ${p.eyebrow}`} width={512} height={512} loading="lazy" decoding="async" className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
+                    <span className="absolute inset-0 bg-black/15 transition-colors group-hover:bg-black/40" />
+                    <Maximize2 className="absolute bottom-2 right-2 text-gold opacity-80 transition-opacity group-hover:opacity-100" aria-hidden="true" />
+                  </Button>
                 ))}
               </div>
               <a
@@ -497,7 +537,7 @@ export default function LegalLanding(p: LandingProps) {
         <div className="max-w-6xl mx-auto px-6 lg:px-10">
           <div className="grid md:grid-cols-2 gap-8 items-start mb-10">
             <div>
-              <img src={logo} alt="Gilson Carvalho" width={230} height={56} className="h-14 mb-4" loading="lazy" decoding="async" />
+              <img src={logo} alt="Gilson Carvalho" width={230} height={56} className="h-14 w-auto object-contain mb-4" loading="lazy" decoding="async" />
               <p className="text-xs tracking-[0.25em] uppercase text-gold mb-1">OAB/TO 2.591 · OAB/RJ 256.131</p>
               <p className="text-stone-400 text-sm">Direito de Família e Sucessões · Atendimento sigiloso.</p>
             </div>
@@ -528,6 +568,39 @@ export default function LegalLanding(p: LandingProps) {
           <p className="text-xs text-stone-500 text-center pt-6 border-t border-white/5">© 2026 Gilson Carvalho — Advocacia. Todos os direitos reservados.</p>
         </div>
       </footer>
+
+      {selectedPoster !== null && (
+        <div
+          role="dialog"
+          aria-modal="true"
+          aria-label={`Cartaz informativo ${selectedPoster + 1}`}
+          className="fixed inset-0 z-[100] flex items-center justify-center bg-black/90 p-4 sm:p-8"
+          onMouseDown={(event) => {
+            if (event.target === event.currentTarget) setSelectedPoster(null);
+          }}
+        >
+          <div className="relative flex max-h-full max-w-5xl items-center justify-center">
+            <img
+              src={galleryImages[selectedPoster]}
+              alt={`Cartaz informativo ${selectedPoster + 1} ampliado — ${p.eyebrow}`}
+              width={1024}
+              height={1024}
+              className="max-h-[88vh] max-w-full object-contain shadow-2xl shadow-black"
+            />
+            <Button
+              ref={closePosterRef}
+              type="button"
+              size="icon"
+              variant="ghost"
+              onClick={() => setSelectedPoster(null)}
+              className="absolute -right-2 -top-12 h-10 w-10 rounded-full border border-gold/50 bg-charcoal-deep text-gold hover:bg-gold hover:text-charcoal-deep sm:-right-12 sm:top-0"
+              aria-label="Fechar imagem ampliada"
+            >
+              <X size={22} />
+            </Button>
+          </div>
+        </div>
+      )}
 
 
       {/* WHATSAPP FLOAT */}

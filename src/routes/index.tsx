@@ -742,7 +742,7 @@ function Index() {
         <div className="max-w-7xl mx-auto px-6 lg:px-10">
           <div className="grid md:grid-cols-3 gap-12 mb-16">
             <div>
-              <img src={logo} alt="Gilson Carvalho" width={260} height={64} loading="lazy" decoding="async" className="h-16 mb-6" />
+              <img src={logo} alt="Gilson Carvalho" width={260} height={64} loading="lazy" decoding="async" className="h-16 w-auto object-contain mb-6" />
               <p className="text-sm text-stone-400 leading-relaxed max-w-xs mb-6">
                 Excelência jurídica com ética, transparência e dedicação total ao seu caso.
               </p>

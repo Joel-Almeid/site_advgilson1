@@ -3,6 +3,7 @@ import LegalLanding from "@/components/LegalLanding";
 import bgMarble from "@/assets/bg-marble.jpg";
 import bgBooks from "@/assets/bg-books.jpg";
 import temaImg from "@/assets/tema-divorcio.jpg";
+import { Briefcase, Gavel, Handshake, ScrollText } from "lucide-react";
 import { jsonLdScript } from "@/lib/seo";
 
 const CANONICAL = "https://gilsoncarvalho.com/divorcio";
@@ -55,10 +56,10 @@ function DivorcioPage() {
         { title: "Falta de discrição", desc: "Medo da exposição pessoal e do impacto na imagem profissional ou familiar." },
       ]}
       solutions={[
-        { title: "Divórcio Consensual Estratégico", desc: "Acordos cuidadosamente estruturados, resolvendo o processo em tempo recorde com mínima exposição." },
-        { title: "Defesa Litigiosa Robusta", desc: "Quando o acordo não é possível, atuamos com firmeza técnica para proteger seus direitos integralmente." },
-        { title: "Proteção Patrimonial", desc: "Análise minuciosa da partilha, holdings familiares e blindagem ética de bens." },
-        { title: "Mediação Privada", desc: "Conduzimos a negociação fora do tribunal sempre que possível — sigilo, agilidade e respeito." },
+        { title: "Divórcio Consensual Estratégico", desc: "Acordos cuidadosamente estruturados, resolvendo o processo em tempo recorde com mínima exposição.", icon: ScrollText },
+        { title: "Defesa Litigiosa Robusta", desc: "Quando o acordo não é possível, atuamos com firmeza técnica para proteger seus direitos integralmente.", icon: Gavel },
+        { title: "Proteção Patrimonial", desc: "Análise minuciosa da partilha, holdings familiares e blindagem ética de bens.", icon: Briefcase },
+        { title: "Mediação Privada", desc: "Conduzimos a negociação fora do tribunal sempre que possível — sigilo, agilidade e respeito.", icon: Handshake },
       ]}
     />
   );

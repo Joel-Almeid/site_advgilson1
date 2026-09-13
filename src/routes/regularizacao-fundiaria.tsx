@@ -3,6 +3,7 @@ import LegalLanding from "@/components/LegalLanding";
 import bgMarble from "@/assets/bg-marble.jpg";
 import bgBooks from "@/assets/bg-books.jpg";
 import temaImg from "@/assets/tema-fundiaria.jpg";
+import { LandPlot, MapPinned, Ruler, ScrollText } from "lucide-react";
 import { jsonLdScript } from "@/lib/seo";
 
 const CANONICAL = "https://gilsoncarvalho.com/regularizacao-fundiaria";
@@ -55,10 +56,10 @@ function RegularizacaoFundiariaPage() {
         { title: "Crédito rural negado", desc: "Sem matrícula regular, o banco não financia safra, maquinário ou expansão." },
       ]}
       solutions={[
-        { title: "Usucapião Judicial e Extrajudicial", desc: "Reconhecimento da propriedade pelo tempo de posse, com a via mais rápida disponível." },
-        { title: "Titulação e Georreferenciamento", desc: "Condução técnica junto a INCRA, órgãos estaduais e cartórios até o título final." },
-        { title: "REURB Urbana", desc: "Regularização fundiária urbana de núcleos consolidados, individual ou coletiva." },
-        { title: "Desmembramento e Retificação", desc: "Ajuste formal de áreas, divisões e confrontações na matrícula do imóvel rural." },
+        { title: "Usucapião Judicial e Extrajudicial", desc: "Reconhecimento da propriedade pelo tempo de posse, com a via mais rápida disponível.", icon: ScrollText },
+        { title: "Titulação e Georreferenciamento", desc: "Condução técnica junto a INCRA, órgãos estaduais e cartórios até o título final.", icon: MapPinned },
+        { title: "REURB Urbana", desc: "Regularização fundiária urbana de núcleos consolidados, individual ou coletiva.", icon: LandPlot },
+        { title: "Desmembramento e Retificação", desc: "Ajuste formal de áreas, divisões e confrontações na matrícula do imóvel rural.", icon: Ruler },
       ]}
     />
   );

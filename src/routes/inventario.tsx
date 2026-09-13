@@ -3,6 +3,7 @@ import LegalLanding from "@/components/LegalLanding";
 import bgMarble from "@/assets/bg-marble.jpg";
 import bgBooks from "@/assets/bg-books.jpg";
 import temaImg from "@/assets/tema-inventario.jpg";
+import { FileCheck2, Landmark, Scale, Users } from "lucide-react";
 import { jsonLdScript } from "@/lib/seo";
 
 const CANONICAL = "https://gilsoncarvalho.com/inventario";
@@ -55,10 +56,10 @@ function InventarioPage() {
         { title: "Conflitos entre herdeiros", desc: "Disputas que rompem laços familiares e travam decisões essenciais sobre os bens." },
       ]}
       solutions={[
-        { title: "Inventário Extrajudicial", desc: "Quando possível, resolução em cartório — rápida, econômica e sem desgaste judicial." },
-        { title: "Planejamento Sucessório", desc: "Holdings familiares, doações e testamentos para reduzir impostos e organizar a sucessão em vida." },
-        { title: "Mediação entre Herdeiros", desc: "Construção de acordos que preservam o patrimônio e os vínculos familiares." },
-        { title: "Inventário Judicial Estratégico", desc: "Defesa técnica firme nas hipóteses litigiosas, com foco em encerramento ágil." },
+        { title: "Inventário Extrajudicial", desc: "Quando possível, resolução em cartório — rápida, econômica e sem desgaste judicial.", icon: FileCheck2 },
+        { title: "Planejamento Sucessório", desc: "Holdings familiares, doações e testamentos para reduzir impostos e organizar a sucessão em vida.", icon: Landmark },
+        { title: "Mediação entre Herdeiros", desc: "Construção de acordos que preservam o patrimônio e os vínculos familiares.", icon: Users },
+        { title: "Inventário Judicial Estratégico", desc: "Defesa técnica firme nas hipóteses litigiosas, com foco em encerramento ágil.", icon: Scale },
       ]}
     />
   );

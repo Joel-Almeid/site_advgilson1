@@ -3,6 +3,7 @@ import LegalLanding from "@/components/LegalLanding";
 import bgMarble from "@/assets/bg-marble.jpg";
 import bgBooks from "@/assets/bg-books.jpg";
 import temaImg from "@/assets/tema-fundiario.jpg";
+import { FileLock2, Gavel, LandPlot, Scale } from "lucide-react";
 import { jsonLdScript } from "@/lib/seo";
 
 const CANONICAL = "https://gilsoncarvalho.com/direito-fundiario";
@@ -55,10 +56,10 @@ function DireitoFundiarioPage() {
         { title: "Contratos rurais frágeis", desc: "Arrendamentos e parcerias mal redigidos que geram litígio e perda de posse." },
       ]}
       solutions={[
-        { title: "Ações Possessórias com Liminar", desc: "Reintegração, manutenção de posse e interdito proibitório com pedido de urgência." },
-        { title: "Ação Reivindicatória", desc: "Retomada do imóvel com base no domínio comprovado pela matrícula." },
-        { title: "Demarcatória e Divisória", desc: "Definição judicial de limites e divisão de áreas comuns entre proprietários." },
-        { title: "Contratos Agrários Blindados", desc: "Arrendamento, parceria e comodato redigidos para prevenir litígio futuro." },
+        { title: "Ações Possessórias com Liminar", desc: "Reintegração, manutenção de posse e interdito proibitório com pedido de urgência.", icon: Gavel },
+        { title: "Ação Reivindicatória", desc: "Retomada do imóvel com base no domínio comprovado pela matrícula.", icon: Scale },
+        { title: "Demarcatória e Divisória", desc: "Definição judicial de limites e divisão de áreas comuns entre proprietários.", icon: LandPlot },
+        { title: "Contratos Agrários Blindados", desc: "Arrendamento, parceria e comodato redigidos para prevenir litígio futuro.", icon: FileLock2 },
       ]}
     />
   );
