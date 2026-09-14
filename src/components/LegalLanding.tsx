@@ -49,7 +49,7 @@ export type LandingProps = {
   routePath?: string;
   instagramLinks?: string[];
   pains: { title: string; desc: string }[];
-  solutions: { title: string; desc: string; icon: LucideIcon }[];
+  solutions: { title: string; desc: string; icon?: LucideIcon }[];
   ctaText: string;
   whatsappMessage: string;
 };
@@ -209,7 +209,7 @@ export default function LegalLanding(p: LandingProps) {
           </div>
           <motion.div {...reveal} className="grid md:grid-cols-2 gap-6">
             {p.solutions.map((it) => {
-              const SolutionIcon = it.icon;
+              const SolutionIcon = it.icon ?? Scale;
               return (
               <div key={it.title} className="card-hover-gold relative p-8 border border-gold/20" style={{ backgroundColor: "rgba(30,30,30,0.7)" }}>
                 <div className="flex items-start gap-4">
