@@ -9,3 +9,4 @@
 - [x] Adicionar navegação contínua, teclado e swipe ao Lightbox
 - [x] Aplicar títulos de autoridade e subtítulos de rodapé por contexto
 - [x] Validar as melhorias de UX e copy em mobile e desktop
+- [x] UX/conversão final: backdrop fecha modal, mensagens WhatsApp dinâmicas por rota, vídeo com playsInline + preload="metadata" (validado em /divorcio e /regularizacao-fundiaria)
