@@ -37,7 +37,7 @@ function DireitoDigitalPage() {
       solutionsImage={bgMarble}
       finalImage={bgBooks}
       ctaText="Agir Agora"
-      whatsappMessage="Olá, fui vítima de um problema digital e preciso de ajuda."
+      whatsappMessage="Olá Dr. Gilson, vim através do site e gostaria de falar sobre Direito Digital."
       pains={[
         { title: "Golpe no WhatsApp", desc: "Conta clonada e contatos abordados em seu nome, com prejuízo financeiro e à sua reputação." },
         { title: "Vazamento de dados", desc: "Informações pessoais expostas por empresas, gerando fraudes e violação da LGPD." },

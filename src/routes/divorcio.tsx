@@ -38,7 +38,7 @@ function DivorcioPage() {
       solutionsImage={bgMarble}
       finalImage={bgBooks}
       ctaText="Iniciar Conversa Sigilosa"
-      whatsappMessage="Olá, gostaria de conversar sobre divórcio."
+      whatsappMessage="Olá Dr. Gilson, vim através do site e gostaria de falar sobre Divórcio."
       routePath="/divorcio"
       videoFile="divorcio.mp4"
       authorityTitle="Quem vai defender os direitos da sua família?"

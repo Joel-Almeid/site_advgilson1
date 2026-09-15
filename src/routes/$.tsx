@@ -7,7 +7,7 @@ import logo from "@/assets/logo_gilson.png";
 import { trackWhatsApp, trackEvent } from "@/lib/analytics";
 
 const WHATSAPP = "5563984474070";
-const waMessage = "Olá, Dr. Gilson! Gostaria de agendar uma consulta jurídica.";
+const waMessage = "Olá Dr. Gilson, vim através do site e gostaria de falar sobre atendimento jurídico.";
 const waLink = `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(waMessage)}`;
 
 const quickLinks = [

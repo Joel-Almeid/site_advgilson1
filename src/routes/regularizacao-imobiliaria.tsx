@@ -38,7 +38,7 @@ function RegularizacaoImobiliariaPage() {
       solutionsImage={bgMarble}
       finalImage={bgBooks}
       ctaText="Regularizar meu Imóvel"
-      whatsappMessage="Olá, preciso de orientação sobre regularização imobiliária."
+      whatsappMessage="Olá Dr. Gilson, vim através do site e gostaria de falar sobre Regularização Imobiliária."
       routePath="/regularizacao-imobiliaria"
       videoFile="regularizacao-imobiliaria.mp4"
       authorityTitle="Quem vai proteger o seu patrimônio e os seus direitos?"

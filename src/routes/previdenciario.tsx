@@ -37,7 +37,7 @@ function PrevidenciarioPage() {
       solutionsImage={bgBooks}
       finalImage={bgMarble}
       ctaText="Planejar minha Aposentadoria"
-      whatsappMessage="Olá, gostaria de orientação previdenciária."
+      whatsappMessage="Olá Dr. Gilson, vim através do site e gostaria de falar sobre Direito Previdenciário."
       pains={[
         { title: "Benefício negado", desc: "Indeferimentos do INSS por falha documental ou tempo de contribuição não reconhecido." },
         { title: "Valor abaixo do devido", desc: "Aposentadorias concedidas sem considerar períodos especiais, rurais ou contribuições antigas." },

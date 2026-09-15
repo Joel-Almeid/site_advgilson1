@@ -38,7 +38,7 @@ function RegularizacaoFundiariaPage() {
       solutionsImage={bgMarble}
       finalImage={bgBooks}
       ctaText="Regularizar minha Terra"
-      whatsappMessage="Olá, preciso de orientação sobre regularização fundiária."
+      whatsappMessage="Olá Dr. Gilson, vim através do site e gostaria de falar sobre Regularização Fundiária."
       routePath="/regularizacao-fundiaria"
       videoFile="regularizacao-fundiaria.mp4"
       authorityTitle="Quem vai proteger o seu patrimônio e os seus direitos?"

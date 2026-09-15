@@ -38,7 +38,7 @@ function UniaoEstavelPage() {
       solutionsImage={bgBooks}
       finalImage={bgMarble}
       ctaText="Planejar com Segurança"
-      whatsappMessage="Olá, gostaria de orientação sobre união estável."
+      whatsappMessage="Olá Dr. Gilson, vim através do site e gostaria de falar sobre União Estável."
       routePath="/uniao-estavel"
       videoFile="uniao-estavel.mp4"
       authorityTitle="Quem vai defender os direitos da sua família?"

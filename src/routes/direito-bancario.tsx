@@ -37,7 +37,7 @@ function DireitoBancarioPage() {
       solutionsImage={bgMarble}
       finalImage={bgBooks}
       ctaText="Analisar meu Caso"
-      whatsappMessage="Olá, gostaria de falar sobre um problema bancário."
+      whatsappMessage="Olá Dr. Gilson, vim através do site e gostaria de falar sobre Direito Bancário."
       pains={[
         { title: "Descontos não autorizados", desc: "Empréstimos consignados e tarifas lançados na sua conta sem qualquer autorização." },
         { title: "Juros abusivos", desc: "Contratos com encargos muito acima da média praticada pelo mercado." },

@@ -38,7 +38,7 @@ function DireitoFundiarioPage() {
       solutionsImage={bgMarble}
       finalImage={bgBooks}
       ctaText="Proteger minha Propriedade"
-      whatsappMessage="Olá, preciso de orientação sobre conflito de posse / direito fundiário."
+      whatsappMessage="Olá Dr. Gilson, vim através do site e gostaria de falar sobre Direito Fundiário."
       routePath="/direito-fundiario"
       videoFile="direito-fundiario.mp4"
       authorityTitle="Quem vai proteger o seu patrimônio e os seus direitos?"
