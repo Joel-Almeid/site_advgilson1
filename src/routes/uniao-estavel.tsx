@@ -41,6 +41,8 @@ function UniaoEstavelPage() {
       whatsappMessage="Olá, gostaria de orientação sobre união estável."
       routePath="/uniao-estavel"
       videoFile="uniao-estavel.mp4"
+      authorityTitle="Quem vai defender os direitos da sua família?"
+      footerSubtitle="Direito de Família e Sucessões · Atendimento sigiloso."
       authorityText="Gilson Carvalho é especialista em Direito de Família e Sucessões com mais de 20 anos de atuação. Dedica-se a proteger o patrimônio e garantir a paz em momentos de transição familiar, oferecendo excelência jurídica e sigilo absoluto."
       instagramLinks={[
         "https://www.instagram.com/p/DGIlXQ4TC9T/?stkn=bmd3cWtvOG8wb2Jm",

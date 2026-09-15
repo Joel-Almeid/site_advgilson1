@@ -41,6 +41,8 @@ function InventarioPage() {
       whatsappMessage="Olá, preciso de orientação sobre inventário e partilha."
       routePath="/inventario"
       videoFile="inventario.mp4"
+      authorityTitle="Quem vai proteger o seu patrimônio e os seus direitos?"
+      footerSubtitle="Direito de Família e Sucessões · Atendimento sigiloso."
       authorityText="Gilson Carvalho é especialista em Direito de Família e Sucessões com mais de 20 anos de atuação. Dedica-se a proteger o patrimônio e garantir a paz em momentos de transição familiar, oferecendo excelência jurídica e sigilo absoluto."
       instagramLinks={[
         "https://www.instagram.com/p/DPhiaqgCXny/?stkn=aDlrYzYxMnFiZmI4",
