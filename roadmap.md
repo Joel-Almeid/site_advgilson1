@@ -6,6 +6,6 @@
 - [x] Corrigir logos de rodapé e foto de União Estável
 - [x] Padronizar sitemap, canonicals e metadados
 - [x] Validar eventos GA4, mobile, desktop e compilação
-- [ ] Adicionar navegação contínua, teclado e swipe ao Lightbox
-- [ ] Aplicar títulos de autoridade e subtítulos de rodapé por contexto
-- [ ] Validar as melhorias de UX e copy em mobile e desktop
+- [x] Adicionar navegação contínua, teclado e swipe ao Lightbox
+- [x] Aplicar títulos de autoridade e subtítulos de rodapé por contexto
+- [x] Validar as melhorias de UX e copy em mobile e desktop
