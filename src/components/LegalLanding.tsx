@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { ChevronRight, Check, ShieldAlert, Scale, FileText, Gavel, Lock, MapPin, Phone, Mail, PlayCircle, X, Maximize2, ExternalLink, type LucideIcon } from "lucide-react";
+import { ChevronLeft, ChevronRight, Check, ShieldAlert, Scale, FileText, Gavel, Lock, MapPin, Phone, Mail, PlayCircle, X, Maximize2, ExternalLink, type LucideIcon } from "lucide-react";
 import { FaWhatsapp, FaInstagram } from "react-icons/fa";
 import { useEffect, useRef, useState } from "react";
 import logo from "@/assets/logo_gilson.png";
@@ -43,6 +43,8 @@ export type LandingProps = {
   authorityImage?: string;
   finalImage?: string;
   authorityText?: string;
+  authorityTitle?: string;
+  footerSubtitle?: string;
   /** Nome do arquivo em /public, ex.: "divorcio.mp4" */
   videoFile?: string;
   /** Rota usada nos comentários HTML dos links do Instagram, ex.: "/divorcio" */
@@ -59,6 +61,7 @@ export default function LegalLanding(p: LandingProps) {
   const [waTipKey, setWaTipKey] = useState(0);
   const [selectedPoster, setSelectedPoster] = useState<number | null>(null);
   const closePosterRef = useRef<HTMLButtonElement>(null);
+  const touchStartXRef = useRef<number | null>(null);
 
   const galleryPrefix = p.routePath?.replace(/^\//, "") ?? "divorcio";
   const galleryImages = Array.from({ length: 6 }, (_, index) => `/${galleryPrefix}${index + 1}.png`);
@@ -85,23 +88,34 @@ export default function LegalLanding(p: LandingProps) {
     const previousOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
     closePosterRef.current?.focus();
-    const closeOnEscape = (event: KeyboardEvent) => {
+    const handleModalKeys = (event: KeyboardEvent) => {
       if (event.key === "Escape") setSelectedPoster(null);
+      if (event.key === "ArrowLeft") showPoster(selectedPoster - 1);
+      if (event.key === "ArrowRight") showPoster(selectedPoster + 1);
     };
-    window.addEventListener("keydown", closeOnEscape);
+    window.addEventListener("keydown", handleModalKeys);
     return () => {
       document.body.style.overflow = previousOverflow;
-      window.removeEventListener("keydown", closeOnEscape);
+      window.removeEventListener("keydown", handleModalKeys);
     };
   }, [selectedPoster]);
 
-  const openPoster = (index: number) => {
-    setSelectedPoster(index);
+  function showPoster(index: number) {
+    const normalizedIndex = (index + galleryImages.length) % galleryImages.length;
+    setSelectedPoster(normalizedIndex);
     trackEvent("view_cartaz_modal", {
       rota: p.routePath ?? "",
-      cartaz: index + 1,
-      arquivo: `${galleryPrefix}${index + 1}.png`,
+      cartaz: normalizedIndex + 1,
+      arquivo: `${galleryPrefix}${normalizedIndex + 1}.png`,
     });
+  }
+
+  const handleTouchEnd = (event: React.TouchEvent<HTMLDivElement>) => {
+    if (selectedPoster === null || touchStartXRef.current === null) return;
+    const distance = touchStartXRef.current - event.changedTouches[0].clientX;
+    touchStartXRef.current = null;
+    if (Math.abs(distance) < 50) return;
+    showPoster(selectedPoster + (distance > 0 ? 1 : -1));
   };
 
 
@@ -240,7 +254,7 @@ export default function LegalLanding(p: LandingProps) {
               <div className="w-12 h-px bg-gold" />
             </div>
             <h2 className="font-serif-luxe text-4xl md:text-5xl text-stone-50">
-              Quem vai defender os direitos da <em className="text-gold-gradient not-italic">sua família?</em>
+              {p.authorityTitle ?? "Quem vai defender os direitos da sua família?"}
             </h2>
           </div>
           <motion.div {...reveal} className="grid lg:grid-cols-2 gap-12 items-center">
@@ -358,7 +372,7 @@ export default function LegalLanding(p: LandingProps) {
                     key={src}
                     type="button"
                     variant="ghost"
-                    onClick={() => openPoster(i)}
+                    onClick={() => showPoster(i)}
                     className="group relative h-auto aspect-square overflow-hidden rounded-none border border-gold/20 p-0 focus-visible:ring-2 focus-visible:ring-gold"
                     aria-label={`Ampliar cartaz ${i + 1}`}
                   >
@@ -539,7 +553,7 @@ export default function LegalLanding(p: LandingProps) {
             <div>
               <img src={logo} alt="Gilson Carvalho" width={230} height={56} className="h-14 w-auto object-contain mb-4" loading="lazy" decoding="async" />
               <p className="text-xs tracking-[0.25em] uppercase text-gold mb-1">OAB/TO 2.591 · OAB/RJ 256.131</p>
-              <p className="text-stone-400 text-sm">Direito de Família e Sucessões · Atendimento sigiloso.</p>
+              <p className="text-stone-400 text-sm">{p.footerSubtitle ?? "Direito de Família e Sucessões · Atendimento sigiloso."}</p>
             </div>
             <div className="space-y-3 text-sm md:text-right">
               <div>
@@ -575,11 +589,18 @@ export default function LegalLanding(p: LandingProps) {
           aria-modal="true"
           aria-label={`Cartaz informativo ${selectedPoster + 1}`}
           className="fixed inset-0 z-[100] flex items-center justify-center bg-black/90 p-4 sm:p-8"
+          onTouchStart={(event) => {
+            touchStartXRef.current = event.touches[0].clientX;
+          }}
+          onTouchEnd={handleTouchEnd}
+          onTouchCancel={() => {
+            touchStartXRef.current = null;
+          }}
           onMouseDown={(event) => {
             if (event.target === event.currentTarget) setSelectedPoster(null);
           }}
         >
-          <div className="relative flex max-h-full max-w-5xl items-center justify-center">
+          <div className="relative flex max-h-full max-w-5xl items-center justify-center [touch-action:pan-y]">
             <img
               src={galleryImages[selectedPoster]}
               alt={`Cartaz informativo ${selectedPoster + 1} ampliado — ${p.eyebrow}`}
@@ -598,6 +619,29 @@ export default function LegalLanding(p: LandingProps) {
             >
               <X size={22} />
             </Button>
+            <Button
+              type="button"
+              size="icon"
+              variant="ghost"
+              onClick={() => showPoster(selectedPoster - 1)}
+              className="absolute left-2 h-12 w-12 rounded-full border border-gold/50 bg-charcoal-deep/90 text-gold shadow-xl hover:bg-gold hover:text-charcoal-deep sm:-left-16"
+              aria-label="Ver cartaz anterior"
+            >
+              <ChevronLeft size={28} />
+            </Button>
+            <Button
+              type="button"
+              size="icon"
+              variant="ghost"
+              onClick={() => showPoster(selectedPoster + 1)}
+              className="absolute right-2 h-12 w-12 rounded-full border border-gold/50 bg-charcoal-deep/90 text-gold shadow-xl hover:bg-gold hover:text-charcoal-deep sm:-right-16"
+              aria-label="Ver próximo cartaz"
+            >
+              <ChevronRight size={28} />
+            </Button>
+            <span aria-live="polite" className="absolute bottom-3 left-1/2 -translate-x-1/2 border border-gold/40 bg-charcoal-deep/90 px-3 py-1 text-xs text-gold">
+              {selectedPoster + 1} / {galleryImages.length}
+            </span>
           </div>
         </div>
       )}

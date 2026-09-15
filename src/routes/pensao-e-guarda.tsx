@@ -41,6 +41,8 @@ function PensaoGuardaPage() {
       whatsappMessage="Olá, gostaria de orientação sobre guarda e pensão."
       routePath="/pensao-e-guarda"
       videoFile="pensao-e-guarda.mp4"
+      authorityTitle="Quem vai defender os direitos da sua família?"
+      footerSubtitle="Direito de Família e Sucessões · Atendimento sigiloso."
       authorityText="Gilson Carvalho é especialista em Direito de Família e Sucessões com mais de 20 anos de atuação. Dedica-se a proteger o patrimônio e garantir a paz em momentos de transição familiar, oferecendo excelência jurídica e sigilo absoluto."
       instagramLinks={[
         "https://www.instagram.com/gilsoncarvalho.adv/p/DTZDVpqjK3C/",

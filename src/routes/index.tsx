@@ -744,7 +744,7 @@ function Index() {
             <div>
               <img src={logo} alt="Gilson Carvalho" width={260} height={64} loading="lazy" decoding="async" className="h-16 w-auto object-contain mb-6" />
               <p className="text-sm text-stone-400 leading-relaxed max-w-xs mb-6">
-                Excelência jurídica com ética, transparência e dedicação total ao seu caso.
+                Advocacia Estratégica e Especializada · Atendimento sigiloso.
               </p>
               <a
                 href={INSTAGRAM_URL}
