@@ -38,7 +38,7 @@ function InventarioPage() {
       solutionsImage={bgMarble}
       finalImage={bgBooks}
       ctaText="Resolver meu Inventário"
-      whatsappMessage="Olá, preciso de orientação sobre inventário e partilha."
+      whatsappMessage="Olá Dr. Gilson, vim através do site e gostaria de falar sobre Inventário e Partilha."
       routePath="/inventario"
       videoFile="inventario.mp4"
       authorityTitle="Quem vai proteger o seu patrimônio e os seus direitos?"

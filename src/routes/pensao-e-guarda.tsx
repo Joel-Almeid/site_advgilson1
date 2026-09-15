@@ -38,7 +38,7 @@ function PensaoGuardaPage() {
       solutionsImage={bgBooks}
       finalImage={bgMarble}
       ctaText="Proteger meus Filhos"
-      whatsappMessage="Olá, gostaria de orientação sobre guarda e pensão."
+      whatsappMessage="Olá Dr. Gilson, vim através do site e gostaria de falar sobre Guarda e Pensão Alimentícia."
       routePath="/pensao-e-guarda"
       videoFile="pensao-e-guarda.mp4"
       authorityTitle="Quem vai defender os direitos da sua família?"

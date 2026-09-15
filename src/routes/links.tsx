@@ -15,7 +15,7 @@ import avatarAsset from "@/assets/fotogilsonlink.png.asset.json";
 import { trackWhatsApp, trackEvent } from "@/lib/analytics";
 
 const WHATSAPP = "5563984474070";
-const waMessage = "Olá, Dr. Gilson! Gostaria de agendar uma consulta jurídica.";
+const waMessage = "Olá Dr. Gilson, vim através do site e gostaria de falar sobre atendimento jurídico.";
 const waLink = `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(waMessage)}`;
 const INSTAGRAM_URL = "https://www.instagram.com/gilsoncarvalho.adv/";
 const MAPS_URL = "https://maps.google.com/?q=Av.+Guanabara,+1669,+Centro+-+Gurupi,+TO";

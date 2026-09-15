@@ -37,7 +37,7 @@ function TrabalhistaPage() {
       solutionsImage={bgBooks}
       finalImage={bgMarble}
       ctaText="Falar com Especialista"
-      whatsappMessage="Olá, gostaria de orientação trabalhista executiva."
+      whatsappMessage="Olá Dr. Gilson, vim através do site e gostaria de falar sobre Direito Trabalhista Executivo."
       pains={[
         { title: "Ambiente insustentável", desc: "Assédio moral, cobranças abusivas e descumprimento reiterado do contrato pelo empregador." },
         { title: "Verbas não pagas", desc: "Bônus, comissões, stock options e horas extras retidos ou calculados de forma incorreta." },
